@@ -1,4 +1,27 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 4.2.1, created on 2022-10-07 04:59:32
+  from 'C:\xampp\htdocs\MotorSportPage\app\Templates\header.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.2.1',
+  'unifunc' => 'content_633f9614686718_52826484',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '6f8c730c4559513e25eb90bb2ecacdb6223777ee' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\MotorSportPage\\app\\Templates\\header.tpl',
+      1 => 1665108800,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_633f9614686718_52826484 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,9 +45,9 @@
                 <a class="nav-link active fs-4" aria-current="page" href="home">Home</a>
                 <a class="nav-link fs-4" href="PoliticayPrivacidad">Politica & Privacidad</>
                 <a class="nav-link fs-4" href="contacto">Contacto</a>
-                {if isset($smarty.session.ID_USUARIO)}
+                <?php if ((isset($_SESSION['ID_USUARIO']))) {?>
                     <a class="nav-link fs-4" href="logout">CERRAR SESION</a>
-                {/if}
+                <?php }?>
             </div>
         </div>
     </div>
@@ -33,3 +56,5 @@
 
 
 
+<?php }
+}
