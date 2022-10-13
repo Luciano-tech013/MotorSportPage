@@ -3,9 +3,6 @@
 <section>
     <h1 class="text-center shadow-sm p-3 mb-0 bg-body rounded">{$titulo}</h1>
     {foreach from=$autos item=$auto}
-        <div class="container text-center">
-            <img width="140" src="" alt="Imagen de {$auto->nombre}">
-        </div>
         <p class="fs-5 pt-4 m-4">{$auto->descripcion}</p>
         <a class="btn btn-primary m-4" href='home'>Volver</a>
     {/foreach}

@@ -1,7 +1,14 @@
 <?php
+require_once 'app/helpers/AuthHelper.php';
 require_once 'app/Models/categoriasModel.php';
 
 class autosModel {
+
+    private $helper;
+
+    function __construct(){
+        $this->helper = new AuthHelper();
+    }
 
     function getDB() {
         $db = new PDO('mysql:host=localhost;'.'dbname=motorsport_bd;charset=utf8', 'root', '');
@@ -20,7 +27,7 @@ class autosModel {
     function getAllCategoryByAutos(){
         $db = $this->getDb();
 
-        $query = $db->prepare("SELECT a.id_categorias, c.nombre, c.id_categorias FROM autos a INNER JOIN categorias c ON c.id_categorias = a.id_categorias");
+        $query = $db->prepare("SELECT c.nombre, a.id_categorias FROM categorias c INNER JOIN autos a ON c.id_categorias = a.id_categorias");
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_OBJ);
@@ -35,15 +42,17 @@ class autosModel {
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function addAuto($nombre, $descripcion, $modelo, $marca, $imagen,$id_categoria){
+    function addAuto($nombre, $descripcion, $modelo, $marca, $id_categoria){
+        /**$this->helper->checkLogged();*/
         $db = $this->getDb();
 
-        $query = $db->prepare("INSERT INTO autos (nombre, descripcion, modelo, marca, imagenes, id_categoria VALUES (?,?,?,?,?,?)");
-        $query->execute([$nombre, $descripcion, $modelo, $marca, $imagen, $id_categoria]);
+        $query = $db->prepare("INSERT INTO autos (nombre, descripcion, modelo, marca, id_categorias) VALUES (?,?,?,?,?)");
+        $query->execute([$nombre, $descripcion, $modelo, $marca, $id_categoria]);
 
     }
 
-    function deleteAuto(){
+    function deleteAuto($id){
+        /**$this->helper->checkLogged();*/
         $db = $this->getDb();
 
         $query = $db->prepare("DELETE FROM autos WHERE id = ?");
@@ -52,9 +61,10 @@ class autosModel {
     }
 
     function updateAuto($id, $nombre, $descripcion, $modelo, $marca, $id_categoria){
+        /**$this->helper->checkLogged();*/
         $db = $this->getDb();
 
-        $query = $db->prepare("UPDATE autos SET nombre = $nombre, descripcion = $descripcion, modelo = $modelo, marca = $marca, id_categoria = $id_categoria WHERE id = ?");
+        $query = $db->prepare("UPDATE autos SET nombre = ?, descripcion = ?, modelo = ?, marca = ?, id_categorias = ? WHERE id = ?");
         $query->execute([$id, $nombre, $descripcion, $modelo, $marca, $id_categoria]);
     }
 }

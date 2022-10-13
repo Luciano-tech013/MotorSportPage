@@ -4,7 +4,7 @@
     <div class="p-4 bg-dark mt-3">
         <p class="fs-5 text-white">Lee la <a href="PoliticayPrivacidad">Politica & Privacidad</a> de nuestra pagina, antes
          de registrarte</p>
-        <form class="g-3 mt-2" method="POST" action="administrador">
+        <form class="g-3 mt-2" method="POST" action="cuenta">
             <div class="mb-4">
                 <label for="nombre" class="form-label text-white fs-4">NOMBRE</label>
                 <input type="text" class="form-control" name="nombre" placeholder="Tu Nombre:">
@@ -19,7 +19,7 @@
                     <label for="condiciones" class="form-check-label text-white">Acepto Politica & Privacidad</label>
                 </div>
             </div>
-            <a href="cuenta" class="btn btn-primary">REGISTRARSE</a>
+            <button class="btn btn-primary">REGISTRARSE</button>
         </form>
     </div>
 </div>

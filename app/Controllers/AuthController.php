@@ -15,12 +15,12 @@ class AuthController {
         $this->helper = new AuthHelper();
     }
 
-    function validateUser(){
+    function createUser(){
         if(!empty($_POST['nombre'] && $_POST['password'] && $_POST['condiciones'])){
             $username = $_POST['nombre'];
             $userpassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
-            $this->userModel->addUser($username, $userpassword);
-
+            $this->usuariosModel->addUser($username, $userpassword);
+            
             header("Location: " . BASE_URL . "login");
         } else {
             $this->view->showError("Complete los datos solicitados");
@@ -28,27 +28,28 @@ class AuthController {
     }
 
     function showFormLogin(){
+        
         $this->view->showForm();
     }
 
     function validateUser(){
         $nombre = $_POST['nombre'];
         $password = $_POST['password'];
-
+        
         $usuario = $this->usuariosModel->getUser($nombre);
         
-        if($usuario && password_verify($password, $usuario->password)) {
+        if(!empty($usuario) && password_verify($password, $usuario->password)) {
             session_start();
             $this->helper->login($usuario);
-            
+
             header("Location: " . BASE_URL);
         } else {
-            $this->view->showError("Complete los datos solicitados");
+            $this->view->showError("Nombre y Contraseña incorrectos");
         }
     }
 
     function logout(){
-        session_start();
+        
         $this->helper->destroyLogin();
 
         header("Location: " . BASE_URL);

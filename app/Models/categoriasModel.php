@@ -23,6 +23,15 @@ class categoriasModel {
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    function getAllNameCategorias($id){
+        $db = $this->getDb();
+
+        $query = $db->prepare("SELECT nombre FROM categorias WHERE id_categorias = ?");
+        $query->execute([$id]);
+
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
     function getAllAutosByCategoryId($id){
         $db = $this->getDb();
         
@@ -30,6 +39,27 @@ class categoriasModel {
         $query->execute();
     
         return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function addCategoria($nombre, $descripcion, $tipo){
+        $db = $this->getDb();
+
+        $query = $db->prepare("INSERT INTO categorias (nombre, descripcion, tipo) VALUES(?,?,?)");
+        $query->execute([$nombre, $descripcion, $tipo]);
+    }
+
+    function deleteCategoria($id){
+        $db = $this->getDb();
+
+        $query = $db->prepare("DELETE FROM categorias WHERE id_categorias = ?");
+        $query->execute([$id]);
+    }
+
+    function updateCategoria($id, $nombre, $descripcion, $tipo){
+        $db = $this->getDb();
+
+        $query = $db->prepare("UPDATE categorias SET nombre = ?, descripcion = ?, tipo = ? WHERE id = ?");
+        $query->execute([$id, $nombre, $descripcion, $tipo]);
     }
 
 }

@@ -1,5 +1,7 @@
-<?php require_once 'app/Controllers/PageController.php'; ?>
-<?php require_once 'app/Controllers/PageAdminController.php'; ?>
+<?php require_once 'app/Controllers/PageController.php';
+      require_once 'app/Controllers/PageAdminController.php'; 
+      require_once 'app/Controllers/AuthController.php';       
+?>
 <?php
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -43,8 +45,8 @@ switch ($params[0]) {
         $PageController->showCrearCuenta();
         break;
     case 'cuenta':
-        $PageAdminController = new AuthController();
-        $PageAdminController->VerificarCuenta();
+        $AuthController = new AuthController();
+        $AuthController->createUser();
         break;
     case 'login':
         $AuthController = new AuthController();
@@ -67,15 +69,34 @@ switch ($params[0]) {
         $PageAdminController = new PageAdminController();
         $PageAdminController->deleteItems($id);
         break;
-    case 'update':
+    case 'showFormItems':
         $id = $params[1];
         $PageAdminController = new PageAdminController();
-        $PageAdminController->update($id);
+        $PageAdminController->showFormItems($id);
         break;
     case 'updateItems':
         $id = $params[1];
         $PageAdminController = new PageAdminController();
         $PageAdminController->updateItem($id);
+        break;
+    case 'addCategorias':
+        $PageAdminController = new PageAdminController();
+        $PageAdminController->addCategorias();
+        break;
+    case 'deleteCategorias':
+        $id = $params[1];
+        $PageAdminController = new PageAdminController();
+        $PageAdminController->deleteCategorias($id);
+        break;
+    case 'showFormCat':
+        $id = $params[1];
+        $PageAdminController = new PageAdminController();
+        $PageAdminController->showFormCat($id);
+        break;
+    case 'updateCategorias':
+        $id = $params[1];
+        $PageAdminController = new PageAdminController();
+        $PageAdminController->updateCategorias($id);
     default:
         echo('404 Page not found');
         break;

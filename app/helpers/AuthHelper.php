@@ -6,6 +6,8 @@ class AuthHelper {
         session_start();
         $_SESSION['ID_USUARIO'] = $usuario->id;
         $_SESSION['NOMBRE'] = $usuario->nombre;
+        $_SESSION['PASSWORD'] = $usuario->password;
+        $_SESSION['IS_LOGGED'] = true;
     }
 
     function destroyLogin(){
