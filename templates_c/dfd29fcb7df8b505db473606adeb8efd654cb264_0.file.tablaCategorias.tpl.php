@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-10-12 20:29:50
+/* Smarty version 4.2.1, created on 2022-10-15 01:18:45
   from 'C:\xampp\htdocs\MotorSportPage\app\Templates\tablaCategorias.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_6347079e1b82c7_16887542',
+  'unifunc' => 'content_6349ee553b0b47_67525545',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dfd29fcb7df8b505db473606adeb8efd654cb264' => 
     array (
       0 => 'C:\\xampp\\htdocs\\MotorSportPage\\app\\Templates\\tablaCategorias.tpl',
-      1 => 1665599048,
+      1 => 1665789349,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6347079e1b82c7_16887542 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6349ee553b0b47_67525545 (Smarty_Internal_Template $_smarty_tpl) {
 ?><section>
 <h1 class="text-center shadow-sm p-3 mb-0 mt-5 bg-body rounded"><?php echo $_smarty_tpl->tpl_vars['titulo_categorias']->value;?>
 </h1>
@@ -67,7 +67,7 @@ $_smarty_tpl->tpl_vars['categoria']->do_else = false;
 ">BORRAR</a></td>
                 
                 
-                <td><a class="btn btn-badge text-bg-warning" href="showFormCat/<?php echo $_smarty_tpl->tpl_vars['categoria']->value->id_categorias;?>
+                <td><a class="btn btn-badge text-bg-warning" href="editCat/<?php echo $_smarty_tpl->tpl_vars['categoria']->value->id_categorias;?>
 ">EDITAR</a></td>
                 
             </tr>

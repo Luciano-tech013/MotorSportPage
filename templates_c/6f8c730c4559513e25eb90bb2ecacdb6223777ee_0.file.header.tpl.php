@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-10-07 04:59:32
+/* Smarty version 4.2.1, created on 2022-10-15 03:37:28
   from 'C:\xampp\htdocs\MotorSportPage\app\Templates\header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_633f9614686718_52826484',
+  'unifunc' => 'content_634a0ed88a10a6_18598928',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6f8c730c4559513e25eb90bb2ecacdb6223777ee' => 
     array (
       0 => 'C:\\xampp\\htdocs\\MotorSportPage\\app\\Templates\\header.tpl',
-      1 => 1665108800,
+      1 => 1665797648,
       2 => 'file',
     ),
   ),
@@ -20,10 +20,12 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_633f9614686718_52826484 (Smarty_Internal_Template $_smarty_tpl) {
+function content_634a0ed88a10a6_18598928 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="<?php echo BASE_URL;?>
+">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

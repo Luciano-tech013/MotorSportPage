@@ -23,6 +23,15 @@ class categoriasModel {
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getAllCategoriasForEdit($id){
+        $db = $this->getDb();
+
+        $query = $db->prepare("SELECT * FROM categorias WHERE id_categorias = ?");
+        $query->execute([$id]);
+
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
     function getAllNameCategorias($id){
         $db = $this->getDb();
 
@@ -58,8 +67,8 @@ class categoriasModel {
     function updateCategoria($id, $nombre, $descripcion, $tipo){
         $db = $this->getDb();
 
-        $query = $db->prepare("UPDATE categorias SET nombre = ?, descripcion = ?, tipo = ? WHERE id = ?");
-        $query->execute([$id, $nombre, $descripcion, $tipo]);
+        $query = $db->prepare("UPDATE `categorias` SET `nombre` = ?, `descripcion` = ?, `tipo` = ? WHERE `categorias`.`id_categorias` = ?");
+        $query->execute([$nombre, $descripcion, $tipo, $id]);
     }
 
 }

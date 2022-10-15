@@ -2,20 +2,23 @@
 require_once 'app/Models/usuariosModel.php';
 require_once 'app/Models/autosModel.php';
 require_once 'app/Models/categoriasModel.php';
-require_once 'app/Views/tablesView.php';
+require_once 'app/Views/MainView.php';
+require_once 'app/Views/userView.php';
 require_once 'app/helpers/AuthHelper.php';
 
 class PageAdminController {
 
     private $autosModel;
     private $categoriasModel;
-    private $view;
+    private $userView;
+    private $MainView;
     private $helper;
 
     function __construct(){
         $this->autosModel = new autosModel();
         $this->categoriasModel = new categoriasModel();
-        $this->view = new tablesView();
+        $this->userView = new userView();
+        $this->MainView = new MainView();
         $this->helper = new AuthHelper();
     }
 
@@ -35,7 +38,7 @@ class PageAdminController {
             
             header("Location: " . BASE_URL);
         } else {
-            $this->view->showError("Debe completar los datos solicitados!!");
+            $this->MainView->showError("Debe completar los datos solicitados!!");
         }
     }
 
@@ -53,13 +56,14 @@ class PageAdminController {
     }
 
     function showFormItems($id){
+        $autos = $this->autosModel->getAllAutosForEdit($id);
         $categorias = $this->categoriasModel->getAllCategorias();
-        $this->view->showFormEditAutos($id, $categorias);
+        $this->userView->showFormEditAutos($id, $autos, $categorias);
     }
 
     function updateItem($id){
-        session_start();
-        $this->helper->checkLogged();
+        /**session_start();
+        $this->helper->checkLogged();*/
 
         if(isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['modelo']) && isset($_POST['marca']) && isset($_POST['categoria'])){
             $nombre = $_POST['nombre'];
@@ -77,8 +81,8 @@ class PageAdminController {
 
     /**CRUD de la tabla categorias*/
     function addCategorias(){
-        session_start();
-        $this->helper->checkLogged();
+        /**session_start();
+        $this->helper->checkLogged();*/
 
         if(!empty($_POST['nombre'] && $_POST['descripcion'] && $_POST['tipo'])){
             $nombre = $_POST['nombre'];
@@ -89,13 +93,13 @@ class PageAdminController {
 
             header("Location: " . BASE_URL);
         } else{
-            $this->showError("Complete todos los campos");
+            $this->MainView->showError("Complete todos los campos");
         }
     }
 
     function deleteCategorias($id){
-        session_start();
-        $this->helper->checkLogged();
+        /**session_start();
+        $this->helper->checkLogged();*/
 
         if(!isset($_POST['id']) && empty($_POST['id'])){
             $this->view->showError("Error: No se puede eliminar");
@@ -107,12 +111,13 @@ class PageAdminController {
     }
 
     function showFormCat($id){
-        $this->view->showFormEditCategorias($id);
+        $categorias = $this->categoriasModel->getAllCategoriasForEdit($id);
+        $this->userView->showFormEditCategorias($id,$categorias);
     }
 
     function updateCategorias($id){
-        session_start();
-        $this->helper->checkLogged();
+        /**session_start();
+        $this->helper->checkLogged();*/
         
         if(isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['tipo'])){
             $nombre = $_POST['nombre'];
@@ -124,9 +129,4 @@ class PageAdminController {
             header("Location: " . BASE_URL);
         }
     }
-
-    function showError($msg){
-        echo "<p>" . $msg . "</p>";
-    }
-
 }

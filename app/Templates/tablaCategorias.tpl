@@ -32,7 +32,7 @@
                 <td><a class="btn btn-badge text-bg-danger" href="deleteCategorias/{$categoria->id_categorias}">BORRAR</a></td>
                 
                 
-                <td><a class="btn btn-badge text-bg-warning" href="showFormCat/{$categoria->id_categorias}">EDITAR</a></td>
+                <td><a class="btn btn-badge text-bg-warning" href="editCat/{$categoria->id_categorias}">EDITAR</a></td>
                 
             </tr>
         {/foreach}

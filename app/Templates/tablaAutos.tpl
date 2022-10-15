@@ -26,22 +26,22 @@
     </thead>
     <tbody>
     {foreach from=$autos item=$auto}
-        {foreach from=$autosCategoria item=$autoCategoria}
+        {foreach from=$autos_db_2 item=$autos_db}
             <tr class="fs-5">
                 <td>{$auto->nombre}</td>
                 <td>{$auto->modelo}</td>
                 <td>{$auto->marca}</td>
-                <td>{$autoCategoria->nombre}</td>
+                <td>{$autos_db}</td>
                 <td><a class="btn btn-primary" href="detalle/{$auto->id}/ {$auto->nombre}">Detalle</a></td>
                 {if !isset($smarty.session.IS_LOGGED)}
                 <td><a class="btn btn-badge text-bg-danger" href="deleteItems/{$auto->id}">BORRAR</a></td>
                 {/if}
                 {if !isset($smarty.session.IS_LOGGED)}
-                <td><a class="btn btn-badge text-bg-warning" href="showFormItems/{$auto->id}">EDITAR</a></td>
+                <td><a class="btn btn-badge text-bg-warning" href="editItems/{$auto->id}">EDITAR</a></td>
                 {/if}
             </tr>
-            {/foreach}  
-        {/foreach}
+        {/foreach}    
+    {/foreach}
     </tbody>
 </table>
 </section>

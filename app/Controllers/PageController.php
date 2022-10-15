@@ -1,61 +1,63 @@
 <?php
 require_once 'app/Models/autosModel.php';
 require_once 'app/Models/categoriasModel.php';
-require_once 'app/Views/tablesView.php';
+require_once 'app/Views/MainView.php';
+require_once 'app/Views/userView.php';
 require_once 'app/helpers/AuthHelper.php';
 
 class PageController {
     private $autosModel;
     private $categoriasModel;
-    private $view;
-    private $helper;
-
+    private $userView;
+    private $MainView;
+    
     function __construct(){
         $this->autosModel = new autosModel();
         $this->categoriasModel = new categoriasModel();
-        $this->view = new tablesView();
-        $this->helper = new AuthHelper();
+        $this->userView = new userView();
+        $this->MainView = new MainView();
+
+        /**$authHelper = new AuthHelper();
+        $authHelper->checkLogged();*/
     }
 
     function showHome(){
-        session_start();
-        
         $autos_db = $this->autosModel->getAllAutos();
-        $autosCategoria = $this->autosModel->getAllCategoryByAutos();
-        /**var_dump($autosCategoria);*/
         $categorias_db = $this->categoriasModel->getAllCategorias();
-        
-        $this->view->showTable($autos_db, $categorias_db, $autosCategoria);
+        $autos_db_2 = array();
+        foreach($autos_db as $autos){
+            foreach($categorias_db as $categorias){
+                if($autos->id == $categorias->id_categorias){
+                    array_push($autos_db_2, $categorias->nombre);
+                }
+            }
+        }
+        var_dump($autos_db_2);
+        $this->MainView->showTable($autos_db, $autos_db_2, $categorias_db,);
     }
 
     function showDetalle($id){
         session_start();
         $autos_db = $this->autosModel->getAllAutosDetalle($id);
-        $this->view->showDescripcionAuto($autos_db);
+        $this->MainView->showDescripcionAuto($autos_db);
     }
 
     function showFiltrado($id){
         session_start();
         $categorias = $this->categoriasModel->getAllNameCategorias($id);
         $autos = $this->categoriasModel->getAllAutosByCategoryId($id);
-        $this->view->showListFiltrado($autos, $categorias);
+        $this->MainView->showListFiltrado($autos, $categorias);
     }
 
     function showPrivacidad(){
         session_start();
-        $this->view->showPrivacidad();
+        $this->userView->showPrivacidad();
     }
    
     function showContacto(){
         session_start();
-        $this->view->showContacto();
+        $this->userView->showContacto();
     }
-
-    function showCrearCuenta(){
-        session_start();
-        $this->view->showRegistrarse();
-    }
-
 }
 
 

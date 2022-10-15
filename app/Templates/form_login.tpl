@@ -6,11 +6,11 @@
         <form class="g-3 mt-2" method="POST" action="validar">
             <div class="mb-4">
                 <label for="nombre" class="form-label text-white fs-4">NOMBRE</label>
-                <input type="text" class="form-control" name="nombre" placeholder="Tu Nombre:">
+                <input type="text" class="form-control" name="nombre" placeholder="Tu Nombre:" id="nombre">
             </div>
             <div class="mb-4">
                 <label for="password" class="form-label text-white fs-4">PASSWORD</label>
-                <input type="password" class="form-control" name="password" placeholder="Escribe tu contraseña:">
+                <input type="password" class="form-control" name="password" placeholder="Escribe tu contraseña:" id="password">
             </div>
             
             <button class="btn btn-primary">LOGIN</button>

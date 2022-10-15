@@ -9,7 +9,7 @@ define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] 
 $action = 'home'; // acción por defecto
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
-}
+} 
 
 $params = explode('/', $action);
 
@@ -69,7 +69,7 @@ switch ($params[0]) {
         $PageAdminController = new PageAdminController();
         $PageAdminController->deleteItems($id);
         break;
-    case 'showFormItems':
+    case 'editItems':
         $id = $params[1];
         $PageAdminController = new PageAdminController();
         $PageAdminController->showFormItems($id);
@@ -88,7 +88,7 @@ switch ($params[0]) {
         $PageAdminController = new PageAdminController();
         $PageAdminController->deleteCategorias($id);
         break;
-    case 'showFormCat':
+    case 'editCat':
         $id = $params[1];
         $PageAdminController = new PageAdminController();
         $PageAdminController->showFormCat($id);

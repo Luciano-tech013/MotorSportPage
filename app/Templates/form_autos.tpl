@@ -19,8 +19,7 @@
                 <label for="categoria" class="form-label fs-5">CATEGORIA</label>
                 <select class="form-select" name="categoria">
                     {foreach from=$categorias item=$categoria}
-                    <option value="{$categoria->id_categorias}"></option>
-                    <option>{$categoria->nombre}</option>
+                        <option value="{$categoria->id_categorias}">{$categoria->nombre}</option>
                     {/foreach}
                 </select>
             </div>
