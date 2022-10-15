@@ -39,7 +39,7 @@ class autosModel {
         /**$this->helper->checkLogged();*/
         $db = $this->getDb();
 
-        $query = $db->prepare("INSERT INTO autos (nombre, descripcion, modelo, marca, id_categorias) VALUES (?,?,?,?,?)");
+        $query = $db->prepare("INSERT INTO autos (nombres, descripcion, modelo, marca, id_categorias) VALUES (?,?,?,?,?)");
         $query->execute([$nombre, $descripcion, $modelo, $marca, $id_categoria]);
 
     }
@@ -57,7 +57,7 @@ class autosModel {
         /**$this->helper->checkLogged();*/
         $db = $this->getDb();
 
-        $query = $db->prepare("UPDATE `autos` SET `nombre` = ?, `descripcion` = ?, `modelo` = ?, `marca` = ?, `id_categorias` = ? WHERE `autos`.`id` = ?");
+        $query = $db->prepare("UPDATE `autos` SET `nombres` = ?, `descripcion` = ?, `modelo` = ?, `marca` = ?, `id_categorias` = ? WHERE `autos`.`id` = ?");
         $query->execute([$nombre, $descripcion, $modelo, $marca, $id_categoria,$id]);
     }
 }

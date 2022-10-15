@@ -22,18 +22,9 @@ class PageController {
     }
 
     function showHome(){
-        $autos_db = $this->autosModel->getAllAutos();
+        $autos_db = $this->categoriasModel->getAllAutosAndCategoryName();
         $categorias_db = $this->categoriasModel->getAllCategorias();
-        $autos_db_2 = array();
-        foreach($autos_db as $autos){
-            foreach($categorias_db as $categorias){
-                if($autos->id == $categorias->id_categorias){
-                    array_push($autos_db_2, $categorias->nombre);
-                }
-            }
-        }
-        var_dump($autos_db_2);
-        $this->MainView->showTable($autos_db, $autos_db_2, $categorias_db,);
+        $this->MainView->showTable($autos_db, $categorias_db,);
     }
 
     function showDetalle($id){

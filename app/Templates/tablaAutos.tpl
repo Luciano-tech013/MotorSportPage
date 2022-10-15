@@ -11,7 +11,7 @@
 <table class="table text-center table-striped">
     <thead class="bg-dark text-white">
         <tr>
-            <th>Nombre</th>
+            <th>Nombres</th>
             <th>Modelo</th>
             <th>Marca</th>
             <th>Categoria</th>
@@ -26,21 +26,19 @@
     </thead>
     <tbody>
     {foreach from=$autos item=$auto}
-        {foreach from=$autos_db_2 item=$autos_db}
-            <tr class="fs-5">
-                <td>{$auto->nombre}</td>
-                <td>{$auto->modelo}</td>
-                <td>{$auto->marca}</td>
-                <td>{$autos_db}</td>
-                <td><a class="btn btn-primary" href="detalle/{$auto->id}/ {$auto->nombre}">Detalle</a></td>
-                {if !isset($smarty.session.IS_LOGGED)}
+        <tr class="fs-5">
+            <td>{$auto->nombres}</td>
+            <td>{$auto->modelo}</td>
+            <td>{$auto->marca}</td>
+            <td>{$auto->nombre}</td>
+            <td><a class="btn btn-primary" href="detalle/{$auto->id}/ {$auto->nombre}">Detalle</a></td>
+            {if !isset($smarty.session.IS_LOGGED)}
                 <td><a class="btn btn-badge text-bg-danger" href="deleteItems/{$auto->id}">BORRAR</a></td>
-                {/if}
-                {if !isset($smarty.session.IS_LOGGED)}
+            {/if}
+            {if !isset($smarty.session.IS_LOGGED)}
                 <td><a class="btn btn-badge text-bg-warning" href="editItems/{$auto->id}">EDITAR</a></td>
-                {/if}
-            </tr>
-        {/foreach}    
+            {/if}
+        </tr>
     {/foreach}
     </tbody>
 </table>

@@ -24,8 +24,8 @@ class PageAdminController {
 
      /**CRUD de la tabla autoss*/
     function addItems(){
-        session_start();
-        $this->helper->checkLogged();
+        /**session_start();
+        $this->helper->checkLogged();*/
 
         if(!empty($_POST['nombre'] && $_POST['descripcion'] && $_POST['modelo'] && $_POST['marca'] && $_POST['categoria'])){
             $nombre = $_POST['nombre'];

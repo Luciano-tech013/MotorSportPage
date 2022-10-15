@@ -10,12 +10,11 @@ class MainView {
         $this->smarty = new Smarty();
     }
 
-    function showTable($autos_db, $autos_db_2, $categorias_db){
+    function showTable($autos_db, $categorias_db){
         $this->smarty->assign('titulo_autos', "Lista de Autos");
         $this->smarty->assign('titulo_categorias', "Categorias a las que pertenecen");
         
         $this->smarty->assign('autos', $autos_db);
-        $this->smarty->assign('autos_db_2', $autos_db_2);
         $this->smarty->assign('categorias', $categorias_db);
         
         $this->smarty->display('app/Templates/tablaAutos.tpl');

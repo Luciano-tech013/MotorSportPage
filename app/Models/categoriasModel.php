@@ -41,6 +41,15 @@ class categoriasModel {
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function getAllAutosAndCategoryName(){
+        $db = $this->getDb();
+
+        $query = $db->prepare("SELECT autos.*, categorias.nombre FROM autos INNER JOIN categorias ON autos.id_categorias = categorias.id_categorias");
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
     function getAllAutosByCategoryId($id){
         $db = $this->getDb();
         
