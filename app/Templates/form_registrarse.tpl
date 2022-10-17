@@ -1,29 +1,4 @@
-<?php
-/* Smarty version 4.2.1, created on 2022-10-17 17:57:56
-  from 'C:\xampp\htdocs\MotorSportPage\app\Templates\form_registrarse.tpl' */
-
-/* @var Smarty_Internal_Template $_smarty_tpl */
-if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
-  'version' => '4.2.1',
-  'unifunc' => 'content_634d7b8431e044_43938506',
-  'has_nocache_code' => false,
-  'file_dependency' => 
-  array (
-    'bf1e8fa96228d164f34777f9445fe347543a2918' => 
-    array (
-      0 => 'C:\\xampp\\htdocs\\MotorSportPage\\app\\Templates\\form_registrarse.tpl',
-      1 => 1666022275,
-      2 => 'file',
-    ),
-  ),
-  'includes' => 
-  array (
-    'file:app/Templates/header.tpl' => 1,
-  ),
-),false)) {
-function content_634d7b8431e044_43938506 (Smarty_Internal_Template $_smarty_tpl) {
-$_smarty_tpl->_subTemplateRender('file:app/Templates/header.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?>
+{include file='app/Templates/header.tpl'}
 
 <h1 class="text-center shadow-sm p-3 mb-0 bg-body rounded">Registrarse</h1>
 <div class="container">
@@ -46,5 +21,4 @@ $_smarty_tpl->_subTemplateRender('file:app/Templates/header.tpl', $_smarty_tpl->
             <button class="btn btn-primary">REGISTRARSE</button>
         </form>
     </div>
-</div><?php }
-}
+</div>

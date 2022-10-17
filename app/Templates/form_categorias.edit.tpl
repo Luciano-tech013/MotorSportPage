@@ -8,7 +8,7 @@
                     <input type="text" class="form-control" name="nombre" value="{foreach from=$categorias item=$categoria}{$categoria->nombre}{/foreach}" placeholder="Nombre:">
                 </div>
                 <div class="mb-4">
-                    <input type="text" class="form-control" value="{foreach from=$autos item=$auto}{$auto->descripcion}{/foreach}" name="descripcion" placeholder="Descripcion:"></input>
+                    <input type="text" class="form-control" value="{foreach from=$categorias item=$categoria}{$categoria->descripcion}{/foreach}" name="descripcion" placeholder="Descripcion:"></input>
                 </div>
                 <div class="mb-4">
                     <input type="text" class="form-control" name="tipo" value="{foreach from=$categorias item=$categoria}{$categoria->tipo}{/foreach}" placeholder="tipo:">

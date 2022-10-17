@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-10-01 20:18:14
+/* Smarty version 4.2.1, created on 2022-10-17 05:00:15
   from 'C:\xampp\htdocs\MotorSportPage\app\Templates\footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_63388466a0e767_71655010',
+  'unifunc' => 'content_634cc53fbeb1a9_39593554',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b932db30b4e6c972b9fd380485613870f1f24d4f' => 
     array (
       0 => 'C:\\xampp\\htdocs\\MotorSportPage\\app\\Templates\\footer.tpl',
-      1 => 1664648268,
+      1 => 1665975615,
       2 => 'file',
     ),
   ),
@@ -20,9 +20,9 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_63388466a0e767_71655010 (Smarty_Internal_Template $_smarty_tpl) {
+function content_634cc53fbeb1a9_39593554 (Smarty_Internal_Template $_smarty_tpl) {
 ?><footer>
-    <div class="container-fluid">
+    <div class="container-fluid mt-5">
         <div class="row p-5 bg-dark text-white">
             <div class="col-lg-3">
                 <p class="h3">MotorSport.com</p>

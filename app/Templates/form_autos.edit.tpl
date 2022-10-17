@@ -5,7 +5,7 @@
     <div class="p-4 bg-light mt-3">
             <form class="g-3 mt-2" method="POST" action="updateItems/{$id}">
             <div class="mb-4">
-                <input type="text" class="form-control" name="nombre" value="{foreach from=$autos item=$auto}{$auto->nombre}{/foreach}" placeholder="Nombre:">
+                <input type="text" class="form-control" name="nombre" value="{foreach from=$autos item=$auto}{$auto->nombres}{/foreach}" placeholder="Nombre:">
             </div>
             <div class="mb-4">
                 <input type="text" class="form-control" value="{foreach from=$autos item=$auto}{$auto->descripcion}{/foreach}" name="descripcion" placeholder="Descripcion:"></input>

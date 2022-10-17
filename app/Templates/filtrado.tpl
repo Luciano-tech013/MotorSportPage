@@ -5,10 +5,13 @@
     
     <ul class="list-group text-center">
     {foreach from=$autos item=$auto}
-        <li class="list-group-item fs-4">{$auto->nombre}</li>
+        <li class="list-group-item fs-4">{$auto->nombres} - {$auto->marca}</li>
     {/foreach}
     </ul>
-    
+
+    <div class="text-center p-4">
+        <a class="btn btn-primary" href="home">Volver</a>
+    </div>
 </section>
 
 {include file="app/Templates/footer.tpl"}

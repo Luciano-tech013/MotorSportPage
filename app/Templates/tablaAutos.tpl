@@ -1,12 +1,11 @@
 {include file="app/Templates/header.tpl"}
 
-{if !isset($smarty.session.IS_LOGGED)}
-    {include file="app/Templates/intro.tpl"}
-{/if}
+{include file="app/Templates/intro.tpl"}
+
 <section>
-<h1 class="text-center shadow-sm p-3 mb-0 bg-body rounded">{$titulo_autos}</h1>
+<h1 class="text-center shadow-sm p-3 mb-4 bg-body rounded">{$titulo}</h1>
 {if !isset($smarty.session.IS_LOGGED)}
-<p class="p-5 fs-5">Aqui mostraremos informacion sobre algunos ejemplos de autos que pertenecen a algunas de estas categorias. En cada auto vamos a mostrar: Su nombre correspondiente (u apodos), breve descripcion del modelo, el nombre del modelo y la marca del fabricante y proveedor</p>
+    <p class="p-5 fs-5">Aqui mostraremos informacion sobre algunos ejemplos de autos que pertenecen a algunas de estas categorias. En cada auto vamos a mostrar: Su nombre correspondiente (u apodos), breve descripcion del modelo, el nombre del modelo y la marca del fabricante y proveedor</p>
 {/if}
 <table class="table text-center table-striped">
     <thead class="bg-dark text-white">
@@ -16,10 +15,8 @@
             <th>Marca</th>
             <th>Categoria</th>
             <th>Detalle</th>
-            {if !isset($smarty.session.IS_LOGGED)}
+            {if isset($smarty.session.IS_LOGGED)}
             <th>BORRAR</th>
-            {/if}
-            {if !isset($smarty.session.IS_LOGGED)}
             <th>EDITAR</th>
             {/if}
         </tr>
@@ -32,10 +29,8 @@
             <td>{$auto->marca}</td>
             <td>{$auto->nombre}</td>
             <td><a class="btn btn-primary" href="detalle/{$auto->id}/ {$auto->nombre}">Detalle</a></td>
-            {if !isset($smarty.session.IS_LOGGED)}
+            {if isset($smarty.session.IS_LOGGED)}
                 <td><a class="btn btn-badge text-bg-danger" href="deleteItems/{$auto->id}">BORRAR</a></td>
-            {/if}
-            {if !isset($smarty.session.IS_LOGGED)}
                 <td><a class="btn btn-badge text-bg-warning" href="editItems/{$auto->id}">EDITAR</a></td>
             {/if}
         </tr>
@@ -44,5 +39,8 @@
 </table>
 </section>
 
+{if isset($smarty.session.IS_LOOGED)}
+    {include file="app/Templates/form_autos.tpl"}
+{/if}
 
 

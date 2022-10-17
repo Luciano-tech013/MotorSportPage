@@ -1,6 +1,6 @@
 {include file='app/Templates/header.tpl'}
 
-<h1 class="text-center shadow-sm p-3 mb-0 bg-body rounded">BIENVENIDO A MOTORSPORT.COM</h1>
+<h1 class="text-center shadow-sm p-3 mb-0 bg-body rounded">Accede a tu Cuenta</h1>
 <div class="container">
     <div class="p-4 bg-dark mt-3">
         <form class="g-3 mt-2" method="POST" action="validar">

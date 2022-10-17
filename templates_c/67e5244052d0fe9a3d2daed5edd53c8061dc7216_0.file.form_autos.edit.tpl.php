@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-10-15 04:29:55
+/* Smarty version 4.2.1, created on 2022-10-15 21:04:59
   from 'C:\xampp\htdocs\MotorSportPage\app\Templates\form_autos.edit.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_634a1b2347e613_90474520',
+  'unifunc' => 'content_634b045b62fcb6_66542441',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '67e5244052d0fe9a3d2daed5edd53c8061dc7216' => 
     array (
       0 => 'C:\\xampp\\htdocs\\MotorSportPage\\app\\Templates\\form_autos.edit.tpl',
-      1 => 1665800989,
+      1 => 1665860697,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:app/Templates/header.tpl' => 1,
   ),
 ),false)) {
-function content_634a1b2347e613_90474520 (Smarty_Internal_Template $_smarty_tpl) {
+function content_634b045b62fcb6_66542441 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:app/Templates/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -36,7 +36,7 @@ $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->t
 $_smarty_tpl->tpl_vars['auto']->do_else = true;
 if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['auto']->value) {
 $_smarty_tpl->tpl_vars['auto']->do_else = false;
-echo $_smarty_tpl->tpl_vars['auto']->value->nombre;
+echo $_smarty_tpl->tpl_vars['auto']->value->nombres;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>" placeholder="Nombre:">
             </div>

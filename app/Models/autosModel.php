@@ -3,61 +3,54 @@ require_once 'app/Models/categoriasModel.php';
 
 class autosModel {
     
-    function getDB() {
+    private $db;
+
+    public function __construct(){
+        $this->db = $this->getDb();
+    }
+
+    private function getDB() {
         $db = new PDO('mysql:host=localhost;'.'dbname=motorsport_bd;charset=utf8', 'root', '');
         return $db;
     }
 
-    function getAllAutos(){
-        $db = $this->getDb();
-        
-        $query = $db->prepare("SELECT * FROM autos");
+    public function getAll(){
+        $query = $this->db->prepare("SELECT * FROM autos");
         $query->execute();
         
         return $query->fetchAll(PDO::FETCH_OBJ); 
     }
 
-    public function getAllAutosForEdit($id){
-        $db = $this->getDb();
-
-        $query = $db->prepare("SELECT * FROM autos WHERE id = ?");
+    public function getAllForEdit($id){
+        /**Traigo registros mediante el ID para mostrar el form.edit precargado */
+        $query = $this->db->prepare("SELECT * FROM autos WHERE id = ?");
         $query->execute([$id]);
 
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function getAllAutosDetalle($id){
-        $db = $this->getDb();
-
-        $query = $db->prepare("SELECT * FROM autos WHERE id = ?");
+    public function getAllDetalle($id){
+        /**Traigo registros mediante el ID para mostrar detalle del auto seleccionado*/
+        $query = $this->db->prepare("SELECT * FROM autos WHERE id = ?");
         $query->execute([$id]);
 
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    function addAuto($nombre, $descripcion, $modelo, $marca, $id_categoria){
-        /**$this->helper->checkLogged();*/
-        $db = $this->getDb();
-
-        $query = $db->prepare("INSERT INTO autos (nombres, descripcion, modelo, marca, id_categorias) VALUES (?,?,?,?,?)");
+    public function add($nombre, $descripcion, $modelo, $marca, $id_categoria){
+        $query = $this->db->prepare("INSERT INTO autos (nombres, descripcion, modelo, marca, id_categorias) VALUES (?,?,?,?,?)");
         $query->execute([$nombre, $descripcion, $modelo, $marca, $id_categoria]);
 
     }
 
-    function deleteAuto($id){
-        /**$this->helper->checkLogged();*/
-        $db = $this->getDb();
-
-        $query = $db->prepare("DELETE FROM autos WHERE id = ?");
+    public function delete($id){
+        $query = $this->db->prepare("DELETE FROM autos WHERE id = ?");
         $query->execute([$id]);
 
     }
 
-    function updateAuto($id, $nombre, $descripcion, $modelo, $marca, $id_categoria){
-        /**$this->helper->checkLogged();*/
-        $db = $this->getDb();
-
-        $query = $db->prepare("UPDATE `autos` SET `nombres` = ?, `descripcion` = ?, `modelo` = ?, `marca` = ?, `id_categorias` = ? WHERE `autos`.`id` = ?");
+    public function update($id, $nombre, $descripcion, $modelo, $marca, $id_categoria){
+        $query = $this->db->prepare("UPDATE `autos` SET `nombres` = ?, `descripcion` = ?, `modelo` = ?, `marca` = ?, `id_categorias` = ? WHERE `autos`.`id` = ?");
         $query->execute([$nombre, $descripcion, $modelo, $marca, $id_categoria,$id]);
     }
 }
