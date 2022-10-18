@@ -13,9 +13,9 @@ class usuariosModel {
     }
 
     //PONER PARAMETRO NOMBRE DSP ATTE: FONZO
-    public function get(){
-        $query = $this->db->prepare("SELECT * FROM `usuarios` WHERE id = 1");
-        $query->execute();
+    public function get($nombre){
+        $query = $this->db->prepare("SELECT * FROM usuarios WHERE nombre = ?");
+        $query->execute([$nombre]);
 
         return $query->fetch(PDO::FETCH_OBJ);
     }

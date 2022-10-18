@@ -41,7 +41,7 @@ class AuthController {
         $password = $_POST['password'];
         
         /**Me traigo el Usuario de mi tabla usuarios */
-        $usuario = $this->usuariosModel->get();
+        $usuario = $this->usuariosModel->get($nombre);
         
         /**Verifico que sean correcto los datos traidos con los que ingreso el usuario por el formulario */
         if($usuario && password_verify($password,$usuario->password)) {
