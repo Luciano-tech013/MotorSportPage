@@ -13,12 +13,6 @@
                 <input type="password" class="form-control" name="password" placeholder="Escribe tu contraseña:" id="password">
             </div>
 
-            {if $error}
-                <div class="alert alert-danger mt-3">
-                    {$error}
-                </div>
-            {/if}
-            
             <button class="btn btn-primary">LOGIN</button>
         </form>
     </div>

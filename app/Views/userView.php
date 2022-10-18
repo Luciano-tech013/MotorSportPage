@@ -25,9 +25,7 @@ class userView {
         $this->smarty->display('app/Templates/form_registrarse.tpl');
     }
 
-    public function showFormLogin($error){
-        $this->smarty->assign('error', $error);
-        
+    public function showFormLogin(){
         $this->smarty->display("app/Templates/form_login.tpl");
     }
 
