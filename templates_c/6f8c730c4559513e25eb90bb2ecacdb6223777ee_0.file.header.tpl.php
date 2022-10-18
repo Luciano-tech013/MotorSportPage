@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-10-15 03:37:28
+/* Smarty version 4.2.1, created on 2022-10-17 19:36:22
   from 'C:\xampp\htdocs\MotorSportPage\app\Templates\header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_634a0ed88a10a6_18598928',
+  'unifunc' => 'content_634d9296a294b0_14285435',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '6f8c730c4559513e25eb90bb2ecacdb6223777ee' => 
     array (
       0 => 'C:\\xampp\\htdocs\\MotorSportPage\\app\\Templates\\header.tpl',
-      1 => 1665797648,
+      1 => 1666028180,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_634a0ed88a10a6_18598928 (Smarty_Internal_Template $_smarty_tpl) {
+function content_634d9296a294b0_14285435 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +48,9 @@ function content_634a0ed88a10a6_18598928 (Smarty_Internal_Template $_smarty_tpl)
                 <a class="nav-link fs-4" href="PoliticayPrivacidad">Politica & Privacidad</>
                 <a class="nav-link fs-4" href="contacto">Contacto</a>
                 <?php if ((isset($_SESSION['ID_USUARIO']))) {?>
-                    <a class="nav-link fs-4" href="logout">CERRAR SESION</a>
+                    <a class="nav-link fs-4" href="logout">Logout</a>
+                <?php } else { ?>
+                    <a class="nav-link fs-4" href="login">Login</a>
                 <?php }?>
             </div>
         </div>

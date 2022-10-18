@@ -24,7 +24,9 @@
                 <a class="nav-link fs-4" href="PoliticayPrivacidad">Politica & Privacidad</>
                 <a class="nav-link fs-4" href="contacto">Contacto</a>
                 {if isset($smarty.session.ID_USUARIO)}
-                    <a class="nav-link fs-4" href="logout">CERRAR SESION</a>
+                    <a class="nav-link fs-4" href="logout">Logout</a>
+                {else}
+                    <a class="nav-link fs-4" href="login">Login</a>
                 {/if}
             </div>
         </div>

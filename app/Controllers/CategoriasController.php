@@ -20,12 +20,17 @@ class CategoriasController {
     }
 
     public function showHome(){
+        if(session_status() != PHP_SESSION_ACTIVE){
+            session_start();
+        }
         $categorias_db = $this->categoriasModel->getAll();
         $this->CategoriasView->showTable($categorias_db);
     }
 
     public function showFiltrado($id){
-        session_start();
+        if(session_status() != PHP_SESSION_ACTIVE){
+            session_start();
+        }
         $categorias = $this->categoriasModel->getAllName($id);
         $autos = $this->categoriasModel->getAllAutosByCategoryId($id);
         $this->CategoriasView->showListFiltrado($categorias, $autos);

@@ -6,6 +6,7 @@ require_once 'app/Views/userView.php';
 require_once 'app/helpers/AuthHelper.php';
 
 class AutosController {
+    
     private $autosModel;
     private $categoriasModel;
     private $userView;
@@ -21,25 +22,33 @@ class AutosController {
     }
 
     public function showHome(){
-        session_start();
+        if(session_status() != PHP_SESSION_ACTIVE){
+            session_start();
+        }
         $autos_db = $this->categoriasModel->getAllAutosAndCategoryName();
         $categorias_db = $this->categoriasModel->getAll();
         $this->AutosView->showTable($autos_db, $categorias_db);
     }
 
     public function showDetalle($id){
-        session_start();
+        if(session_status() != PHP_SESSION_ACTIVE){
+            session_start();
+        }
         $autos_db = $this->autosModel->getAllDetalle($id);
         $this->AutosView->showDescripcion($autos_db);
     }
 
     public function showPrivacidad(){
-        session_start();
+        if(session_status() != PHP_SESSION_ACTIVE){
+            session_start();
+        }
         $this->userView->showPrivacidad();
     }
    
     public function showContacto(){
-        session_start();
+        if(session_status() != PHP_SESSION_ACTIVE){
+            session_start();
+        }
         $this->userView->showContacto();
     }
 

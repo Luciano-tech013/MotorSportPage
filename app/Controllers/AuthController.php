@@ -27,7 +27,7 @@ class AuthController {
             
             header("Location: " . BASE_URL . "login");
         } else {
-            $this->userView->showError("Complete los datos solicitados");
+            $this->userView->showFormRegistrarse("Complete los datos solicitados");
         }
     }
 
@@ -54,7 +54,7 @@ class AuthController {
             
             header("Location: " . BASE_URL);
         } else {
-            $this->userView->showError("Nombre y Contraseña incorrectos");
+            $this->userView->showFormLogin("Nombre y Contraseña incorrectos");
         }
     }
 

@@ -39,7 +39,7 @@
 </table>
 </section>
 
-{if isset($smarty.session.IS_LOOGED)}
+{if isset($smarty.session.IS_LOGGED)}
     {include file="app/Templates/form_autos.tpl"}
 {/if}
 

@@ -56,6 +56,7 @@ switch ($params[0]) {
     case 'validar':
         $AuthController = new AuthController();
         $AuthController->validateUser();
+        break;
     case 'logout':
         $AuthController = new AuthController();
         $AuthController->logout();
