@@ -3,7 +3,7 @@
 {include file="app/Templates/intro.tpl"}
 
 <section>
-<h1 class="text-center shadow-sm p-3 mb-4 bg-body rounded">{$titulo}</h1>
+<h1 class="text-center shadow-sm p-3 mb-4 bg-body rounded">Lista de Autos</h1>
 {if !isset($smarty.session.IS_LOGGED)}
     <p class="p-5 fs-5">Aqui mostraremos informacion sobre algunos ejemplos de autos que pertenecen a algunas de estas categorias. En cada auto vamos a mostrar: Su nombre correspondiente (u apodos), breve descripcion del modelo, el nombre del modelo y la marca del fabricante y proveedor</p>
 {/if}

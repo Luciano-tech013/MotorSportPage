@@ -66,7 +66,7 @@ class categoriasModel {
     }
 
     public function update($id, $nombre, $descripcion, $tipo){
-        $query = $db->prepare("UPDATE `categorias` SET `nombre` = ?, `descripcion` = ?, `tipo` = ? WHERE `categorias`.`id_categorias` = ?");
+        $query = $this->db->prepare("UPDATE `categorias` SET `nombre` = ?, `descripcion` = ?, `tipo` = ? WHERE `categorias`.`id_categorias` = ?");
         $query->execute([$nombre, $descripcion, $tipo, $id]);
     }
 

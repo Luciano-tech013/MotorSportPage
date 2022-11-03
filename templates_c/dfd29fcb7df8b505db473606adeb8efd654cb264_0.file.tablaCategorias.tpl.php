@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-10-17 18:36:28
+/* Smarty version 4.2.1, created on 2022-11-03 16:03:24
   from 'C:\xampp\htdocs\MotorSportPage\app\Templates\tablaCategorias.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_634d848ca833e2_42808548',
+  'unifunc' => 'content_6363d83cc596f7_25656281',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dfd29fcb7df8b505db473606adeb8efd654cb264' => 
     array (
       0 => 'C:\\xampp\\htdocs\\MotorSportPage\\app\\Templates\\tablaCategorias.tpl',
-      1 => 1666024586,
+      1 => 1667487801,
       2 => 'file',
     ),
   ),
@@ -22,10 +22,9 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:app/Templates/footer.tpl' => 1,
   ),
 ),false)) {
-function content_634d848ca833e2_42808548 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6363d83cc596f7_25656281 (Smarty_Internal_Template $_smarty_tpl) {
 ?><section>
-<h1 class="text-center shadow-sm p-3 mb-4 mt-5 bg-body rounded"><?php echo $_smarty_tpl->tpl_vars['titulo']->value;?>
-</h1>
+<h1 class="text-center shadow-sm p-3 mb-4 mt-5 bg-body rounded">Categorias a las que pertenecen</h1>
 <?php if (!(isset($_SESSION['ID_LOGGED']))) {?>
     <p class="p-5 fs-5">En esta tabla mostraremos los autos descriptos en la tabla anterior y la categoria competitiva a la
         que pertenecen.Mostraremos el nombre de la categoria, una detallada descripcion de su organizacion y obejtivo, y en

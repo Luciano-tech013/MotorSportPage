@@ -1,7 +1,7 @@
 <?php 
 require_once 'app/Controllers/AutosController.php';
 require_once 'app/Controllers/CategoriasController.php'; 
-require_once 'app/Controllers/AuthController.php';       
+require_once 'app/Controllers/UserController.php';       
 
 define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
@@ -13,12 +13,9 @@ if (!empty($_GET['action'])) {
 $params = explode('/', $action);
 
 switch ($params[0]) {
-    /**Llamados al Home */
     case 'home':
         $AutosController = new AutosController();
-        $CategoriasController = new CategoriasController();
         $AutosController->showHome();
-        $CategoriasController->showHome();
         break;
     /**Detalle y filtrado */
     case 'detalle':
@@ -33,33 +30,33 @@ switch ($params[0]) {
         break;
     /**Llamados a la NavBar */
     case 'PoliticayPrivacidad':
-        $AutosController = new AutosController();
-        $AutosController->showPrivacidad();
+        $UserController = new UserController();
+        $UserController->showPrivacidad();
         break;
     case 'contacto':
-        $AutosController = new AutosController();
-        $AutosController->showPrivacidad();
+        $UserController = new UserController();
+        $UserController->showContacto();
         break;
     /**Llamados a registrarse y login*/
     case 'registrarse':
-        $AuthController = new AuthController();
-        $AuthController->showFormRegistrarse();
+        $UserController = new UserController();
+        $UserController->showFormRegistrarse();
         break;
     case 'cuenta':
-        $AuthController = new AuthController();
-        $AuthController->createUser();
+        $UserController = new UserController();
+        $UserController->createUser();
         break;
     case 'login':
-        $AuthController = new AuthController();
-        $AuthController->showFormLogin();
+        $UserController = new UserController();
+        $UserController->showFormLogin();
         break;
     case 'validar':
-        $AuthController = new AuthController();
-        $AuthController->validateUser();
+        $UserController = new UserController();
+        $UserController->validateUser();
         break;
     case 'logout':
-        $AuthController = new AuthController();
-        $AuthController->logout();
+        $UserController = new UserController();
+        $UserController->logout();
         break;
     /**CRUD */
     case 'addItems':

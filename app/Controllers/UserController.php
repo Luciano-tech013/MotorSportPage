@@ -3,20 +3,20 @@ require_once 'app/helpers/AuthHelper.php';
 require_once 'app/Models/usuariosModel.php';
 require_once 'app/Views/userView.php';
 
-class AuthController {
+class UserController {
 
     private $usuariosModel;
-    private $userView;
+    private $view;
     private $helper;
 
     public function __construct(){
         $this->usuariosModel = new usuariosModel();
-        $this->userView = new userView();
+        $this->view = new userView();
         $this->helper = new AuthHelper();
     }
 
     public function showFormRegistrarse(){
-        $this->userView->showFormRegistrarse();
+        $this->view->showFormRegistrarse();
     }
 
     public function createUser(){
@@ -27,12 +27,12 @@ class AuthController {
             
             header("Location: " . BASE_URL . "login");
         } else {
-            $this->userView->showError("Complete los datos solicitados");
+            $this->view->showError("Complete los datos solicitados");
         }
     }
 
     public function showFormLogin(){
-        $this->userView->showFormLogin();
+        $this->view->showFormLogin();
     }
 
     public function validateUser(){
@@ -54,7 +54,7 @@ class AuthController {
             
             header("Location: " . BASE_URL);
         } else {
-            $this->userView->showError("Nombre y Contraseña incorrectos");
+            $this->view->showError("Nombre y Contraseña incorrectos");
         }
     }
 
@@ -63,5 +63,19 @@ class AuthController {
         $this->helper->destroyLogin();
 
         header("Location: " . BASE_URL);
+    }
+
+    public function showPrivacidad(){
+        if(session_status() != PHP_SESSION_ACTIVE){
+            session_start();
+        }
+        $this->view->showPrivacidad();
+    }
+   
+    public function showContacto(){
+        if(session_status() != PHP_SESSION_ACTIVE){
+            session_start();
+        }
+        $this->view->showContacto();
     }
 }

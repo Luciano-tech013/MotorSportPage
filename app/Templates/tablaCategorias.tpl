@@ -1,5 +1,5 @@
 <section>
-<h1 class="text-center shadow-sm p-3 mb-4 mt-5 bg-body rounded">{$titulo}</h1>
+<h1 class="text-center shadow-sm p-3 mb-4 mt-5 bg-body rounded">Categorias a las que pertenecen</h1>
 {if !isset($smarty.session.ID_LOGGED)}
     <p class="p-5 fs-5">En esta tabla mostraremos los autos descriptos en la tabla anterior y la categoria competitiva a la
         que pertenecen.Mostraremos el nombre de la categoria, una detallada descripcion de su organizacion y obejtivo, y en

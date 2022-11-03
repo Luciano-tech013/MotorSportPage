@@ -1,7 +1,7 @@
 <?php
 require_once 'app/Models/autosModel.php';
 require_once 'app/Models/categoriasModel.php';
-require_once 'app/Views/AutosView.php';
+require_once 'app/Views/MotorView.php';
 require_once 'app/Views/userView.php';
 require_once 'app/helpers/AuthHelper.php';
 
@@ -10,14 +10,14 @@ class AutosController {
     private $autosModel;
     private $categoriasModel;
     private $userView;
-    private $AutosView;
+    private $view;
     private $helper;
     
     public function __construct(){
         $this->autosModel = new autosModel();
         $this->categoriasModel = new categoriasModel();
         $this->userView = new userView();
-        $this->AutosView = new AutosView();
+        $this->view = new MotorView();
         $this->helper = new AuthHelper();
     }
 
@@ -27,7 +27,7 @@ class AutosController {
         }
         $autos_db = $this->categoriasModel->getAllAutosAndCategoryName();
         $categorias_db = $this->categoriasModel->getAll();
-        $this->AutosView->showTable($autos_db, $categorias_db);
+        $this->view->showTable($autos_db, $categorias_db);
     }
 
     public function showDetalle($id){
@@ -35,21 +35,7 @@ class AutosController {
             session_start();
         }
         $autos_db = $this->autosModel->getAllDetalle($id);
-        $this->AutosView->showDescripcion($autos_db);
-    }
-
-    public function showPrivacidad(){
-        if(session_status() != PHP_SESSION_ACTIVE){
-            session_start();
-        }
-        $this->userView->showPrivacidad();
-    }
-   
-    public function showContacto(){
-        if(session_status() != PHP_SESSION_ACTIVE){
-            session_start();
-        }
-        $this->userView->showContacto();
+        $this->view->showDescripcion($autos_db);
     }
 
     /**CRUD de la tabla autoss*/
@@ -67,7 +53,7 @@ class AutosController {
             
             header("Location: " . BASE_URL);
         } else {
-            $this->AutosView->showError("Debe completar los datos solicitados!!");
+            $this->view->showError("Debe completar los datos solicitados!!");
         }
     }
 
@@ -75,7 +61,7 @@ class AutosController {
         $this->helper->checkLogged();
 
         if(!isset($_POST['id']) && empty($_POST['id'])){
-            $this->AutosView->showError("Error: No se puede eliminar");
+            $this->view->showError("Error: No se puede eliminar");
         }
 
         $this->autosModel->delete($id);
@@ -86,7 +72,7 @@ class AutosController {
     public function showFormItems($id){
         $autos = $this->autosModel->getAllForEdit($id);
         $categorias = $this->categoriasModel->getAll();
-        $this->AutosView->showFormEdit($id, $autos, $categorias);
+        $this->view->showFormEditAutos($id, $autos, $categorias);
     }
 
     public function updateItem($id){
