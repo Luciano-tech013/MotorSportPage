@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-11-03 16:03:24
+/* Smarty version 4.2.1, created on 2022-11-08 16:40:14
   from 'C:\xampp\htdocs\MotorSportPage\app\Templates\tablaCategorias.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_6363d83cc596f7_25656281',
+  'unifunc' => 'content_636a785e545758_43720845',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'dfd29fcb7df8b505db473606adeb8efd654cb264' => 
     array (
       0 => 'C:\\xampp\\htdocs\\MotorSportPage\\app\\Templates\\tablaCategorias.tpl',
-      1 => 1667487801,
+      1 => 1667921745,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:app/Templates/footer.tpl' => 1,
   ),
 ),false)) {
-function content_6363d83cc596f7_25656281 (Smarty_Internal_Template $_smarty_tpl) {
+function content_636a785e545758_43720845 (Smarty_Internal_Template $_smarty_tpl) {
 ?><section>
 <h1 class="text-center shadow-sm p-3 mb-4 mt-5 bg-body rounded">Categorias a las que pertenecen</h1>
 <?php if (!(isset($_SESSION['ID_LOGGED']))) {?>

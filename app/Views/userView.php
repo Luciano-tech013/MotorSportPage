@@ -9,6 +9,15 @@ class userView {
         $this->smarty = new Smarty();
     }
 
+    public function showTable($autos_db, $categorias_db){
+        $this->smarty->assign('autos', $autos_db);
+        $this->smarty->assign('categorias', $categorias_db);
+        $this->smarty->assign('error', 'Tiene que eliminar los autos que pertenecen a esta categoria primero');
+
+        $this->smarty->display('app/Templates/tablaAutos.tpl');
+        $this->smarty->display('app/Templates/tablaCategorias.tpl');
+    }
+
     public function showPrivacidad(){
         $this->smarty->assign('titulo', "Politica & Privacidad");
 
@@ -29,7 +38,9 @@ class userView {
         $this->smarty->display("app/Templates/form_login.tpl");
     }
 
-    public function showError($msg){
-        echo '<p class="text-center fs-1 badge text-bg-danger">' . $msg . '</p>';
+    public function showError($error){
+        $this->smarty->assign('error', $error);
+
+        $this->smarty->display("app/Templates/alert.tpl");
     }
 }

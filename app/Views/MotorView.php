@@ -46,7 +46,9 @@ class MotorView {
         $this->smarty->display('app/Templates/form_categorias.edit.tpl');
     }
 
-    public function showError($msg){
-        echo '<p class="text-center fs-1 badge text-bg-danger">' . $msg . '</p>';
+    public function showError($error){
+        $this->smarty->assign('error', $error);
+
+        $this->smarty->display("app/Templates/alert.tpl");
     }
 }

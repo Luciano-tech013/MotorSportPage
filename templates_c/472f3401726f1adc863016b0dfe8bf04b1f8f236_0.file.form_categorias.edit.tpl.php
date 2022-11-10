@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-10-17 04:47:16
+/* Smarty version 4.2.1, created on 2022-11-08 16:30:42
   from 'C:\xampp\htdocs\MotorSportPage\app\Templates\form_categorias.edit.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_634cc234c1f9e5_17679334',
+  'unifunc' => 'content_636a7622a11192_60356645',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '472f3401726f1adc863016b0dfe8bf04b1f8f236' => 
     array (
       0 => 'C:\\xampp\\htdocs\\MotorSportPage\\app\\Templates\\form_categorias.edit.tpl',
-      1 => 1665974835,
+      1 => 1667921422,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:app/Templates/header.tpl' => 1,
   ),
 ),false)) {
-function content_634cc234c1f9e5_17679334 (Smarty_Internal_Template $_smarty_tpl) {
+function content_636a7622a11192_60356645 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:app/Templates/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 <section>
@@ -62,6 +62,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>" placeholder="t
                 </div>
 
                 <button class="btn btn-badge text-bg-success">ENVIAR</button>
+                <button class="btn btn-primary">VOLVER</button>
             </form>
         </div>
     </div>

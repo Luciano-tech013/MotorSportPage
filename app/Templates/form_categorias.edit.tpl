@@ -15,6 +15,7 @@
                 </div>
 
                 <button class="btn btn-badge text-bg-success">ENVIAR</button>
+                <button class="btn btn-primary">VOLVER</button>
             </form>
         </div>
     </div>

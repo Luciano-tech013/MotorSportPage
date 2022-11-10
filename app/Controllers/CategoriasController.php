@@ -45,7 +45,7 @@ class CategoriasController {
         $this->helper->checkLogged();
 
         if(!isset($_POST['id']) && empty($_POST['id'])){
-            $this->view->showError("Error: No se puede eliminar");
+            $this->view->showError("Tiene que eliminar los autos que pertenecen a esta categoria primero");
         }
 
         $this->model->delete($id);

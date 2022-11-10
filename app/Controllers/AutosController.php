@@ -9,15 +9,15 @@ class AutosController {
     
     private $autosModel;
     private $categoriasModel;
-    private $userView;
+    private $MotorView;
     private $view;
     private $helper;
     
     public function __construct(){
         $this->autosModel = new autosModel();
         $this->categoriasModel = new categoriasModel();
-        $this->userView = new userView();
-        $this->view = new MotorView();
+        $this->view = new userView();
+        $this->MotorView = new MotorView();
         $this->helper = new AuthHelper();
     }
 
@@ -35,7 +35,7 @@ class AutosController {
             session_start();
         }
         $autos_db = $this->autosModel->getAllDetalle($id);
-        $this->view->showDescripcion($autos_db);
+        $this->MotorView->showDescripcion($autos_db);
     }
 
     /**CRUD de la tabla autoss*/
@@ -61,7 +61,7 @@ class AutosController {
         $this->helper->checkLogged();
 
         if(!isset($_POST['id']) && empty($_POST['id'])){
-            $this->view->showError("Error: No se puede eliminar");
+            $this->view->showError("No se puede eliminar");
         }
 
         $this->autosModel->delete($id);
@@ -72,7 +72,7 @@ class AutosController {
     public function showFormItems($id){
         $autos = $this->autosModel->getAllForEdit($id);
         $categorias = $this->categoriasModel->getAll();
-        $this->view->showFormEditAutos($id, $autos, $categorias);
+        $this->MotorView->showFormEditAutos($id, $autos, $categorias);
     }
 
     public function updateItem($id){

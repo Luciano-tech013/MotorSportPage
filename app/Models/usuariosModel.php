@@ -12,7 +12,6 @@ class usuariosModel {
         return $db;
     }
 
-    //PONER PARAMETRO NOMBRE DSP ATTE: FONZO
     public function get($nombre){
         $query = $this->db->prepare("SELECT * FROM usuarios WHERE nombre = ?");
         $query->execute([$nombre]);

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-11-03 16:03:24
+/* Smarty version 4.2.1, created on 2022-11-08 16:26:04
   from 'C:\xampp\htdocs\MotorSportPage\app\Templates\tablaAutos.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_6363d83cbfaa69_39975090',
+  'unifunc' => 'content_636a750c69c431_81614412',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '71e4f27ff2d8196ec98356cdc6b31191c7fa10d4' => 
     array (
       0 => 'C:\\xampp\\htdocs\\MotorSportPage\\app\\Templates\\tablaAutos.tpl',
-      1 => 1667487771,
+      1 => 1667920962,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:app/Templates/form_autos.tpl' => 1,
   ),
 ),false)) {
-function content_6363d83cbfaa69_39975090 (Smarty_Internal_Template $_smarty_tpl) {
+function content_636a750c69c431_81614412 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_subTemplateRender("file:app/Templates/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
@@ -44,8 +44,8 @@ $_smarty_tpl->_subTemplateRender("file:app/Templates/header.tpl", $_smarty_tpl->
             <th>Categoria</th>
             <th>Detalle</th>
             <?php if ((isset($_SESSION['IS_LOGGED']))) {?>
-            <th>BORRAR</th>
-            <th>EDITAR</th>
+                <th>BORRAR</th>
+                <th>EDITAR</th>
             <?php }?>
         </tr>
     </thead>

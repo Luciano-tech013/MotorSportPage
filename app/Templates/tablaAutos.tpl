@@ -16,8 +16,8 @@
             <th>Categoria</th>
             <th>Detalle</th>
             {if isset($smarty.session.IS_LOGGED)}
-            <th>BORRAR</th>
-            <th>EDITAR</th>
+                <th>BORRAR</th>
+                <th>EDITAR</th>
             {/if}
         </tr>
     </thead>
