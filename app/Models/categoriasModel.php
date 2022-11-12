@@ -61,8 +61,13 @@ class categoriasModel {
     }
 
     public function delete($id){
-        $query = $this->db->prepare("DELETE FROM categorias WHERE id_categorias = ?");
-        $query->execute([$id]);
+        try {
+            $query = $this->db->prepare("DELETE FROM categorias WHERE id_categorias = ?");
+            $query->execute([$id]);
+        }
+        catch(Exception $e) {
+            return $e;
+        }
     }
 
     public function update($id, $nombre, $descripcion, $tipo){

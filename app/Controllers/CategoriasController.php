@@ -43,14 +43,14 @@ class CategoriasController {
 
     public function deleteCategorias($id){
         $this->helper->checkLogged();
-
-        if(!isset($_POST['id']) && empty($_POST['id'])){
-            $this->view->showError("Tiene que eliminar los autos que pertenecen a esta categoria primero");
-        }
-
+        
         $this->model->delete($id);
-
-        header("Location: " . BASE_URL);
+            if($this->model->delete($id)){
+                $this->view->showError("Tiene que eliminar los autos que pertenecen a esta categoria primero");
+            } else {
+                header("Location: " . BASE_URL);
+            }
+        
     }
 
     public function showFormCat($id){
