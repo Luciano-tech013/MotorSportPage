@@ -1,4 +1,4 @@
-{include file="app/Templates/header.tpl"}
+{include file="app/templates/header.tpl"}
 
 <section>
     <h1 class="text-center shadow-sm p-3 mb-0 bg-body rounded">{$titulo}</h1>
@@ -8,4 +8,4 @@
     {/foreach}
 </section>
 
-{include file="app/Templates/footer.tpl"}
+{include file="app/templates/footer.tpl"}

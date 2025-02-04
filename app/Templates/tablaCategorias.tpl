@@ -23,12 +23,12 @@
             <tr class="fs-5">
                 <td>{$categoria->nombre}</td>
                 <td>{$categoria->tipo}</td>
-                <td><a class="btn btn-primary" href="filtrar/{$categoria->id_categorias}/{$categoria->nombre}">Filtrar</a>
+                <td><a class="btn btn-primary" href="categorias/autos/{$categoria->id_categorias}">Filtrar</a>
                 </td>
                 <td>{$categoria->descripcion}</td>
                 {if isset($smarty.session.IS_LOGGED)}
-                    <td><a class="btn btn-badge text-bg-danger" href="deleteCategorias/{$categoria->id_categorias}">BORRAR</a></td>
-                     <td><a class="btn btn-badge text-bg-warning" href="editCat/{$categoria->id_categorias}">EDITAR</a>
+                    <td><a class="btn btn-badge text-bg-danger" href="categorias/eliminar/{$categoria->id_categorias}">BORRAR</a></td>
+                     <td><a class="btn btn-badge text-bg-warning" href="categorias/edit/{$categoria->id_categorias}">EDITAR</a>
                     </td>
                 {/if}
             </tr>
@@ -38,7 +38,7 @@
 </section>
 
 {if isset($smarty.session.IS_LOGGED)}
-    {include file="app/Templates/form_categoria.tpl"}
+    {include file="app/templates/form_categoria.tpl"}
 {/if}
 
-{include file="app/Templates/footer.tpl"}
+{include file="app/templates/footer.tpl"}

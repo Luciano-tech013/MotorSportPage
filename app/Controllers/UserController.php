@@ -1,22 +1,22 @@
 <?php
 require_once 'app/helpers/AuthHelper.php';
-require_once 'app/Models/usuariosModel.php';
-require_once 'app/Views/userView.php';
+require_once 'app/models/UsuariosModel.php';
+require_once 'app/views/UserView.php';
 
 class UserController {
 
     private $usuariosModel;
-    private $view;
-    private $helper;
+    private $userView;
+    private $authHelper;
 
     public function __construct(){
         $this->usuariosModel = new usuariosModel();
-        $this->view = new userView();
-        $this->helper = new AuthHelper();
+        $this->userView = new userView();
+        $this->authHelper = new AuthHelper();
     }
 
     public function showFormRegistrarse(){
-        $this->view->showFormRegistrarse();
+        $this->userView->showFormRegistrarse();
     }
 
     public function createUser(){
@@ -27,12 +27,12 @@ class UserController {
             
             header("Location: " . BASE_URL . "login");
         } else {
-            $this->view->showError("Complete los datos solicitados");
+            $this->userView->showError("Complete los datos solicitados");
         }
     }
 
     public function showFormLogin(){
-        $this->view->showFormLogin();
+        $this->userView->showFormLogin();
     }
 
     public function validateUser(){
@@ -54,13 +54,12 @@ class UserController {
             
             header("Location: " . BASE_URL);
         } else {
-            $this->view->showError("Nombre y Contraseña incorrectos");
+            $this->userView->showError("Nombre y Contraseña incorrectos");
         }
     }
 
     public function logout(){
-        
-        $this->helper->destroyLogin();
+        $this->authHelper->destroyLogin();
 
         header("Location: " . BASE_URL);
     }
@@ -69,13 +68,15 @@ class UserController {
         if(session_status() != PHP_SESSION_ACTIVE){
             session_start();
         }
-        $this->view->showPrivacidad();
+
+        $this->userView->showPrivacidad();
     }
    
     public function showContacto(){
         if(session_status() != PHP_SESSION_ACTIVE){
             session_start();
         }
-        $this->view->showContacto();
+
+        $this->userView->showContacto();
     }
 }

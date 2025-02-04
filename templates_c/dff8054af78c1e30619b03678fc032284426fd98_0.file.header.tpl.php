@@ -1,7 +1,31 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 4.2.1, created on 2024-11-30 20:16:40
+  from 'F:\software development\xampp\htdocs\motorsportpage\app\Templates\header.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '4.2.1',
+  'unifunc' => 'content_674b64980abf60_97103567',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'dff8054af78c1e30619b03678fc032284426fd98' => 
+    array (
+      0 => 'F:\\software development\\xampp\\htdocs\\motorsportpage\\app\\Templates\\header.tpl',
+      1 => 1732988640,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_674b64980abf60_97103567 (Smarty_Internal_Template $_smarty_tpl) {
+?><!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="{BASE_URL}">
+    <base href="<?php echo BASE_URL;?>
+">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,11 +48,11 @@
                 <a class="nav-link active fs-4" aria-current="page" href="home">Home</a>
                 <a class="nav-link fs-4" href="politicas">Politica & Privacidad</>
                 <a class="nav-link fs-4" href="contacto">Contacto</a>
-                {if isset($smarty.session.ID_USUARIO)}
+                <?php if ((isset($_SESSION['ID_USUARIO']))) {?>
                     <a class="nav-link fs-4" href="logout">Logout</a>
-                {else}
+                <?php } else { ?>
                     <a class="nav-link fs-4" href="login">Login</a>
-                {/if}
+                <?php }?>
             </div>
         </div>
     </div>
@@ -37,3 +61,5 @@
 
 
 
+<?php }
+}

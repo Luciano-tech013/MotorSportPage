@@ -1,6 +1,6 @@
-{include file="app/Templates/header.tpl"}
+{include file="app/templates/header.tpl"}
 
-{include file="app/Templates/intro.tpl"}
+{include file="app/templates/intro.tpl"}
 
 <section>
 <h1 class="text-center shadow-sm p-3 mb-4 bg-body rounded">Lista de Autos</h1>
@@ -28,10 +28,10 @@
             <td>{$auto->modelo}</td>
             <td>{$auto->marca}</td>
             <td>{$auto->nombre}</td>
-            <td><a class="btn btn-primary" href="detalle/{$auto->id}/ {$auto->nombre}">Detalle</a></td>
+            <td><a class="btn btn-primary" href="autos/detalle/{$auto->id}">Detalle</a></td>
             {if isset($smarty.session.IS_LOGGED)}
-                <td><a class="btn btn-badge text-bg-danger" href="deleteItems/{$auto->id}">BORRAR</a></td>
-                <td><a class="btn btn-badge text-bg-warning" href="editItems/{$auto->id}">EDITAR</a></td>
+                <td><a class="btn btn-badge text-bg-danger" href="autos/eliminar/{$auto->id}">BORRAR</a></td>
+                <td><a class="btn btn-badge text-bg-warning" href="autos/edit/{$auto->id}">EDITAR</a></td>
             {/if}
         </tr>
     {/foreach}
@@ -40,7 +40,7 @@
 </section>
 
 {if isset($smarty.session.IS_LOGGED)}
-    {include file="app/Templates/form_autos.tpl"}
+    {include file="app/templates/form_autos.tpl"}
 {/if}
 
 

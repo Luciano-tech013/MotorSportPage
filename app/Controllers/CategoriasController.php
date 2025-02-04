@@ -1,72 +1,73 @@
 <?php
-require_once 'app/Models/categoriasModel.php';
-require_once 'app/Views/MotorView.php';
+require_once 'app/models/CategoriasModel.php';
+require_once 'app/views/MotorView.php';
 require_once 'app/helpers/AuthHelper.php';
 
 class CategoriasController {
 
-    private $model;
-    private $view;
-    private $helper;
+    private $categoriasModel;
+    private $motorView;
+    private $authHelper;
 
     public function __construct(){
-        $this->model = new categoriasModel();
-        $this->view = new MotorView();
-        $this->helper = new AuthHelper();
+        $this->categoriasModel = new categoriasModel();
+        $this->motorView = new MotorView();
+        $this->authHelper = new AuthHelper();
     }
 
     public function showFiltrado($id){
         if(session_status() != PHP_SESSION_ACTIVE){
             session_start();
         }
-        $categorias = $this->model->getAllName($id);
-        $autos = $this->model->getAllAutosByCategoryId($id);
-        $this->view->showListFiltrado($categorias, $autos);
+
+        $categorias = $this->categoriasModel->getByIdWithName($id);
+        $autos = $this->categoriasModel->getAllAutosByCategoryId($id);
+        $this->motorView->showListFiltrado($categorias, $autos);
     }
 
     /**CRUD de la tabla categorias*/
     public function addCategorias(){
-        $this->helper->checkLogged();
+        $this->authHelper->checkLogged();
 
         if(!empty($_POST['nombre'] && $_POST['descripcion'] && $_POST['tipo'])){
             $nombre = $_POST['nombre'];
             $descripcion = $_POST['descripcion'];
             $tipo = $_POST['tipo'];
 
-            $this->model->add($nombre, $descripcion, $tipo);
+            $this->categoriasModel->add($nombre, $descripcion, $tipo);
 
             header("Location: " . BASE_URL);
         } else{
-            $this->view->showError("Complete todos los campos");
+            $this->motorView->showError("Complete todos los campos");
         }
     }
 
     public function deleteCategorias($id){
-        $this->helper->checkLogged();
+        $this->authHelper->checkLogged();
         
-        $this->model->delete($id);
-            if($this->model->delete($id)){
-                $this->view->showError("Tiene que eliminar los autos que pertenecen a esta categoria primero");
-            } else {
-                header("Location: " . BASE_URL);
-            }
-        
+        $this->categoriasModel->delete($id);
+        if($this->categoriasModel->delete($id)){
+            $this->motorView->showError("Tiene que eliminar los autos que pertenecen a esta categoria primero");
+            die();
+        } else {
+            header("Location: " . BASE_URL);
+        }
     }
 
     public function showFormCat($id){
-        $categorias = $this->model->getAllForEdit($id);
-        $this->view->showFormEditCat($id,$categorias);
+        $categorias = $this->categoriasModel->getById($id);
+        $this->motorView->showFormEditCat($id,$categorias);
     }
 
     public function updateCategorias($id){
-        $this->helper->checkLogged();
+        $this->authHelper->checkLogged();
         
         if(isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['tipo'])){
             $nombre = $_POST['nombre'];
             $descripcion = $_POST['descripcion'];
             $tipo = $_POST['tipo'];
             
-            $this->model->update($id, $nombre, $descripcion, $tipo);
+            $this->categoriasModel->update($id, $nombre, $descripcion, $tipo);
 
             header("Location: " . BASE_URL);
         }

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-11-12 18:55:18
+/* Smarty version 4.2.1, created on 2022-12-02 01:32:07
   from 'C:\xampp\htdocs\motorsportpage\app\Templates\header.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_636fde06ad8ad1_45880977',
+  'unifunc' => 'content_638947877e3106_72615854',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3bfb3b5cce6b8aee1e990524f3e78aaf24cbf785' => 
     array (
       0 => 'C:\\xampp\\htdocs\\motorsportpage\\app\\Templates\\header.tpl',
-      1 => 1667761777,
+      1 => 1669941122,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_636fde06ad8ad1_45880977 (Smarty_Internal_Template $_smarty_tpl) {
+function content_638947877e3106_72615854 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +29,7 @@ function content_636fde06ad8ad1_45880977 (Smarty_Internal_Template $_smarty_tpl)
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <title>MotorSport -- Page</title>

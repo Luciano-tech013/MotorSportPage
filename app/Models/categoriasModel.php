@@ -1,5 +1,5 @@
 <?php
-require_once 'app/Models/autosModel.php';
+require_once 'app/models/AutosModel.php';
 
 class categoriasModel {
     
@@ -12,10 +12,10 @@ class categoriasModel {
     }
 
     private function getDB() {
-        $db = new PDO('mysql:host=localhost;'.'dbname=motorsport_bd;charset=utf8', 'root', '');
+        $db = new PDO('mysql:host=localhost;port=3307;dbname=motorsportpage_bd;charset=utf8', 'root', '');
         return $db;
     }
-
+    
     public function getAll(){
         $query = $this->db->prepare("SELECT * FROM categorias");
         $query->execute();
@@ -23,7 +23,7 @@ class categoriasModel {
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getAllForEdit($id){
+    public function getById($id){
         /**Traigo registros mediante el ID para mostrar el form.edit precargado */
         $query = $this->db->prepare("SELECT * FROM categorias WHERE id_categorias = ?");
         $query->execute([$id]);
@@ -31,7 +31,7 @@ class categoriasModel {
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getAllName($id){
+    public function getByIdWithName($id){
         /**Traigo solo el nombre mediante el ID de la categoria seleccionada */
         $query = $this->db->prepare("SELECT nombre FROM categorias WHERE id_categorias = ?");
         $query->execute([$id]);
@@ -39,9 +39,9 @@ class categoriasModel {
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function getAllAutosAndCategoryName(){
+    public function getCategoryNameWithAllAutos(){
         /**Inner join que me devuelve la categorias a la que pertenecen los autos (items) */
-        $query = $this->db->prepare("SELECT autos.*, categorias.nombre FROM autos INNER JOIN categorias ON autos.id_categorias = categorias.id_categorias");
+        $query = $this->db->prepare("SELECT a.*, c.nombre FROM autos a INNER JOIN categorias c ON a.id_categorias = c.id_categorias");
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_OBJ);

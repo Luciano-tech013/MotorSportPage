@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.2.1, created on 2022-11-12 20:04:48
+/* Smarty version 4.2.1, created on 2022-11-14 15:31:21
   from 'C:\xampp\htdocs\motorsportpage\app\Templates\alert.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.2.1',
-  'unifunc' => 'content_636fee507a99b5_24901047',
+  'unifunc' => 'content_63725139d33889_25005148',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'bae6c62e758130bf2e4aa99e5446425d91d513ad' => 
     array (
       0 => 'C:\\xampp\\htdocs\\motorsportpage\\app\\Templates\\alert.tpl',
-      1 => 1668279886,
+      1 => 1668436274,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:app/templates/footer.tpl' => 1,
   ),
 ),false)) {
-function content_636fee507a99b5_24901047 (Smarty_Internal_Template $_smarty_tpl) {
+function content_63725139d33889_25005148 (Smarty_Internal_Template $_smarty_tpl) {
 ?><head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -35,7 +35,7 @@ function content_636fee507a99b5_24901047 (Smarty_Internal_Template $_smarty_tpl)
         </div>
         <a href="volver" class="btn btn-primary mt-5">VOLVER</a>
     </div>
-    <div class="m-0">
+    <div>
         <p class="ml-4 p-5 fs-4">Si se muestra el error "¡Alerta!" u otro código de error, significa que usted debe eliminar primero los autos que contengan dicha categoria.
         Si aparece un error de eliminar categoria, siga los pasos que aparecen a continuacion: </p>
         <div class="m-5 mt-0">
@@ -51,7 +51,7 @@ function content_636fee507a99b5_24901047 (Smarty_Internal_Template $_smarty_tpl)
         Si aparece un error de carga de la página: Para solucionar el problema, sigue los pasos que aparecen a
         continuación. Para comenzar, vuelve a cargar la página. </p>
         <div class="m-5 mt-0">
-            <h1 class="fs-3">1.Pruebe eliminando los autos</h1>
+            <h1 class="fs-3">2.Internet</h1>
             <ul class="fs-5">
                 <li>Comprueba tu conexión a Internet</li>
                 <li>Borra la caché</li>

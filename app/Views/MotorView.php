@@ -9,9 +9,9 @@ class MotorView {
         $this->smarty = new Smarty();
     }
 
-    public function showTable($autos_db, $categorias_db){
-        $this->smarty->assign('autos', $autos_db);
-        $this->smarty->assign('categorias', $categorias_db);
+    public function showTable($autos, $categorias){
+        $this->smarty->assign('autos', $autos);
+        $this->smarty->assign('categorias', $categorias);
 
         $this->smarty->display('app/Templates/tablaAutos.tpl');
         $this->smarty->display('app/Templates/tablaCategorias.tpl');

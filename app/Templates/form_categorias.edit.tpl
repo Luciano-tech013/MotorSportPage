@@ -3,7 +3,7 @@
     <h1 class="text-center shadow-sm p-3 mb-0 bg-body rounded">Editar</h1>
     <div class="container">
         <div class="p-4 bg-light mt-3">
-            <form class="g-3 mt-2" method="POST" action="updateCategorias/{$id}">
+            <form class="g-3 mt-2" method="POST" action="categorias/update/{$id}">
                 <div class="mb-4">
                     <input type="text" class="form-control" name="nombre" value="{foreach from=$categorias item=$categoria}{$categoria->nombre}{/foreach}" placeholder="Nombre:">
                 </div>

@@ -1,46 +1,44 @@
 <?php
-require_once 'app/Models/autosModel.php';
-require_once 'app/Models/categoriasModel.php';
-require_once 'app/Views/MotorView.php';
-require_once 'app/Views/userView.php';
+require_once 'app/models/AutosModel.php';
+require_once 'app/models/CategoriasModel.php';
+require_once 'app/views/MotorView.php';
+require_once 'app/views/UserView.php';
 require_once 'app/helpers/AuthHelper.php';
 
 class AutosController {
     
     private $autosModel;
     private $categoriasModel;
-    private $MotorView;
-    private $view;
-    private $helper;
+    private $motorView;
+    private $userView;
+    private $authHelper;
     
     public function __construct(){
         $this->autosModel = new autosModel();
         $this->categoriasModel = new categoriasModel();
-        $this->view = new userView();
-        $this->MotorView = new MotorView();
-        $this->helper = new AuthHelper();
+        $this->motorView = new MotorView();
+        $this->userView = new userView();
+        $this->authHelper = new AuthHelper();
     }
 
     public function showHome(){
         if(session_status() != PHP_SESSION_ACTIVE){
             session_start();
         }
-        $autos_db = $this->categoriasModel->getAllAutosAndCategoryName();
-        $categorias_db = $this->categoriasModel->getAll();
-        $this->view->showTable($autos_db, $categorias_db);
+
+        $autos = $this->categoriasModel->getCategoryNameWithAllAutos();
+        $categorias = $this->categoriasModel->getAll();
+        $this->motorView->showTable($autos, $categorias);
     }
 
     public function showDetalle($id){
-        if(session_status() != PHP_SESSION_ACTIVE){
-            session_start();
-        }
-        $autos_db = $this->autosModel->getAllDetalle($id);
-        $this->MotorView->showDescripcion($autos_db);
+        $auto = $this->autosModel->getByDetalle($id);
+        $this->motorView->showDescripcion($auto);
     }
 
     /**CRUD de la tabla autoss*/
     public function addItems(){
-        $this->helper->checkLogged();
+        $this->authHelper->checkLogged();
 
         if(!empty($_POST['nombre'] && $_POST['descripcion'] && $_POST['modelo'] && $_POST['marca'] && $_POST['categoria'])){
             $nombre = $_POST['nombre'];
@@ -53,15 +51,15 @@ class AutosController {
             
             header("Location: " . BASE_URL);
         } else {
-            $this->view->showError("Debe completar los datos solicitados!!");
+            $this->userView->showError("Debe completar los datos solicitados!!");
         }
     }
 
     public function deleteItems($id){
-        $this->helper->checkLogged();
+        $this->authHelper->checkLogged();
 
         if(!isset($_POST['id']) && empty($_POST['id'])){
-            $this->view->showError("No se puede eliminar");
+            $this->userView->showError("No se puede eliminar");
         }
 
         $this->autosModel->delete($id);
@@ -70,13 +68,13 @@ class AutosController {
     }
 
     public function showFormItems($id){
-        $autos = $this->autosModel->getAllForEdit($id);
+        $autos = $this->autosModel->getById($id);
         $categorias = $this->categoriasModel->getAll();
-        $this->MotorView->showFormEditAutos($id, $autos, $categorias);
+        $this->motorView->showFormEditAutos($id, $autos, $categorias);
     }
 
     public function updateItem($id){
-        $this->helper->checkLogged();
+        $this->authHelper->checkLogged();
 
         if(isset($_POST['nombre']) && isset($_POST['descripcion']) && isset($_POST['modelo']) && isset($_POST['marca']) && isset($_POST['categoria'])){
             $nombre = $_POST['nombre'];
