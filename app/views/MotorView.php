@@ -13,22 +13,22 @@ class MotorView {
         $this->smarty->assign('autos', $autos);
         $this->smarty->assign('categorias', $categorias);
 
-        $this->smarty->display('app/Templates/tablaAutos.tpl');
-        $this->smarty->display('app/Templates/tablaCategorias.tpl');
+        $this->smarty->display('app/templates/tablaAutos.tpl');
+        $this->smarty->display('app/templates/tablaCategorias.tpl');
     }
 
     public function showDescripcion($autos_db){
         $this->smarty->assign('titulo', "Descripcion del auto");
         $this->smarty->assign('autos', $autos_db);
 
-        $this->smarty->display('app/Templates/detalleAuto.tpl');
+        $this->smarty->display('app/templates/detalleAuto.tpl');
     }
 
     public function showListFiltrado($categorias, $autos){
         $this->smarty->assign('categorias', $categorias);
         $this->smarty->assign('autos', $autos);
        
-        $this->smarty->display('app/Templates/filtrado.tpl');
+        $this->smarty->display('app/templates/filtrado.tpl');
     }
 
     public function showFormEditAutos($id, $autos, $categorias){
@@ -36,19 +36,19 @@ class MotorView {
         $this->smarty->assign('categorias', $categorias);
         $this->smarty->assign('autos', $autos);
 
-        $this->smarty->display("app/Templates/form_autos.edit.tpl");
+        $this->smarty->display("app/templates/form_autos.edit.tpl");
     }
 
     public function showFormEditCat($id, $categorias){
         $this->smarty->assign('id', $id);
         $this->smarty->assign('categorias', $categorias);
 
-        $this->smarty->display('app/Templates/form_categorias.edit.tpl');
+        $this->smarty->display('app/templates/form_categorias.edit.tpl');
     }
 
     public function showError($error){
         $this->smarty->assign('error', $error);
 
-        $this->smarty->display("app/Templates/alert.tpl");
+        $this->smarty->display("app/templates/alert.tpl");
     }
 }

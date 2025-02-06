@@ -1,4 +1,4 @@
-{include file='app/Templates/header.tpl'}
+{include file='app/templates/header.tpl'}
 
 <h1 class="text-center shadow-sm p-3 mb-0 bg-body rounded">Accede a tu Cuenta</h1>
 <div class="container">

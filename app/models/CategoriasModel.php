@@ -1,25 +1,32 @@
 <?php
 require_once 'app/models/AutosModel.php';
 
-class categoriasModel {
+class CategoriasModel {
     
     private $db;
     private $autosModel;
 
     public function __construct(){
         $this->db = $this->getDb();
-        $this->autosModel = new autosModel();
+        $this->autosModel = new AutosModel();
     }
 
     private function getDB() {
-        $db = new PDO('mysql:host=localhost;port=3307;dbname=motorsportpage_bd;charset=utf8', 'root', '');
+        $db = new PDO('mysql:host=172.17.0.3;port=3306;dbname=motorsportpage_bd;charset=utf8', 'root', '45037195');
         return $db;
     }
     
     public function getAll(){
-        $query = $this->db->prepare("SELECT * FROM categorias");
+        $query = $this->db->prepare("SELECT * FROM categorias LIMIT 5");
         $query->execute();
         
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getAllByIdUser($id) {
+        $query = $this->db->prepare("SELECT * FROM categorias WHERE id_usuario = ?");
+        $query->execute([$id]);
+
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -41,8 +48,15 @@ class categoriasModel {
 
     public function getCategoryNameWithAllAutos(){
         /**Inner join que me devuelve la categorias a la que pertenecen los autos (items) */
-        $query = $this->db->prepare("SELECT a.*, c.nombre FROM autos a INNER JOIN categorias c ON a.id_categorias = c.id_categorias");
+        $query = $this->db->prepare("SELECT a.*, c.nombre FROM autos a INNER JOIN categorias c ON a.id_categorias = c.id_categorias LIMIT 6");
         $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function getCategoryNameWithAllAutosByIdUser($id) {
+        $query = $this->db->prepare("SELECT a.*, c.nombre FROM autos a INNER JOIN categorias c ON a.id_categorias = c.id_categorias WHERE c.id_usuario = ?");
+        $query->execute([$id]);
 
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
@@ -55,9 +69,9 @@ class categoriasModel {
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function add($nombre, $descripcion, $tipo){
-        $query = $this->db->prepare("INSERT INTO categorias (nombre, descripcion, tipo) VALUES(?,?,?)");
-        $query->execute([$nombre, $descripcion, $tipo]);
+    public function add($nombre, $descripcion, $tipo, $id_usuario){
+        $query = $this->db->prepare("INSERT INTO categorias (nombre, descripcion, tipo, id_usuario) VALUES(?,?,?,?)");
+        $query->execute([$nombre, $descripcion, $tipo, $id_usuario]);
     }
 
     public function delete($id){

@@ -1,6 +1,6 @@
 <?php
 
-class usuariosModel {
+class UsuariosModel {
 
     private $db;
     
@@ -9,7 +9,7 @@ class usuariosModel {
     }
     
     private function getDB() {
-        $db = new PDO('mysql:host=localhost;port=3307;dbname=motorsportpage_bd;charset=utf8', 'root', '');
+        $db = new PDO('mysql:host=172.17.0.3;port=3306;dbname=motorsportpage_bd;charset=utf8', 'root', '45037195');
         return $db;
     }
     

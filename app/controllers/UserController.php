@@ -10,8 +10,8 @@ class UserController {
     private $authHelper;
 
     public function __construct(){
-        $this->usuariosModel = new usuariosModel();
-        $this->userView = new userView();
+        $this->usuariosModel = new UsuariosModel();
+        $this->userView = new UserView();
         $this->authHelper = new AuthHelper();
     }
 
@@ -65,18 +65,14 @@ class UserController {
     }
 
     public function showPrivacidad(){
-        if(session_status() != PHP_SESSION_ACTIVE){
-            session_start();
-        }
-
         $this->userView->showPrivacidad();
     }
    
     public function showContacto(){
-        if(session_status() != PHP_SESSION_ACTIVE){
-            session_start();
-        }
-
         $this->userView->showContacto();
+    }
+
+    public function showResourcesNotFound() {
+        $this->userView->showResponse();
     }
 }

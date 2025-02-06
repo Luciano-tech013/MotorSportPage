@@ -1,7 +1,7 @@
 <?php
-require_once 'app/Models/categoriasModel.php';
+require_once 'app/models/CategoriasModel.php';
 
-class autosModel {
+class AutosModel {
     
     private $db;
 
@@ -10,7 +10,7 @@ class autosModel {
     }
 
     private function getDB() {
-        $db = new PDO('mysql:host=localhost;port=3307;dbname=motorsportpage_bd;charset=utf8', 'root', '');
+        $db = new PDO('mysql:host=172.17.0.3;port=3306;dbname=motorsportpage_bd;charset=utf8', 'root', '45037195');
         return $db;
     }
     

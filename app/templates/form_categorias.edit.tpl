@@ -1,4 +1,4 @@
-{include file="app/Templates/header.tpl"}
+{include file="app/templates/header.tpl"}
 <section>
     <h1 class="text-center shadow-sm p-3 mb-0 bg-body rounded">Editar</h1>
     <div class="container">
@@ -15,8 +15,8 @@
                 </div>
 
                 <button class="btn btn-badge text-bg-success">ENVIAR</button>
-                <button class="btn btn-primary">VOLVER</button>
             </form>
+            <a class="btn btn-primary" href="home">VOLVER</a>
         </div>
     </div>
 </section>
