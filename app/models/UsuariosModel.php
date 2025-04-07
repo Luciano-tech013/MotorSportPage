@@ -2,26 +2,30 @@
 
 class UsuariosModel {
 
-    private $db;
+    private static $instance;
+    private $connection;
     
-    function __construct(){
-        $this->db = $this->getDb();
+    private function __construct($connection){
+        $this->connection = $connection->getConecction();
     }
     
-    private function getDB() {
-        $db = new PDO('mysql:host=172.17.0.3;port=3306;dbname=motorsportpage_bd;charset=utf8', 'root', '45037195');
-        return $db;
+    public static function getInstance($connection){
+        if (!isset(self::$instance)) {
+            self::$instance = new UsuariosModel($connection);
+        }
+
+        return self::$instance;
     }
     
     public function get($nombre){
-        $query = $this->db->prepare("SELECT * FROM usuarios WHERE nombre = ?");
+        $query = $this->connection->prepare("SELECT * FROM usuarios WHERE nombre = ?");
         $query->execute([$nombre]);
 
         return $query->fetch(PDO::FETCH_OBJ);
     }
 
     public function add($username, $userpassword){
-        $query = $this->db->prepare("INSERT INTO usuarios (nombre, password) VALUES (?,?)");
+        $query = $this->connection->prepare("INSERT INTO usuarios (nombre, password) VALUES (?,?)");
         $query->execute([$username, $userpassword]);
     }
 }

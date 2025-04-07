@@ -1,12 +1,19 @@
 <?php
-require_once 'libs/smarty-4.2.1/libs/Smarty.class.php';
-
 class UserView {
 
+    private static $instance;
     private $smarty;
 
-    public function __construct(){
-        $this->smarty = new Smarty();
+    private function __construct($smarty){
+        $this->smarty = $smarty;
+    }
+
+    public static function getInstance($smarty){
+        if (!isset(self::$instance)) {
+            self::$instance = new UserView($smarty);
+        }
+
+        return self::$instance;
     }
 
     public function showTable($autos_db, $categorias_db){

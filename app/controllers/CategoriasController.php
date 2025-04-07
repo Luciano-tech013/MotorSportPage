@@ -1,20 +1,25 @@
 <?php
-require_once 'app/models/CategoriasModel.php';
-require_once 'app/views/MotorView.php';
-require_once 'app/helpers/AuthHelper.php';
-
 class CategoriasController {
 
+    private static $instance;
     private $categoriasModel;
     private $motorView;
     private $authHelper;
     private $userView;
 
-    public function __construct(){
-        $this->categoriasModel = new CategoriasModel();
-        $this->motorView = new MotorView();
-        $this->authHelper = new AuthHelper();
-        $this->userView = new UserView();
+    private function __construct($categoriasModel, $motorView, $authHelper, $userView){
+        $this->categoriasModel = $categoriasModel;
+        $this->motorView = $motorView;
+        $this->authHelper = $authHelper;
+        $this->userView = $userView;
+    }
+
+    public static function getInstance($categoriasModel, $motorView, $authHelper, $userView) {
+        if(!isset(self::$instance)) {
+            self::$instance = new CategoriasController($categoriasModel, $motorView, $authHelper, $userView);
+        }
+
+        return self::$instance;
     }
 
     private function noExisteCategoria($id) {

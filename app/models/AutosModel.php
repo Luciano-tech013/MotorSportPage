@@ -1,21 +1,23 @@
 <?php
-require_once 'app/models/CategoriasModel.php';
-
 class AutosModel {
     
-    private $db;
+    private static $instance;
+    private $connection;
 
-    public function __construct(){
-        $this->db = $this->getDb();
+    private function __construct($connection){
+        $this->connection = $connection->getConnection();
     }
 
-    private function getDB() {
-        $db = new PDO('mysql:host=172.17.0.3;port=3306;dbname=motorsportpage_bd;charset=utf8', 'root', '45037195');
-        return $db;
+    public static function getInstance($connection) {
+        if(!isset(self::$instance)) {
+            self::$instance = new AutosModel($connection);
+        }
+
+        return self::$instance;
     }
-    
+
     public function getAll(){
-        $query = $this->db->prepare("SELECT * FROM autos");
+        $query = $this->connection->prepare("SELECT * FROM autos");
         $query->execute();
         
         return $query->fetchAll(PDO::FETCH_OBJ); 
@@ -23,7 +25,7 @@ class AutosModel {
 
     public function getById($id){
         /**Traigo registros mediante el ID para mostrar el form.edit precargado */
-        $query = $this->db->prepare("SELECT * FROM autos WHERE id = ?");
+        $query = $this->connection->prepare("SELECT * FROM autos WHERE id = ?");
         $query->execute([$id]);
 
         return $query->fetchAll(PDO::FETCH_OBJ);
@@ -31,24 +33,24 @@ class AutosModel {
 
     public function getByDetalle($id){
         /**Traigo registros mediante el ID para mostrar detalle del auto seleccionado*/
-        $query = $this->db->prepare("SELECT * FROM autos WHERE id = ?");
+        $query = $this->connection->prepare("SELECT * FROM autos WHERE id = ?");
         $query->execute([$id]);
 
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function add($nombre, $descripcion, $modelo, $marca, $id_categoria){
-        $query = $this->db->prepare("INSERT INTO autos (nombres, descripcion, modelo, marca, id_categorias) VALUES (?,?,?,?,?)");
+        $query = $this->connection->prepare("INSERT INTO autos (nombres, descripcion, modelo, marca, id_categorias) VALUES (?,?,?,?,?)");
         $query->execute([$nombre, $descripcion, $modelo, $marca, $id_categoria]);
     }
 
     public function delete($id){
-        $query = $this->db->prepare("DELETE FROM autos WHERE id = ?");
+        $query = $this->connection->prepare("DELETE FROM autos WHERE id = ?");
         $query->execute([$id]);
     }
 
     public function update($id, $nombre, $descripcion, $modelo, $marca, $id_categoria){
-        $query = $this->db->prepare("UPDATE `autos` SET `nombres` = ?, `descripcion` = ?, `modelo` = ?, `marca` = ?, `id_categorias` = ? WHERE `autos`.`id` = ?");
+        $query = $this->connection->prepare("UPDATE `autos` SET `nombres` = ?, `descripcion` = ?, `modelo` = ?, `marca` = ?, `id_categorias` = ? WHERE `autos`.`id` = ?");
         $query->execute([$nombre, $descripcion, $modelo, $marca, $id_categoria,$id]);
     }
 }

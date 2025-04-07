@@ -1,13 +1,21 @@
 <?php
-require_once 'libs/smarty-4.2.1/libs/Smarty.class.php';
 
 class MotorView {
 
+    private static $instance;
     private $smarty;
     
-    public function __construct(){
-        $this->smarty = new Smarty();
+    public function __construct($smarty){
+        $this->smarty = $smarty;
     }
+
+    public static function getInstance($smarty) {
+        if(!isset(self::$instance)) {
+            self::$instance = new MotorView($smarty);
+        }
+
+        return self::$instance;
+    } 
 
     public function showTable($autos, $categorias){
         $this->smarty->assign('autos', $autos);

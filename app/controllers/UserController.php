@@ -1,18 +1,23 @@
 <?php
-require_once 'app/helpers/AuthHelper.php';
-require_once 'app/models/UsuariosModel.php';
-require_once 'app/views/UserView.php';
-
 class UserController {
 
+    private static $instance;
     private $usuariosModel;
     private $userView;
     private $authHelper;
 
-    public function __construct(){
-        $this->usuariosModel = new UsuariosModel();
-        $this->userView = new UserView();
-        $this->authHelper = new AuthHelper();
+    private function __construct($usuariosModel, $userView, $authHelper){
+        $this->usuariosModel = $usuariosModel;
+        $this->userView = $userView;
+        $this->authHelper = $authHelper;
+    }
+
+    public static function getInstance($usuariosModel, $userView, $authHelper){
+        if (!isset(self::$instance)) {
+            self::$instance = new UserController($usuariosModel, $userView, $authHelper);
+        }
+        
+        return self::$instance;
     }
 
     public function showFormRegistrarse(){

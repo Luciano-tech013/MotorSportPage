@@ -1,24 +1,27 @@
 <?php
-require_once 'app/models/AutosModel.php';
-require_once 'app/models/CategoriasModel.php';
-require_once 'app/views/MotorView.php';
-require_once 'app/views/UserView.php';
-require_once 'app/helpers/AuthHelper.php';
-
 class AutosController {
     
+    private static $instance;
     private $autosModel;
     private $categoriasModel;
     private $motorView;
     private $userView;
     private $authHelper;
     
-    public function __construct(){
-        $this->autosModel = new AutosModel();
-        $this->categoriasModel = new CategoriasModel();
-        $this->motorView = new MotorView();
-        $this->userView = new UserView();
-        $this->authHelper = new AuthHelper();
+    private function __construct($autosModel, $categoriasModel, $motorView, $userView, $authHelper) {
+        $this->autosModel = $autosModel;
+        $this->categoriasModel = $categoriasModel;
+        $this->motorView = $motorView;
+        $this->userView = $userView;
+        $this->authHelper = $authHelper;
+    }
+
+    public static function getInstance($autosModel, $categoriasModel, $motorView, $userView, $authHelper){
+        if(self::$instance == null) {
+            self::$instance = new AutosController($autosModel, $categoriasModel, $motorView, $userView, $authHelper);
+        }
+        
+        return self::$instance;
     }
 
     private function noExisteAuto($id) {
@@ -50,7 +53,7 @@ class AutosController {
     }
 
     /**CRUD de la tabla autoss*/
-    public function addItems(){
+    public function addAutos(){
         $this->authHelper->checkLoggedAndRedict();
 
         if(!empty($_POST['nombre'] && $_POST['descripcion'] && $_POST['modelo'] && $_POST['marca'] && $_POST['categoria'])){
@@ -68,7 +71,7 @@ class AutosController {
         }
     }
 
-    public function deleteItems($id){
+    public function deleteAutos($id){
         $this->authHelper->checkLoggedAndRedict();
         
         if($this->noExisteAuto($id)) {
@@ -80,7 +83,7 @@ class AutosController {
         header("Location: " . BASE_URL);
     }
 
-    public function showFormItems($id){
+    public function showFormAutos($id){
         $this->authHelper->checkLoggedAndRedict();
 
         if($this->noExisteAuto($id)) {
@@ -93,7 +96,7 @@ class AutosController {
         $this->motorView->showFormEditAutos($id, $autos, $categorias);
     }
 
-    public function updateItem($id){
+    public function updateAutos($id){
         $this->authHelper->checkLoggedAndRedict();
 
         if($this->noExisteAuto($id)) {
@@ -113,6 +116,9 @@ class AutosController {
         } 
     }
 
+    public function showError($error){
+        $this->userView->showError($error);
+    }
 }
 
 

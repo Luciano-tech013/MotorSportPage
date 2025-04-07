@@ -1,6 +1,17 @@
 <?php
 
 class AuthHelper {
+    private static $instance;
+
+    private function __construct() {}
+
+    public static function getInstance() {
+        if(!isset(self::$instance)) {
+            self::$instance = new AuthHelper();
+        }
+
+        return self::$instance;
+    }
    
     public function destroyLogin(){
         session_start();
