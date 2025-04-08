@@ -1,7 +1,7 @@
 <section>
 <h1 class="text-center shadow p-3 mb-5 bg-body rounded">BIENVENIDO A</h1>
     <div class="text-center mb-5">
-        <img width="300" class="img-fluid" src="assets/img/logo_page.jpg"></h1>
+        <img width="300" class="img-fluid" src="/public/logo_page.jpg"></h1>
     </div>
     {if !isset($smarty.session.IS_LOGGED)}
         <p class="text-center p-5 fs-5">Somos una pagina dedicada al mundo del automotor deportivo, y nos gusta aprender cada dia nuevos modelos de autos, el reglamento deportivo de la categoria a la que pertenecen y estudiar su comportamiento. Por eso brindamos esta herramienta para que te mostremos lo que sabemos hasta el dia de hoy, y podamos compartir esta pasion juntos. 

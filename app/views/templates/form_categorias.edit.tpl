@@ -1,4 +1,4 @@
-{include file="app/templates/header.tpl"}
+{include file="header.tpl"}
 <section>
     <h1 class="text-center shadow-sm p-3 mb-0 bg-body rounded">Editar</h1>
     <div class="container">

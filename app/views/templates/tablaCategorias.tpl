@@ -38,7 +38,7 @@
 </section>
 
 {if isset($smarty.session.IS_LOGGED)}
-    {include file="app/templates/form_categoria.tpl"}
+    {include file="form_categoria.tpl"}
 {/if}
 
-{include file="app/templates/footer.tpl"}
+{include file="footer.tpl"}

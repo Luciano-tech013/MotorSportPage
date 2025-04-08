@@ -1,93 +1,52 @@
 <?php
-require_once './libs/Router.php';
-require_once './database/connection/Connection.php';
-require_once 'app/models/AutosModel.php';
-require_once 'app/models/CategoriasModel.php';
-require_once 'app/views/MotorView.php';
-require_once 'app/views/UserView.php';
-require_once 'app/helpers/AuthHelper.php';
-require_once 'app/controllers/AutosController.php';
-require_once 'app/controllers/CategoriasController.php'; 
-require_once 'app/controllers/UserController.php';    
+require_once 'instances.php';
+require_once 'libs/Router.php';
 
-define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
-
-$action = 'home'; // acción por defecto
-if (!empty($_GET['action'])) {
-    $action = $_GET['action'];
-} 
-
-$params = explode('/', $action);
-
-$connection = Connection::getInstance();
-$smarty = new Smarty();
-
-$autosModel = AutosModel::getInstance($connection);
-$categoriasModel = CategoriasModel::getInstance($connection);
-
-$motorView = MotorView::getInstance($smarty);
-$userView = UserView::getInstance($smarty);
-
-$authHelper = AuthHelper::getInstance();
-
-$autosController = AutosController::getInstance($autosModel, $categoriasModel, $motorView, $userView, $authHelper);
-$categoriasController = CategoriasController::getInstance($categoriasModel, $motorView, $userView, $authHelper);
-$userController = UserController::getInstance($motorView, $userView, $authHelper);
+define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . rtrim(dirname($_SERVER['PHP_SELF']), '/').'/');
 
 $router = new Router();
 
-$router->addRoute('politicas', 'GET', $userController, 'showPrivacidad');
+$action = 'home';
+if(isset($_GET['action'])) {
+    $action = $_GET['action'];
+} 
 
-$router->addRoute('contacto', 'GET', $userController, 'showContacto');
+$router->setDefaultRoute($autosController, 'showHome');
 
-$router->addRoute('registrarse', 'GET', $userController, 'createUser');
+$router->addRoute('politicas', $userController, 'showPrivacidad');
 
-$router->addRoute('cuenta', 'GET', $userController, 'showFormRegistrarse');
+$router->addRoute('contacto', $userController, 'showContacto');
 
-$router->addRoute('login', 'GET', $userController, 'showFormLogin');
+$router->addRoute('registrarse', $userController, 'createUser');
 
-$router->addRoute('validar', 'POST', $userController, 'validateUser');
+$router->addRoute('cuenta', $userController, 'showFormRegistrarse');
 
-$router->addRoute('logout', 'GET', $userController, 'logout');
+$router->addRoute('login', $userController, 'showFormLogin');
 
-$router->addRoute('autos/insertar', 'GET', $autosController, 'addAutos');
+$router->addRoute('validar', $userController, 'validateUser');
 
-$router->addRoute('autos/eliminar/:ID', 'GET', $autosController, 'deleteAutos');
+$router->addRoute('logout', $userController, 'logout');
 
-$router->addRoute('autos/edit/:ID', 'GET', $autosController, 'showFormAutos');
+$router->addRoute('autos/detalle/:ID', $autosController, 'showDetalle');
 
-$router->addRoute('autos/update/:ID', 'POST', $autosController, 'updateAutos');
+$router->addRoute('autos/insertar', $autosController, 'addAutos');
 
-$router->addRoute('categorias/insertar', 'GET', $categoriasController, 'addCategorias');
+$router->addRoute('autos/eliminar/:ID', $autosController, 'deleteAutos');
 
-$router->addRoute('categorias/eliminar/:ID', 'GET', $categoriasController, 'deleteCategorias');
+$router->addRoute('autos/edit/:ID', $autosController, 'showFormAutos');
 
-$router->addRoute('categorias/edit/:ID', 'GET', $categoriasController, 'showFormCat');
+$router->addRoute('autos/update/:ID', $autosController, 'updateAutos');
 
-$router->addRoute('categorias/update/:ID', 'POST', $categoriasController, 'updateCategorias');
+$router->addRoute('categorias/insertar', $categoriasController, 'addCategorias');
 
-$router->addRoute('categorias/autos/:ID', 'GET', $categoriasController, 'showFiltrado');
+$router->addRoute('categorias/eliminar/:ID', $categoriasController, 'deleteCategorias');
 
-$router->setDefaultRoute('home', 'GET', $autosController, 'showHome');
+$router->addRoute('categorias/edit/:ID', $categoriasController, 'showFormCat');
+
+$router->addRoute('categorias/update/:ID', $categoriasController, 'updateCategorias');
+
+$router->addRoute('categorias/autos/:ID', $categoriasController, 'showFiltrado');
+
+$router->route($action);
 
 
-/*match($params[0]) {
-    'home' => AUTOS_CONTROLLER->showHome(),
-    'politicas' => USER_CONTROLLER->showPrivacidad(),
-    'contacto' => USER_CONTROLLER->showContacto(),
-    'registrarse' => USER_CONTROLLER->createUser(),
-    'cuenta' => USER_CONTROLLER->showFormRegistrarse(),
-    'login' => USER_CONTROLLER->showFormLogin(),
-    'validar' => USER_CONTROLLER->validateUser(),
-    'logout' => USER_CONTROLLER->logout(),
-    'autos' => ,
-    'categorias' => match($params[1]) {
-        'insertar' => CATEGORIAS_CONTROLLER->addCategorias(),
-        'eliminar' => CATEGORIAS_CONTROLLER->deleteCategorias($params[2]),
-        'edit' => CATEGORIAS_CONTROLLER->showFormCat($params[2]),
-        'update' => CATEGORIAS_CONTROLLER->updateCategorias($params[2]),
-        'autos' => CATEGORIAS_CONTROLLER->showFiltrado($params[2]),
-        default => USER_CONTROLLER->showResourcesNotFound()
-    },
-    default => USER_CONTROLLER->showResourcesNotFound()
-};*/

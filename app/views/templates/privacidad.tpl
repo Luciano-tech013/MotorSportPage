@@ -1,4 +1,4 @@
-{include file="app/templates/header.tpl"}
+{include file="header.tpl"}
 
 <section>
 <h1 class="text-center shadow p-3 mb-5 bg-body rounded">{$titulo}</h1>
@@ -15,4 +15,4 @@
     información personal.</p>
 </section>
 
-{include file="app/templates/footer.tpl"}
+{include file="footer.tpl"}

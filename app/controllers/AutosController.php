@@ -42,7 +42,9 @@ class AutosController {
         $this->motorView->showTable($autos, $categorias);
     }
 
-    public function showDetalle($id){
+    public function showDetalle($params){
+        $id = $params[":ID"];
+
         if($this->noExisteAuto($id)) {
             $this->userView->showError("El auto solicitado no existe en el sistema");
             die();
@@ -71,7 +73,9 @@ class AutosController {
         }
     }
 
-    public function deleteAutos($id){
+    public function deleteAutos($params){
+        $id = $params[":ID"];
+
         $this->authHelper->checkLoggedAndRedict();
         
         if($this->noExisteAuto($id)) {
@@ -83,7 +87,9 @@ class AutosController {
         header("Location: " . BASE_URL);
     }
 
-    public function showFormAutos($id){
+    public function showFormAutos($params){
+        $id = $params[":ID"];
+
         $this->authHelper->checkLoggedAndRedict();
 
         if($this->noExisteAuto($id)) {
@@ -96,7 +102,9 @@ class AutosController {
         $this->motorView->showFormEditAutos($id, $autos, $categorias);
     }
 
-    public function updateAutos($id){
+    public function updateAutos($params){
+        $id = $params[":ID"];
+        
         $this->authHelper->checkLoggedAndRedict();
 
         if($this->noExisteAuto($id)) {

@@ -1,6 +1,6 @@
-{include file="app/templates/header.tpl"}
+{include file="header.tpl"}
 
-{include file="app/templates/intro.tpl"}
+{include file="intro.tpl"}
 
 <section>
 <h1 class="text-center shadow-sm p-3 mb-4 bg-body rounded">Lista de Autos</h1>
@@ -40,7 +40,7 @@
 </section>
 
 {if isset($smarty.session.IS_LOGGED)}
-    {include file="app/templates/form_autos.tpl"}
+    {include file="form_autos.tpl"}
 {/if}
 
 

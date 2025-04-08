@@ -26,7 +26,9 @@ class CategoriasController {
         return empty($this->categoriasModel->getById($id));
     }
 
-    public function showFiltrado($id){
+    public function showFiltrado($params){
+        $id = $params[":ID"];
+
         if($this->noExisteCategoria($id)) {
             $this->userView->showError("La categoria especificada no existe");
             die();
@@ -55,7 +57,9 @@ class CategoriasController {
         }
     }
 
-    public function deleteCategorias($id){
+    public function deleteCategorias($params){
+        $id = $params[":ID"];
+
         $this->authHelper->checkLoggedAndRedict();
         
         if($this->noExisteCategoria($id)) {
@@ -72,7 +76,9 @@ class CategoriasController {
         }
     }
 
-    public function showFormCat($id){
+    public function showFormCat($params){
+        $id = $params[":ID"];
+
         $this->authHelper->checkLoggedAndRedict();
 
         if($this->noExisteCategoria($id)) {
@@ -84,7 +90,9 @@ class CategoriasController {
         $this->motorView->showFormEditCat($id,$categorias);
     }
 
-    public function updateCategorias($id){
+    public function updateCategorias($params){
+        $id = $params[":ID"];
+        
         $this->authHelper->checkLoggedAndRedict();
         
         if($this->noExisteCategoria($id)) {

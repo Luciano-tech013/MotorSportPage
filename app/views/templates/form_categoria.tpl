@@ -10,7 +10,14 @@
                 <textarea type="text" class="form-control" name="descripcion" placeholder="Descripcion:"></textarea>
             </div>
             <div class="mb-4">
-                <input type="text" class="form-control" name="tipo" placeholder="tipo:">
+                <select class="form-select" name="tipo">
+                    <option value="" disabled selected>Seleccione un tipo</option>
+                    <option value="INTERNACIONAL">INTERNACIONAL</option>
+                    <option value="NACIONAL">NACIONAL</option>
+                    <option value="ZONAL">ZONAL</option>
+                    <option value="PROVINCIAL">PROVINCIAL</option>
+                    <option value="CONTINENTAL">CONTINENTAL</option>
+                </select>
             </div>
             
             <button class="btn btn-badge text-bg-success">ENVIAR</button>

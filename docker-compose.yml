@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: motorsport_database_server
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "${MYSQL_PORT}:3306"
+    networks:
+      - motorsportpage-net
+
+  web:
+    image: motorsportpage_app_image
+    build: .
+    container_name: motorsportpage_web_app
+    ports:
+      - "${APP_PORT}:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - motorsportpage-net
+
+networks:
+  motorsportpage-net:
+    driver: bridge

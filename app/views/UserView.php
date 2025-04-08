@@ -21,37 +21,37 @@ class UserView {
         $this->smarty->assign('categorias', $categorias_db);
         $this->smarty->assign('error', 'Tiene que eliminar los autos que pertenecen a esta categoria primero');
 
-        $this->smarty->display('app/templates/tablaAutos.tpl');
-        $this->smarty->display('app/templates/tablaCategorias.tpl');
+        $this->smarty->display('tablaAutos.tpl');
+        $this->smarty->display('tablaCategorias.tpl');
     }
 
     public function showPrivacidad(){
         $this->smarty->assign('titulo', "Politica & Privacidad");
 
-        $this->smarty->display('app/templates/privacidad.tpl');
+        $this->smarty->display('privacidad.tpl');
     }
 
     public function showContacto(){
         $this->smarty->assign('titulo', "Contactanos en: ");
 
-        $this->smarty->display("app/templates/contacto.tpl");
+        $this->smarty->display("contacto.tpl");
     }
 
     public function showFormRegistrarse(){
-        $this->smarty->display('app/templates/form_registrarse.tpl');
+        $this->smarty->display('form_registrarse.tpl');
     }
 
     public function showFormLogin(){
-        $this->smarty->display("app/templates/form_login.tpl");
+        $this->smarty->display("form_login.tpl");
     }
 
     public function showError($error){
         $this->smarty->assign('error', $error);
 
-        $this->smarty->display("app/templates/alert.tpl");
+        $this->smarty->display("alert.tpl");
     }
 
     public function showResponse() {
-        $this->smarty->display("app/templates/response.tpl");
+        $this->smarty->display("response.tpl");
     }
 }

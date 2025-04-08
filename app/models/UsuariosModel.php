@@ -6,7 +6,7 @@ class UsuariosModel {
     private $connection;
     
     private function __construct($connection){
-        $this->connection = $connection->getConecction();
+        $this->connection = $connection->getConnection();
     }
     
     public static function getInstance($connection){

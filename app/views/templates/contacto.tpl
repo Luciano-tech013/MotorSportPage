@@ -1,4 +1,4 @@
-{include file="app/templates/header.tpl"}
+{include file="header.tpl"}
 
 <h1 class="text-center shadow p-3 mb-5 bg-body rounded">{$titulo}</h1>
 <div class="text-center">
@@ -9,4 +9,4 @@
     </ul>
 </div>
 
-{include file="app/templates/footer.tpl"}
+{include file="footer.tpl"}

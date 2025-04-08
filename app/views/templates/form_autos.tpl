@@ -17,14 +17,20 @@
             </div>
             <div class="mb-4">
                 <label for="categoria" class="form-label fs-5">CATEGORIA</label>
-                <select class="form-select" name="categoria">
-                    {foreach from=$categorias item=$categoria}
-                        <option value="{$categoria->id_categorias}">{$categoria->nombre}</option>
-                    {/foreach}
-                </select>
+                {if !isset($categorias) || $categorias|@count == 0}
+                    <p class="text-danger">Primero debes agregar una categoría para poder agregar un auto</p>
+                {else}
+                    <select class="form-select" name="categoria">
+                        <option value="" disabled selected>Seleccione una categoría</option>
+                            {foreach from=$categorias item=$categoria}
+                                <option value="{$categoria->id_categorias}">{$categoria->nombre}</option>
+                            {/foreach}
+                    </select>
+                {/if}
             </div>
-
-            <button class="btn btn-badge text-bg-success">ENVIAR</button>
+            {if !empty($categorias)}
+                <button class="btn btn-badge text-bg-success">ENVIAR</button>
+            {/if}
         </form>
     </div>
 </div>
