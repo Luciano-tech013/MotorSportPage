@@ -1,0 +1,15 @@
+.section__privacity__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.section__privacity__container h1 {
+    width: 100%;
+}
+
+.section__privacity__description {
+    width: 1000px;
+    height: 300px;
+}

@@ -27,20 +27,20 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `autos`
 --
 
-CREATE TABLE `autos` (
-  `id` int(200) NOT NULL,
-  `nombres` varchar(2000) NOT NULL,
-  `descripcion` varchar(2000) NOT NULL,
-  `modelo` varchar(200) NOT NULL,
-  `marca` varchar(200) NOT NULL,
-  `id_categorias` int(200) NOT NULL
+CREATE TABLE `car` (
+  `car_id` int(200) NOT NULL,
+  `name` varchar(2000) NOT NULL,
+  `description` varchar(2000) NOT NULL,
+  `model` varchar(200) NOT NULL,
+  `brand` varchar(200) NOT NULL,
+  `category_id` int(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `autos`
 --
 
-INSERT INTO `autos` (`id`, `nombres`, `descripcion`, `modelo`, `marca`, `id_categorias`) VALUES
+INSERT INTO `car` (`car_id`, `name`, `description`, `model`, `brand`, `category_id`) VALUES
 (1, 'Audi R8 LMS Evo II', 'Este R8 LMS GT3 Evo II incorpora diferentes mejoras en muchos aspectos, desde componentes aerodinámicos o cambios en el chasis, hasta nuevas especificaciones para el motor o una puesta a punto específica para el control de tracción o el sistema de climatización.la suspensión del R8 LMS GT3 cuenta con amortiguadores ajustables (4 ajustes) y, además, el control de tracción ahora ofrece más opciones de configuración que antes. Todas estas mejoras, además, se adoptarán en los coches de nueva fabricación pero también se podrán equipar a posteriori en modelos previos.', 'GT3', 'AUDI', 1),
 (2, 'Bentley Continental GT3', 'Se llama Bentley Continental GT3 2018 y es la segunda generación del bólido de la casa de Crewe destinado a las carreras de resistencia, especialmente a las Blancpain GT Series Endurance Cup donde su antecesor ha logrado ya 120 podios y 45 victorias en las 528 carreras disputadas en todo el mundo.\r\n\r\nLa nueva carrocería no puede presentar un aspecto mejor y es que luce numerosos componentes aerodinámicos de fibra de carbono como el splitter frontal, el difusor de aire trasero, los faldones y aletines laterales así como el imponente alerón posterior de tres piezas firmado por Bentley tanto en su parte superior como en la inferior. Con estas modificaciones, la longitud total del GT ha ascendido a los 4,86 metros y la anchura a los 2,05 metros, mientras que la altura se limita a los 1,35 metros.', 'GT3', 'Bentley', 1),
 (3, 'RB18', 'El RB18 es un monoplaza que abre un nuevo ciclo reglamentario y, junto con el F1-75, que seguía un concepto aerodinámico diferente, es el coche de referencia del Gran Circo, aunque en prestaciones puras el coche rojo suele mostrar picos superiores.\r\n\r\nEl coche de Adrian Newey tuvo un difícil comienzo de temporada, pero luego el equipo campeón del mundo pudo jugar con Ferrari como el gato y el ratón, consiguiendo nueve victorias (ocho de Vestappen y una de Pérez) frente a las tres de la Scuderia (dos de Leclerc y una de Sainz).\r\n\r\nLa suspensión tiene un diseño inusual: barra de tracción delantera y barra de empuje trasera. Se trata de elecciones dictadas por los requisitos aerodinámicos, pero también van en la dirección de un buen aprovechamiento de los neumáticos. En el RB16B, Newey había introducido un único brazo que unía los dos triángulos inferiores, mientras que en el RB18 propuso esta solución para el triángulo superior, introduciendo, en cambio, brazos multibrazo en la parte inferior.', 'Monoplaza', 'Red Bull (FABRICANTE)', 2),
@@ -57,18 +57,18 @@ INSERT INTO `autos` (`id`, `nombres`, `descripcion`, `modelo`, `marca`, `id_cate
 -- Estructura de tabla para la tabla `categorias`
 --
 
-CREATE TABLE `categorias` (
-  `id_categorias` int(200) NOT NULL,
-  `nombre` varchar(200) NOT NULL,
-  `descripcion` varchar(2000) NOT NULL,
-  `tipo` varchar(200) NOT NULL
+CREATE TABLE `category` (
+  `category_id` int(200) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `description` varchar(2000) NOT NULL,
+  `type` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `categorias`
 --
 
-INSERT INTO `categorias` (`id_categorias`, `nombre`, `descripcion`, `tipo`) VALUES
+INSERT INTO `category` (`category_id`, `name`, `description`, `type`) VALUES
 (1, 'BlancPain Series', 'Blancpain GT Series, es una serie de campeonatos de automovilismo de velocidad que se disputan en Europa desde el año 2011. Participan gran turismos de los reglamentos GT3.', 'CONTINENTAL'),
 (2, 'F1', 'El Campeonato Mundial de Fórmula 1 de la FIA, más conocido como Fórmula 1, F1 o Fórmula Uno, es la principal competición de automovilismo internacional y el campeonato de deportes de motor más popular y prestigioso del mundo. La entidad que la dirige es la Federación Internacional del Automóvil.', 'INTERNACIONAL'),
 (4, 'WEC', 'El Campeonato Mundial de Resistencia de la FIA es una competición de automovilismo de velocidad que se disputa entre sport prototipos y gran turismos. A lo largo de su historia ha cambiado numerosas veces de nombre y reglamentos', 'INTERNACIONAL'),
@@ -81,9 +81,9 @@ INSERT INTO `categorias` (`id_categorias`, `nombre`, `descripcion`, `tipo`) VALU
 -- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `usuarios` (
-  `id` int(20) NOT NULL,
-  `nombre` varchar(2000) NOT NULL DEFAULT 'NOT NULL',
+CREATE TABLE `user` (
+  `user_id` int(20) NOT NULL,
+  `name` varchar(2000) NOT NULL DEFAULT 'NOT NULL',
   `password` varchar(2000) DEFAULT 'NOT NULL'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -95,21 +95,35 @@ CREATE TABLE `usuarios` (
 --
 -- Indices de la tabla `autos`
 --
-ALTER TABLE `autos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_categoria` (`id_categorias`);
+ALTER TABLE `car`
+  ADD PRIMARY KEY (`car_id`),
+  ADD KEY `category` (`category_id`);
+
+ALTER TABLE `car`
+  ADD COLUMN `name_id` varchar(100),
+  ADD UNIQUE KEY (`name_id`);
 
 --
 -- Indices de la tabla `categorias`
 --
-ALTER TABLE `categorias`
-  ADD PRIMARY KEY (`id_categorias`);
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`category_id`);
+  ADD UNIQUE KEY (`name`);
+
+ALTER TABLE `category`
+  ADD COLUMN `name_id` varchar(100),
+  ADD UNIQUE KEY (`name_id`);
 
 --
 -- Indices de la tabla `usuarios`
 --
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+  ADD UNIQUE KEY (`name_id`);
+
+ALTER TABLE `user`
+  ADD COLUMN `name_id` varchar(100),
+  ADD UNIQUE KEY (`name_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -118,20 +132,20 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de la tabla `autos`
 --
-ALTER TABLE `autos`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `car`
+  MODIFY `car_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
-ALTER TABLE `categorias`
-  MODIFY `id_categorias` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `category`
+  MODIFY `category_id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
-ALTER TABLE `usuarios`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+ALTER TABLE `user`
+  MODIFY `user_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restricciones para tablas volcadas
@@ -140,17 +154,17 @@ ALTER TABLE `usuarios`
 --
 -- Filtros para la tabla `autos`
 --
-ALTER TABLE `autos`
-  ADD CONSTRAINT `autos_ibfk_1` FOREIGN KEY (`id_categorias`) REFERENCES `categorias` (`id_categorias`) ON UPDATE CASCADE;
+ALTER TABLE `car`
+  ADD CONSTRAINT `car_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON UPDATE CASCADE;
 COMMIT;
 
 
-ALTER TABLE categorias
-ADD COLUMN id_usuario INT;
+ALTER TABLE category
+ADD COLUMN user_id INT;
 
-ALTER TABLE categorias
-ADD CONSTRAINT fk_id_usuario
-FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+ALTER TABLE category
+ADD CONSTRAINT fk_user_id
+FOREIGN KEY (user_id) REFERENCES user(user_id)
 ON DELETE CASCADE;
 
 

@@ -11,41 +11,41 @@ if(isset($_GET['action'])) {
     $action = $_GET['action'];
 } 
 
-$router->setDefaultRoute($autosController, 'showHome');
+$router->setDefaultRoute($siteController, 'createHome');
 
-$router->addRoute('politicas', $userController, 'showPrivacidad');
+$router->addRoute('politicies', $siteController, 'getPrivacityPolicy');
 
-$router->addRoute('contacto', $userController, 'showContacto');
+$router->addRoute('contact', $siteController, 'getContact');
 
-$router->addRoute('registrarse', $userController, 'createUser');
+$router->addRoute('signup', $userController, 'createUser');
 
-$router->addRoute('cuenta', $userController, 'showFormRegistrarse');
+$router->addRoute('account', $userController, 'getSignUpForm');
 
-$router->addRoute('login', $userController, 'showFormLogin');
+$router->addRoute('account/validate', $userController, 'getSignInForm');
 
-$router->addRoute('validar', $userController, 'validateUser');
+$router->addRoute('login', $authController, 'login');
 
-$router->addRoute('logout', $userController, 'logout');
+$router->addRoute('account/logout', $authController, 'logout');
 
-$router->addRoute('autos/detalle/:ID', $autosController, 'showDetalle');
+$router->addRoute('car/detail/:ID', $carController, 'getCarDetail');
 
-$router->addRoute('autos/insertar', $autosController, 'addAutos');
+$router->addRoute('save/car', $carController, 'addCar');
 
-$router->addRoute('autos/eliminar/:ID', $autosController, 'deleteAutos');
+$router->addRoute('remove/car/:ID', $carController, 'deleteCar');
 
-$router->addRoute('autos/edit/:ID', $autosController, 'showFormAutos');
+$router->addRoute('edit/car/:ID', $carController, 'getCarForm');
 
-$router->addRoute('autos/update/:ID', $autosController, 'updateAutos');
+$router->addRoute('update/car/:ID', $carController, 'updateCar');
 
-$router->addRoute('categorias/insertar', $categoriasController, 'addCategorias');
+$router->addRoute('save/category', $categoryController, 'addCategory');
 
-$router->addRoute('categorias/eliminar/:ID', $categoriasController, 'deleteCategorias');
+$router->addRoute('remove/category/:ID', $categoryController, 'deleteCategory');
 
-$router->addRoute('categorias/edit/:ID', $categoriasController, 'showFormCat');
+$router->addRoute('edit/category/:ID', $categoryController, 'getCategoryForm');
 
-$router->addRoute('categorias/update/:ID', $categoriasController, 'updateCategorias');
+$router->addRoute('update/category/:ID', $categoryController, 'updateCategory');
 
-$router->addRoute('categorias/autos/:ID', $categoriasController, 'showFiltrado');
+$router->addRoute('category/cars/:ID', $categoryController, 'getFilterListOfCategory');
 
 $router->route($action);
 

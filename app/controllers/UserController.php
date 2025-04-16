@@ -1,83 +1,76 @@
 <?php
+require_once __DIR__ . '/../../utils/validators/ValidatorFields.php';
+
 class UserController {
 
-    private static $instance;
-    private $usuariosModel;
-    private $userView;
-    private $authHelper;
+    private static UserController $instance;
+    private UserModel $userModel;
+    private FormView $formView;
+    private AuthHelper $authHelper;
 
-    private function __construct($usuariosModel, $userView, $authHelper){
-        $this->usuariosModel = $usuariosModel;
-        $this->userView = $userView;
+    private function __construct(UserModel $userModel, FormView $formView, AuthHelper $authHelper){
+        $this->userModel = $userModel;
+        $this->formView = $formView;
         $this->authHelper = $authHelper;
     }
 
-    public static function getInstance($usuariosModel, $userView, $authHelper){
+    public static function getInstance(UserModel $usuariosModel, FormView $formView, AuthHelper $authHelper): UserController{
         if (!isset(self::$instance)) {
-            self::$instance = new UserController($usuariosModel, $userView, $authHelper);
+            self::$instance = new UserController($usuariosModel, $formView, $authHelper);
         }
         
         return self::$instance;
     }
 
-    public function showFormRegistrarse(){
-        $this->userView->showFormRegistrarse();
+    public function getSignUpForm(): Void {
+        $this->formView->showFormUser('signup.form.tpl');
     }
 
-    public function createUser(){
-        if(!empty($_POST['nombre'] && $_POST['password'] && $_POST['condiciones'])){
-            $username = $_POST['nombre'];
-            $userpassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
-            $this->usuariosModel->add($username, $userpassword);
+    public function getSignInForm(): Void {
+        $this->formView->showFormUser('signin.form.tpl');
+    }
+
+    public function createUser(): Void {
+        $this->validateFields();
+
+        $username = $_POST['name'];
+        $nameId = strtolower($username);
+        $this->validateRepeatedName($nameId);
+
+        $userpassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+        $this->userModel->add($username, $userpassword, $nameId);
             
-            header("Location: " . BASE_URL . "login");
-        } else {
-            $this->userView->showError("Complete los datos solicitados");
+        header("Location: " . BASE_URL . "login");
+    }
+
+    public function destroyUser(): Void {
+        
+    }
+
+    private function getFields(): array
+    {
+        return [
+            "username" => $_POST["name"],
+            "password" => $_POST["password"],
+            "politicies" => $_POST["politicies"] ?? null
+        ];
+    }
+
+    private function validateFields(): Void {
+        $fields = $this->getFields();
+        $errors = ValidatorFields::searchIncorrectFields($fields);
+        if (!empty($errors)) {
+            $this->formView->showFormUser('signup.form.tpl', $errors);
+            die();
         }
     }
 
-    public function showFormLogin(){
-        $this->userView->showFormLogin();
-    }
-
-    public function validateUser(){
-        /**Capturo datos del form */
-        $nombre = $_POST['nombre'];
-        $password = $_POST['password'];
-        
-        /**Me traigo el Usuario de mi tabla usuarios */
-        $usuario = $this->usuariosModel->get($nombre);
-        
-        /**Verifico que sean correcto los datos traidos con los que ingreso el usuario por el formulario */
-        if($usuario && password_verify($password,$usuario->password)) {
-            /**Inicio sesion */
-            session_start();
-            $_SESSION['ID_USUARIO'] = $usuario->id;
-            $_SESSION['NOMBRE'] = $usuario->nombre;
-            $_SESSION['PASSWORD'] = $usuario->password;
-            $_SESSION['IS_LOGGED'] = true;
-            
-            header("Location: " . BASE_URL);
-        } else {
-            $this->userView->showError("Nombre y Contraseña incorrectos");
+    private function validateRepeatedName($nameId): Void {
+        $errors = ["usernameRepeat" => true];
+        if ($this->userModel->getByUserIdAndName($nameId, $this->authHelper->getUserId())) {
+            $this->formView->showFormUser('signup.form.tpl', $errors);
+            die();
         }
-    }
-
-    public function logout(){
-        $this->authHelper->destroyLogin();
-
-        header("Location: " . BASE_URL);
-    }
-
-    public function showPrivacidad(){
-        $this->userView->showPrivacidad();
-    }
-   
-    public function showContacto(){
-        $this->userView->showContacto();
-    }
-
-    public function showResourcesNotFound() {
-        $this->userView->showResponse();
     }
 }
