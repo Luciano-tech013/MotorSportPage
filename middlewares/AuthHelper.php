@@ -19,6 +19,7 @@ class AuthHelper {
     }
 
     public function checkLoggedAndRedict() {
+        session_start();
         if(!$this->isLogged()) {
             header("Location: " . BASE_URL . 'login');
             die();
@@ -26,7 +27,6 @@ class AuthHelper {
     }
 
     public function isLogged() {
-        session_start();
         return isset($_SESSION['IS_LOGGED']);
     }
 
@@ -34,6 +34,6 @@ class AuthHelper {
         if(session_status() != PHP_SESSION_ACTIVE)
             session_start();
         
-        return $_SESSION['ID_USUARIO'];
+        return isset($_SESSION['USER_ID']) ? $_SESSION['USER_ID'] : null;
     }
 }
