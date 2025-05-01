@@ -1,0 +1,18 @@
+<?php
+
+declare(strict_types=1);
+
+require_once '../src/app/controllers/exceptions/CategoryDeletionException.php';  
+
+class CategoryDeletionValidator {
+    private CarModel $carModel;
+
+    public function __construct(CarModel $carModel) {
+        $this->carModel = $carModel;
+    }
+
+    public function isDeletable(string $id): void {
+        if(!empty($this->carModel->getAllByCategoryIdWithNameAndBrand($id)))
+            throw new CategoryDeletionException("No se puede eliminar la categoria porque tiene autos asociados.");
+    }
+}
