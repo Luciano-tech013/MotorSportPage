@@ -98,6 +98,6 @@ para agregar no para editar-->
     {include file="forms/category.form.tpl" is_embedded=true category=null action="save/category"}
 {/if}
 
-{include file="modals/category.remove.modal.tpl"}
+{include file="modals/category.remove.modal.tpl" }
 
 {include file="layout/footer.tpl"}

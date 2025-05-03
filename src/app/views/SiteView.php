@@ -30,7 +30,7 @@ class SiteView extends BaseView {
         parent::renderView('category.filter.list.tpl', ['categories' => $categoryName, 'cars' => $cars]);
     }
 
-    public static function showErrorSever(string $msg): void {
+    public function showErrorSever(string $msg): void {
         parent::renderView('connection.error.tpl', ['error' => $msg]);
     }
 }

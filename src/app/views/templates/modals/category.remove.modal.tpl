@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <section class="modal-content">
             <section class="modal-header bg-dark text-white">
-                <h5 class="modal-title text-danger" id="confirmRemoveLabel">{$smarty.session.ERRORS.INVALID_DELETABLE}</h5>
+                <h5 class="modal-title text-danger" id="confirmRemoveLabel">{if isset($smarty.session.ERRORS.INVALID_DELETABLE)} {$smarty.session.ERRORS.INVALID_DELETABLE} {/if}</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </section>
             <section class="modal-body">

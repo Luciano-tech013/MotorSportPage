@@ -1,18 +1,18 @@
 const signup_expresions = {
   username: /^(?=.*[A-Za-z])[A-Za-z\d\s\-!"#$%&'()*+,./:;<=>?@[\\\]^_{|}~]{4,30}$/,
-  password: /^(?=.*[A-Za-z])[A-Za-z\d\s\-!"#$%&'()*+,./:;<=>?@[\\\]^_{|}~]{4,15}$/,
+  password: /^(?=.*[A-Za-z])[A-Za-z\d\s\-!"#$%&'()*+,./:;<=>?@[\\\]^_{|}~]{4,15}$/
 };
 
 const category_expresions = {
   name: /^(?=(?:.*[A-Za-z]){4,30})[A-Za-z\d\t ]+$/, 
-  description: /^(?=.*[A-Za-zÁÉÍÓÚÜÑáéíóúüñ])[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\d\s\-!"#$%&'()*+,.\/:;<=>?@[\\\]^_{|}~]{4,500}$/,
+  description: /^(?=.*\p{L})[\p{L}\d\p{P}\s]{4,5000}$/u
 };
 
 const car_expresions = {
-  name: /^(?=(?:.*[A-Za-z]){2,30})[A-Za-z\d\t ]+$/,
-  description: /^(?=.*[A-Za-zÁÉÍÓÚÜÑáéíóúüñ])[A-Za-zÁÉÍÓÚÜÑáéíóúüñ\d\s\-!"#$%&'()*+,.\/:;<=>?@[\\\]^_{|}~]{4,500}$/,
-  brand: /^[a-zA-ZÀ-ÿ\s]{3,30}$/,
-};
+  name: /^(?=(?:.*[A-Za-z]){2,30})[A-Za-z\d\t]+$/,
+  description: /^(?=.*\p{L})[\p{L}\d\p{P}\s]{4,5000}$/u,
+  brand: /^(?=(?:.*[A-Za-z]){3,30})[A-Za-z\d\t ]+$/,
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     const config = [

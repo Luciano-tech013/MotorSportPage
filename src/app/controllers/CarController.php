@@ -11,23 +11,29 @@ class CarController {
     private SiteView $siteView;
     private FormView $formView;
     private FormValidator $formValidator;
-    private ExistenceValidator $existenceValidator;
     private UniqueNameValidator $uniqueNameValidator;
 
-    public function __construct(CarModel $carModel, CategoryModel $categoryModel, SiteView $siteView, FormView $formView, FormValidator $formValidator, ExistenceValidator $existenceValidator, UniqueNameValidator $uniqueNameValidator) {
+    public function __construct(CarModel $carModel, CategoryModel $categoryModel, SiteView $siteView, FormView $formView, FormValidator $formValidator, UniqueNameValidator $uniqueNameValidator) {
         $this->carModel = $carModel;
         $this->categoryModel = $categoryModel;
         $this->siteView = $siteView;
         $this->formView = $formView;
         $this->formValidator = $formValidator;
-        $this->existenceValidator = $existenceValidator;
         $this->uniqueNameValidator = $uniqueNameValidator;
     }
 
     public function getCarDetail(string $id): void {
-        $this->existenceValidator->validateExistence($this->carModel, $id);
+        if(!$this->carModel->getById($id)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
         
-        $detail = $this->carModel->getByIdWithDescription($id);
+        $detail = AuthHelper::isLogged() ? $this->carModel->getByIdAndUserIdWithDescription($id, AuthHelper::getUserId()) : $this->carModel->getByIdWithDescription($id); 
+        if(empty($detail)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
+
         $this->siteView->showDetail($detail, "Detalle del auto: ");
     }
 
@@ -35,6 +41,10 @@ class CarController {
         AuthHelper::checkLoggedAndRedict();
 
         $fields = $this->getFields();
+        if(empty($fields)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
 
         $errors = $this->formValidator->validateFields($fields);
         if(!empty($errors)) {
@@ -71,9 +81,12 @@ class CarController {
     public function deleteCar(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
-        $this->existenceValidator->validateExistence($this->carModel, $id);
-
-        $this->carModel->delete($id);
+        if(!$this->carModel->getByIdAndUserId($id, AuthHelper::getUserId())) {
+            header("Location: " . BASE_URL);
+            return;
+        }
+        
+        $this->carModel->deleteByIdAndUserId($id, AuthHelper::getUserId());
 
         header("Location: " . BASE_URL);
     }
@@ -81,12 +94,15 @@ class CarController {
     public function getCarForm(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
-        $this->existenceValidator->validateExistence($this->carModel, $id);
-
-        $route = 'update/car/' . $id;
+        $car = $this->carModel->getByIdAndUserId($id, AuthHelper::getUserId());
+        if(!$car) {
+            header("Location: " . BASE_URL);
+            return;
+        }
 
         $categories = $this->categoryModel->getAllWithIdAndName(AuthHelper::getUserId());
-        $car = $this->carModel->getById($id);
+
+        $route = 'update/car/' . $id;
 
         $this->formView->showCarFormEdit('car.form.tpl', $car, $categories, $route);
     }
@@ -94,9 +110,16 @@ class CarController {
     public function updateCar(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
-        $this->existenceValidator->validateExistence($this->carModel, $id);
-
+        if(!$this->carModel->getByIdAndUserId($id, AuthHelper::getUserId())) {
+            header("Location: " . BASE_URL);
+            return;
+        }
+        
         $fields = $this->getFields();
+        if(empty($fields)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
 
         $errors = $this->formValidator->validateFields($fields);
         if(!empty($errors)) {
@@ -121,6 +144,15 @@ class CarController {
     }
 
     private function getFields(): array {
+        //Valido que los datos hayan venido del envío del formulario 
+        if(!isset($_POST['name']) || 
+           !isset($_POST['description']) || 
+           !isset($_POST['model']) || 
+           !isset($_POST['brand']) || 
+           !isset($_POST['category_id'])) {
+            return [];
+        }
+
         return [
             'carName' => $_POST['name'],
             'carDescription' => $_POST['description'],

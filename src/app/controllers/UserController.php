@@ -9,14 +9,12 @@ class UserController {
     private UserModel $userModel;
     private FormView $formView;
     private FormValidator $formValidator;
-    private ExistenceValidator $existenceValidator;
     private UniqueNameValidator $uniqueNameValidator;
 
-    public function __construct(UserModel $userModel, FormView $formView, FormValidator $formValidator, ExistenceValidator $existenceValidator, UniqueNameValidator $uniqueNameValidator){
+    public function __construct(UserModel $userModel, FormView $formView, FormValidator $formValidator, UniqueNameValidator $uniqueNameValidator){
         $this->userModel = $userModel;
         $this->formView = $formView;
         $this->formValidator = $formValidator;
-        $this->existenceValidator = $existenceValidator;
         $this->uniqueNameValidator = $uniqueNameValidator;
     }
 
@@ -30,6 +28,10 @@ class UserController {
 
     public function createUser(): void {
         $fields = $this->getFields();
+        if(empty($fields)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
 
         $errors = $this->formValidator->validateFields($fields);
         if(!empty($errors)) {
@@ -50,7 +52,8 @@ class UserController {
             header("Location: " . BASE_URL . "account");
             return;
         }
-           
+        
+        //Hasheo la contraseña
         $userpassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
         $this->userModel->add($username, $userpassword, $nameId);
@@ -61,10 +64,20 @@ class UserController {
     public function removeUser(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
-        $this->existenceValidator->validateExistence($this->userModel, $id);
+        //Valido que los datos hayan venido del envío del formulario
+        if(!isset($_PASSWORD["password"])) {
+           header("Location: " . BASE_URL);
+           return; 
+        }
 
+        //Valido si existe el usuario con ese id
         $user = $this->userModel->getById($id);
+        if(empty($user)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
 
+        //Valido que haya ingresado la contraseña correcta de su cuenta
         if(!password_verify($_POST["password"], $user->password)) {
             FlashErrorsHelper::addError("INVALID_PASSWORD", "Contraseña incorrecta. Intente nuevamente.");            $_SESSION["ERRORS"]["PASSWORD"] = "Contraseña incorrecta. Intente nuevamente.";
             header("Location: " . $_SERVER["HTTP_REFERER"]);
@@ -86,6 +99,10 @@ class UserController {
     }
 
     private function getFields(): array {
+        //Valido que los datos hayan venido del envío del formulario
+        if(!isset($_POST["username"]) || !isset($_POST["password"]) || !isset($_POST["politicies"]))
+            return [];
+    
         return [
             "username" => $_POST["username"],
             "password" => $_POST["password"],

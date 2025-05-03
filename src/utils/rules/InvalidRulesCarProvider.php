@@ -31,7 +31,6 @@ class InvalidRulesCarProvider implements InvalidRulesProvider {
             "brand" => [
                 new InvalidRule("/[^A-Za-z0-9 ]/", "La marca no puede contener símbolos"),
                 new InvalidRule("/^[0-9]+$/", "El nombre de la marca no puede contener números"),
-                new InvalidRule("/[^A-Za-z\s]/", "El nombre de la marca solo puede tener letras"),
                 new InvalidRule("/^$/", "La marca es requerida. Por favor, ingresa una marca"),
                 new InvalidRule("/^.{0,1}$/", "El nombre de la marca es muy corto. Debe tener un tamaño mayor o igual a 2"),
                 new InvalidRule("/^.{31,}$/", "Se superó el limite de ingreso de caracteres")

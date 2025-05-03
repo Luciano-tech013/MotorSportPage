@@ -20,7 +20,7 @@ class InvalidRulesCategoryProvider implements InvalidRulesProvider {
             "categoryDescription" => [
                 new InvalidRule("/^[^A-Za-z\s]+$/", "La descripcion es inválida. Debe contener letras tambien"),
                 new InvalidRule("/^.{0,3}$/", "La descripcion es muy breve"),
-                new InvalidRule("/^.{501,}$/", "Se supero el limite de caracteres permitidos"),
+                new InvalidRule("/^.{5001,}$/", "Se supero el limite de caracteres permitidos"),
                 new InvalidRule("/^$/", "La descripcion es requerida. Por favor, ingresa una descripcion")
             ],
             "type" => [

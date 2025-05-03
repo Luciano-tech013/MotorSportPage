@@ -10,7 +10,6 @@ class CarModel {
         $this->connection = $connection;
     }
 
-    /*Le agregue logica para evitar duplicar código. Si el id no es nulo, significa que hay que buscar filtrando por el id usuario*/
     public function getAllWithCategoryName(): array {
         $query = $this->connection->prepare("SELECT c.*, c2.name AS category_name FROM car c INNER JOIN category c2 ON c.category_id = c2.category_id WHERE c2.user_id IS NULL");
         $query->execute();
@@ -48,9 +47,17 @@ class CarModel {
         return $result == false ? null : $result;
     }
 
-    public function getByIdWithCategoryIdAndName(string $id): ?object {
-        $query = $this->connection->prepare("SELECT c.*, c2.name AS category_name, c2.category_id FROM car c JOIN category c2 ON c.category_id = c2.category_id WHERE car_id = ?");
-        $query->execute([$id]);
+    public function getByIdAndUserId(string $id, int $userId): ?object {
+        $query = $this->connection->prepare("SELECT c.* FROM car c JOIN category c2 ON c.category_id = c2.category_id WHERE c.car_id = ? AND c2.user_id = ?");
+        $query->execute([$id, $userId]);
+
+        $result = $query->fetch();
+        return $result == false ? null : $result;
+    }
+
+    public function getByIdWithCategoryIdAndName(string $id, int $userId): ?object {
+        $query = $this->connection->prepare("SELECT c.*, c2.name AS category_name, c2.category_id FROM car c JOIN category c2 ON c.category_id = c2.category_id WHERE c.car_id = ? AND c2.user_id = ?");
+        $query->execute([$id, $userId]);
 
         $result = $query->fetch();
         return $result == false ? null : $result;
@@ -64,9 +71,19 @@ class CarModel {
         return $result == false ? null : $result;
     }
 
+    /* Si el usuario no está logueado uso éste */
     public function getByIdWithDescription(string $id): ?object {
         $query = $this->connection->prepare("SELECT description FROM car WHERE car_id= ?");
         $query->execute([$id]);
+
+        $result = $query->fetch();
+        return $result == false ? null : $result;
+    }
+
+    /* Si el usuario está logueado uso éste */
+    public function getByIdAndUserIdWithDescription(string $id, int $userId): ?object {
+        $query = $this->connection->prepare("SELECT c.description FROM car c JOIN category c2 ON c.category_id = c2.category_id WHERE c.car_id = ? AND c2.user_id = ?");
+        $query->execute([$id, $userId]);
 
         $result = $query->fetch();
         return $result == false ? null : $result;
@@ -78,10 +95,10 @@ class CarModel {
         $query->execute([$name, $nameId, $description, $model, $brand, $category_id]);
     }
 
-    public function delete(string $id): void {
-        $query = $this->connection->prepare("DELETE FROM car WHERE car_id = ?");
+    public function deleteByIdAndUserId(string $id, int $userId): void {
+        $query = $this->connection->prepare("DELETE c FROM car c JOIN category c2 ON c.category_id = c2.category_id WHERE c.car_id = ? AND c2.user_id = ?");
 
-        $query->execute([$id]);
+        $query->execute([$id, $userId]);
     }
 
     public function update(string $id, string $name, string $nameId, string $description, string $model, string $brand, string $category_id): void {

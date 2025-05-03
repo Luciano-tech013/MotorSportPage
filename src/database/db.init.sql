@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `category_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `name_id` varchar(50) NOT NULL,
-  `description` varchar(500) NOT NULL,
+  `description` varchar(5000) NOT NULL,
   `type` varchar(13) NOT NULL,
   `user_id` int DEFAULT NULL,
   PRIMARY KEY (`category_id`),

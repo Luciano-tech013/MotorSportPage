@@ -21,11 +21,12 @@ services:
     container_name: motorsportpage_web_app
     ports:
       - "${APP_PORT}:80"
-    volumes:
-      - ./public:/var/www/html #Ésta linea debo comentarla en produccion
-      - ./src:/var/www/src #Ésta linea debo comentarla en produccion
     depends_on:
       - db
+    volumes:
+      - ./public:/var/www/html/public
+      - ./src/:/var/www/src
+      - ./vendor:/var/www/vendor
     networks:
       - motorsportpage-net
 

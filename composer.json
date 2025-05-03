@@ -1,0 +1,23 @@
+{
+  "name": "lucho/motorsportpage",
+  "description": "",
+  "require": {
+    "smarty/smarty": "^4.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [ 
+    ],
+    "post-update-cmd": [
+      "@post-install-cmd"
+    ],
+    "post-install-smarty-cache": [
+      "mkdir -p templates_c",
+      "chmod -R 777 templates_c || exit 0"
+    ]
+  }
+}

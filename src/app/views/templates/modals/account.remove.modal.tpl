@@ -17,7 +17,7 @@
             <section class="modal-body">
                 <p class="fs-5"><strong>Esta acción no se puede deshacer.</strong></p>
 
-                <form id="remove-form" action="remove/account/{$smarty.session.AUTH.USER_ID}" method="POST">
+                <form id="remove-form" {if isset($smarty.session.AUTH.USER_ID)} action="remove/account/{$smarty.session.AUTH.USER_ID} {/if}" method="POST">
                     <div class="form-check mb-3">
                         <label for="condtion" class="form-check-label fs-5 text-dark">Acepto eliminar mi cuenta</label>
                         <input type="checkbox" class="form-check-input" name="condition" id="condition">
@@ -31,7 +31,7 @@
                             placeholder="Escribe tu contraseña:">
                         {if isset($smarty.session.ERRORS.INVALID_PASSWORD)}
                             <p class="text-danger mt-1">{$smarty.session.ERRORS.INVALID_PASSWORD}</p>
-                            {/if}
+                        {/if}
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger">Eliminar</button>

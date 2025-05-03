@@ -13,31 +13,45 @@ class CategoryController {
     private FormView $formView;
     private CategoryDeletionValidator $categoryDeletionValidator;
     private FormValidator $formValidator;
-    private ExistenceValidator $existenceValidator;
     private UniqueNameValidator $uniqueNameValidator;
 
-    public function __construct(CategoryModel $categoryModel, CarModel $carModel, SiteView $siteView, FormView $formView, CategoryDeletionValidator $categoryDeletionValidator, FormValidator $formValidator, ExistenceValidator $existenceValidator, UniqueNameValidator $uniqueNameValidator){
+    public function __construct(CategoryModel $categoryModel, CarModel $carModel, SiteView $siteView, FormView $formView, CategoryDeletionValidator $categoryDeletionValidator, FormValidator $formValidator, UniqueNameValidator $uniqueNameValidator){
         $this->categoryModel = $categoryModel;
         $this->carModel = $carModel;
         $this->siteView = $siteView;
         $this->formView = $formView;
         $this->categoryDeletionValidator = $categoryDeletionValidator;
         $this->formValidator = $formValidator;
-        $this->existenceValidator = $existenceValidator;
         $this->uniqueNameValidator = $uniqueNameValidator;
     }
 
     public function getCategoryDetail(string $id): void {
-        $this->existenceValidator->validateExistence($this->categoryModel, $id);
+        if(!$this->categoryModel->getById($id)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
 
-        $category = $this->categoryModel->getByIdWithDescription($id);
-        $this->siteView->showDetail($category, "Detalle de la categoria: ");
+        $detail = AuthHelper::isLogged() ? $this->categoryModel->getByIdAndUserIdWithDescription($id, AuthHelper::getUserId()) : $this->categoryModel->getByIdWithDescription($id);
+        if(empty($detail)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
+
+        $this->siteView->showDetail($detail, "Detalle de la categoria: ");
     }
 
     public function getFilterListOfCategory(string $id): void {
-        $this->existenceValidator->validateExistence($this->categoryModel, $id);
+        if(!$this->categoryModel->getById($id)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
 
-        $categoryName = $this->categoryModel->getByIdWithName($id);
+        $categoryName = AuthHelper::isLogged() ? $this->categoryModel->getByIdAndUserIdWithName($id, AuthHelper::getUserId()) : $this->categoryModel->getByIdWithName($id);
+        if(!$categoryName){
+            header("Location: " . BASE_URL);
+            return;
+        }
+
         $cars = $this->carModel->getAllByCategoryIdWithNameAndBrand($id);
 
         $this->siteView->showCategoryFilterList($categoryName, $cars);
@@ -47,6 +61,10 @@ class CategoryController {
         AuthHelper::checkLoggedAndRedict();
 
         $fields = $this->getFields();
+        if (empty($fields)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
 
         $errors = $this->formValidator->validateFields($fields);
         if(!empty($errors)) {
@@ -82,7 +100,10 @@ class CategoryController {
     public function deleteCategory(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
-        $this->existenceValidator->validateExistence($this->categoryModel, $id);
+        if(!$this->categoryModel->getByIdAndUserId($id, AuthHelper::getUserId())) {
+            header("Location: " . BASE_URL);
+            return;
+        }
 
         try {
             $this->categoryDeletionValidator->isDeletable($id);
@@ -94,7 +115,7 @@ class CategoryController {
         
         FlashErrorsHelper::clearErrors();
     
-        $this->categoryModel->delete($id);
+        $this->categoryModel->deleteByIdAndUserId($id, AuthHelper::getUserId());
         
         header("Location: " . BASE_URL);
     }
@@ -102,11 +123,13 @@ class CategoryController {
     public function getCategoryForm(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
-        $this->existenceValidator->validateExistence($this->categoryModel, $id);
+        $category = $this->categoryModel->getById($id);
+        if(empty($category)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
 
         $route = "update/category/" . $id;
-
-        $category = $this->categoryModel->getById($id);
 
         $this->formView->showCategoryFormEdit('category.form.tpl', $category, $route);
     }
@@ -114,9 +137,16 @@ class CategoryController {
     public function updateCategory(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
-        $this->existenceValidator->validateExistence($this->categoryModel, $id);
+        if(!$this->categoryModel->getByIdAndUserId($id, AuthHelper::getUserId())) {
+            header("Location: " . BASE_URL);
+            return;
+        }
         
         $fields = $this->getFields();
+        if(empty($fields)) {
+            header("Location: " . BASE_URL);
+            return;
+        }
 
         $errors = $this->formValidator->validateFields($fields);
         if(!empty($errors)) {
@@ -138,8 +168,11 @@ class CategoryController {
         header("Location: " . BASE_URL);
     }
 
-    private function getFields(): array 
-    {
+    private function getFields(): array {
+        if(!isset($_POST["name"]) || !isset($_POST["description"]) || !isset($_POST["type"])) {
+            return [];
+        }
+
         return [
             "categoryName" => $_POST["name"],
             "categoryDescription" => $_POST["description"],

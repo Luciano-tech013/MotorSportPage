@@ -17,7 +17,7 @@ class Connection {
         try {
             return new PDO($dsn, self::DB_USER, self::DB_PASSWORD, self::OPTIONS);
         } catch(PDOException $e) {
-            throw new Error('Error de conexión: ' . $e->getMessage());
+            throw new PDOException('Error de conexión');
         }
     }
 }

@@ -10,10 +10,7 @@
     RewriteRule ^(.+)$ router.php?action=$1 [QSA,L]
 </IfModule>
 
-# Bloquear acceso a archivos .env, .git, etc.
-<FilesMatch "\.(env|gitignore|htaccess|sql)$">
-    Require all denied
-</FilesMatch>
+
 
 
 

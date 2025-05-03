@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once '../src/app/controllers/exceptions/CategoryDeletionException.php';  
+require_once __DIR__ . '/../../app/controllers/exceptions/CategoryDeletionException.php';  
 
 class CategoryDeletionValidator {
     private CarModel $carModel;
