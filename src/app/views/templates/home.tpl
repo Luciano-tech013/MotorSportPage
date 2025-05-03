@@ -46,7 +46,7 @@ para agregar no para editar. Entonces, en vez de asignarsela desde la vista
 se la asigno desde acá con valor null. Por eso en car.form.tpl se valida que no se null
 para mostrar los datos en el formulario. Lo mismo con $optionsCategory-->
 {if isset($smarty.session.AUTH.IS_LOGGED)}
-    {include file="forms/car.form.tpl" is_embedded=true current_year=date('Y') car=null categories=$categories action="save/car"}
+    {include file="forms/car.form.tpl" is_embedded=true current_year=$smarty.now|date_format:"%Y" car=null categories=$categories action="save/car"}
 {/if}
 
 <section>
