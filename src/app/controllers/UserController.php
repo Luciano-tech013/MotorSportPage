@@ -64,8 +64,10 @@ class UserController {
     public function removeUser(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
+        FlashErrorsHelper::clearErrors();
+
         //Valido que los datos hayan venido del envío del formulario
-        if(!isset($_PASSWORD["password"])) {
+        if(!isset($_POST["password"]) || !isset($_POST["condition"])) {
            header("Location: " . BASE_URL);
            return; 
         }
@@ -83,14 +85,14 @@ class UserController {
             header("Location: " . $_SERVER["HTTP_REFERER"]);
             return;
         }
-        
+
         //Valido que haya aceptado la condicion de eliminacion de cuenta
-        if(!empty($_POST["condition"])) {
+        if(empty($_POST["condition"])) {
             FlashErrorsHelper::addError("CONDITION", "Debe aceptar la responsabilidad de eliminar la cuenta");
             header("Location: " . $_SERVER["HTTP_REFERER"]);
             return;
         }
-    
+        
         $this->userModel->delete($id);
 
         AuthHelper::destroyLogin();
