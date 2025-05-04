@@ -1,12 +1,7 @@
 <?php
 require_once __DIR__ . '/../../src/app/Instances.php';
 require_once __DIR__ . '/../../src/libs/Router.php';
-
-//Carga automática de Composer
-//Para produccion:
-//require_once __DIR__ . '/../../src/vendor/autoload.php'; --> No lo voy a utilizar por ahora
-//Para desarrollo:
-require_once __DIR__ . '/../../vendor/autoload.php';
+//require_once __DIR__ . '/../../vendor/autoload.php'; --> No lo voy a utilizar por ahora
 
 define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . rtrim(dirname($_SERVER['PHP_SELF']), '/') . '/');
 

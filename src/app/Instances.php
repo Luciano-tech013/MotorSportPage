@@ -3,10 +3,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../database/connection/Connection.php';
-//Para desarrollo:
-require_once __DIR__ . '/../../vendor/smarty/smarty/libs/Smarty.class.php';
-//Para produccion:
-//require_once __DIR__ . '/../vendor/smarty/smarty/libs/Smarty.class.php';
+require_once __DIR__ . '/../vendor/smarty/smarty/libs/Smarty.class.php';
 require_once 'models/CarModel.php';
 require_once 'models/CategoryModel.php';
 require_once 'models/UserModel.php';

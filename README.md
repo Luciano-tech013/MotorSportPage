@@ -13,4 +13,4 @@ El router solamente funciona para rutas que admitan un solo parámetro y sea del
 - Me gustaria refactorizar los modelos para evitar el uso de join cuando el usuario está logueado
 y evitar repetir código. Por cuestiones de tiempo no lo puedo hacer ahora
 - Mejorar la aplicacion de estilos CSS y Bootstrap
-- 
+- Refactorizar router para explicitar ID

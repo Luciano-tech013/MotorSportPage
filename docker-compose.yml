@@ -16,15 +16,14 @@ services:
 
   web:
     image: motorsportpage_app_image
-    container_name: motorsportpage_web_app
+    container_name: motorsportpage_ssr_app
     ports:
       - "${APP_PORT}:80"
     depends_on:
       - db
     volumes:
-      - ./public:/var/www/html/public
+      - ./public/:/var/www/html/public
       - ./src/:/var/www/src
-      - ./vendor:/var/www/vendor
     networks:
       - motorsportpage-net
 
