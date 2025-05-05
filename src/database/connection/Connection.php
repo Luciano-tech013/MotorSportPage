@@ -13,11 +13,11 @@ class Connection {
 
     public static function connect(): PDO {
         //Extrae componentes con valores por defecto seguros
-        $host = getenv('MYSQLHOST') ?? self::DEFAULT_DB_HOST;
-        $port = getenv('MYSQLPORT')?? self::DEFAULT_DB_PORT;
-        $user = getenv('MYSQLUSER') ?? self::DEFAULT_DB_USER;
-        $pass = getenv('MYSQLPASSWORD') ?? self::DEFAULT_DB_PASSWORD;
-        $name = getenv('MYSQLDATABASE') ?? self::DEFAULT_DB_NAME;
+        $host = $_ENV['MYSQLHOST'] ?? self::DEFAULT_DB_HOST;
+        $port = $_ENV['MYSQLPORT'] ?? self::DEFAULT_DB_PORT;
+        $user = $_ENV['MYSQLUSER'] ?? self::DEFAULT_DB_USER;
+        $pass = $_ENV['MYSQLPASSWORD'] ?? self::DEFAULT_DB_PASSWORD;
+        $name = $_ENV['MYSQLDATABASE'] ?? self::DEFAULT_DB_NAME;
         $options = self::DEFAULT_OPTIONS;
 
         error_log(sprintf(
@@ -25,7 +25,7 @@ class Connection {
             $host, $port, $user, $pass, $name
         ));
     
-        $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8', $host, $port, $name);
+        $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8;sslmode=require');
     
         try {
             return new PDO($dsn, $user, $pass, $options);
