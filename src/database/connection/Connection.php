@@ -12,11 +12,11 @@ class Connection {
     ];
 
     public static function connect(): PDO {
-        $host = getenv('MYSQL_HOST') ?? self::DEFAULT_DB_HOST;
-        $port = getenv('MYSQL_PORT') ?? self::DEFAULT_DB_PORT;
-        $user = getenv('MYSQL_USER') ?? self::DEFAULT_DB_USER;
-        $pass = getenv('MYSQL_PASSWORD') ?? self::DEFAULT_DB_PASSWORD;
-        $name = getenv('MYSQL_DATABASE') ?? self::DEFAULT_DB_NAME;
+        $host = getenv('MYSQLHOST') ?? self::DEFAULT_DB_HOST;
+        $port = getenv('MYSQLPORT') ?? self::DEFAULT_DB_PORT;
+        $user = getenv('MYSQLUSER') ?? self::DEFAULT_DB_USER;
+        $pass = getenv('MYSQLPASSWORD') ?? self::DEFAULT_DB_PASSWORD;
+        $name = getenv('MYSQLDATABASE') ?? self::DEFAULT_DB_NAME;
         $options = self::DEFAULT_OPTIONS;
 
         error_log("Usando vars individuales: HOST=$host, PORT=$port, DB=$name, USER=$user");
