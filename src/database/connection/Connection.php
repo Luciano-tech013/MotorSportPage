@@ -12,32 +12,15 @@ class Connection {
     ];
 
     public static function connect(): PDO {
-        //Usa MYSQL_URL Railway para obtener la URL
-        $databaseURL = getenv("MYSQL_URL");
-        
-        //Registra el valor para debug de credenciales
-        error_log("Valor de MYSQL_URL: " . $databaseURL);
-    
-        if($databaseURL) {
-            $databaseURL = str_replace('jdbc:', '', $databaseURL);
-            $parts = parse_url($databaseURL);
-    
-            //Extrae componentes con valores por defecto seguros
-            $host = $parts['host'] ?? '';
-            $port = $parts['port'] ?? '3306';
-            $user = $parts['user'] ?? '';
-            $pass = $parts['pass'] ?? '';
-            $name = ltrim($parts['path'] ?? '', '/');
-        } else {
-            //Para entorno local (opcional)
-            $host = self::DEFAULT_DB_HOST;
-            $port = self::DEFAULT_DB_PORT;
-            $user = self::DEFAULT_DB_USER;
-            $pass = self::DEFAULT_DB_PASSWORD;
-            $name = self::DEFAULT_DB_NAME;
-        }
-    
+        //Extrae componentes con valores por defecto seguros
+        $host = getenv('MYSQLHOST') ?? self::DEFAULT_DB_HOST;
+        $port = getenv('MYSQLPORT')?? self::DEFAULT_DB_PORT;
+        $user = getenv('MYSQLUSER') ?? self::DEFAULT_DB_USER;
+        $pass = getenv('MYSQLPASSWORD') ?? self::DEFAULT_DB_PASSWORD;
+        $name = getenv('MYSQLDATABASE') ?? self::DEFAULT_DB_NAME;
         $options = self::DEFAULT_OPTIONS;
+
+        error_log("Variables independientes: ", $host, $port, $user, $pass, $name);
     
         $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8', $host, $port, $name);
     
