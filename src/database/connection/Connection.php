@@ -25,7 +25,13 @@ class Connection {
             $host, $port, $user, $pass, $name
         ));
     
-        $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8;sslmode=require');
+        $dsn = sprintf(
+            'mysql:host=%s;port=%s;dbname=%s;charset=utf8',
+            $host,
+            $port,
+            $name
+        );
+        
     
         try {
             return new PDO($dsn, $user, $pass, $options);
