@@ -12,26 +12,14 @@ class Connection {
     ];
 
     public static function connect(): PDO {
-        $databaseURL = getenv("DATABASE_URL");
-        error_log("Valor raw de DATABASE_URL: " . var_export($databaseURL, true));
+        $host = getenv('MYSQL_HOST') ?? self::DEFAULT_DB_HOST;
+        $port = getenv('MYSQL_PORT') ?? self::DEFAULT_DB_PORT;
+        $user = getenv('MYSQL_USER') ?? self::DEFAULT_DB_USER;
+        $pass = getenv('MYSQL_PASSWORD') ?? self::DEFAULT_DB_PASSWORD;
+        $name = getenv('MYSQL_DATABASE') ?? self::DEFAULT_DB_NAME;
+        $options = self::DEFAULT_OPTIONS;
 
-        if($databaseURL != false) {
-            $parts = parse_url($databaseURL);
-
-            $host = $parts['host'];
-            $port = $parts['port'];
-            $user = $parts['user'];
-            $pass = $parts['pass'];
-            $name = ltrim($parts['path'], '/');
-            $options = self::DEFAULT_OPTIONS;
-        } else {
-            $host = self::DEFAULT_DB_HOST;
-            $port = self::DEFAULT_DB_PORT;
-            $user = self::DEFAULT_DB_USER;
-            $pass = self::DEFAULT_DB_PASSWORD;
-            $name = self::DEFAULT_DB_NAME;
-            $options = self::DEFAULT_OPTIONS;
-        }
+        error_log("Usando vars individuales: HOST=$host, PORT=$port, DB=$name, USER=$user");
 
         $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8', $host, $port, $name);
 
