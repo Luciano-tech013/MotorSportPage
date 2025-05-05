@@ -14,3 +14,6 @@ El router solamente funciona para rutas que admitan un solo parámetro y sea del
 y evitar repetir código. Por cuestiones de tiempo no lo puedo hacer ahora
 - Mejorar la aplicacion de estilos CSS y Bootstrap
 - Refactorizar router para explicitar ID
+
+##¿Por qué utilizo docker en el proyecto?
+Utilizo docker para desarrollo, en donde levanto los servidores para la base y para la web app. COmo estoy en linux y tuve problemas para ejecutar XAMPP, decidí hacerlo así. Tal vez podría haber desplegado los contenedore directamente, pero no encontré un plan gratuito para hacerlo
