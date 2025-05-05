@@ -12,33 +12,43 @@ class Connection {
     ];
 
     public static function connect(): PDO {
-        $databaseURL = getenv("DATABASE_URL");
-        error_log("Valor raw de DATABASE_URL: " . var_export($databaseURL, true));
-
-        if($databaseURL != false) {
+        //Usa MYSQL_URL Railway para obtener la URL
+        $databaseURL = getenv("MYSQL_URL");
+        
+        //Registra el valor para debug de credenciales
+        error_log("Valor de MYSQL_URL: " . $databaseURL);
+    
+        if($databaseURL) {
+            $databaseURL = str_replace('jdbc:', '', $databaseURL);
             $parts = parse_url($databaseURL);
-
-            $host = $parts['host'];
-            $port = $parts['port'];
-            $user = $parts['user'];
-            $pass = $parts['pass'];
-            $name = ltrim($parts['path'], '/');
-            $options = self::DEFAULT_OPTIONS;
+    
+            //Extrae componentes con valores por defecto seguros
+            $host = $parts['host'] ?? '';
+            $port = $parts['port'] ?? '3306';
+            $user = $parts['user'] ?? '';
+            $pass = $parts['pass'] ?? '';
+            $name = ltrim($parts['path'] ?? '', '/');
         } else {
+            //Para entorno local (opcional)
             $host = self::DEFAULT_DB_HOST;
             $port = self::DEFAULT_DB_PORT;
             $user = self::DEFAULT_DB_USER;
             $pass = self::DEFAULT_DB_PASSWORD;
             $name = self::DEFAULT_DB_NAME;
-            $options = self::DEFAULT_OPTIONS;
         }
-
+    
+        $options = self::DEFAULT_OPTIONS;
+    
         $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8', $host, $port, $name);
-
+    
         try {
             return new PDO($dsn, $user, $pass, $options);
         } catch(PDOException $e) {
-            throw new PDOException('Error de conexión: ' . $e->getMessage());
+            throw new PDOException(sprintf(
+                'Error conectando a %s: %s',
+                $dsn,
+                $e->getMessage()
+            ));
         }
     }
 }
