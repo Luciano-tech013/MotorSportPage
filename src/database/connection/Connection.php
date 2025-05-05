@@ -13,6 +13,7 @@ class Connection {
 
     public static function connect(): PDO {
         $databaseURL = getenv("DATABASE_URL");
+        error_log("Valor raw de DATABASE_URL: " . var_export($databaseURL, true));
 
         if($databaseURL != false) {
             $parts = parse_url($databaseURL);

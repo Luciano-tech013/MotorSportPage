@@ -44,7 +44,7 @@ class Instances {
     private function getSmarty(): Smarty {
         $smarty = new Smarty();
         $smarty->setTemplateDir(__DIR__ . '/views/templates');
-        $smarty->setCompileDir(__DIR__ . '/../../templates_c');
+        $smarty->setCompileDir(__DIR__ . '/../templates_c');
         
         return $smarty;
     }
