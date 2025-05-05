@@ -20,7 +20,10 @@ class Connection {
         $name = getenv('MYSQLDATABASE') ?? self::DEFAULT_DB_NAME;
         $options = self::DEFAULT_OPTIONS;
 
-        error_log("Variables independientes: ", $host, $port, $user, $pass, $name);
+        error_log(sprintf(
+            "Variables independientes: host=%s, port=%s, user=%s, pass=%s, name=%s",
+            $host, $port, $user, $pass, $name
+        ));
     
         $dsn = sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8', $host, $port, $name);
     
