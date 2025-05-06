@@ -8,7 +8,7 @@ class AuthHelper {
 
     public static function checkLoggedAndRedict() {
         if(!self::isLogged()) {
-            header("Location: " . BASE_URL . 'login');
+            header("Location: " . BASE_URL . 'account/validate');
             die();
         }
     }

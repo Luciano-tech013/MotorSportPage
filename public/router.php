@@ -3,7 +3,13 @@ require_once __DIR__ . '/../../src/app/Instances.php';
 require_once __DIR__ . '/../../src/libs/Router.php';
 //require_once __DIR__ . '/../../vendor/autoload.php'; --> No lo voy a utilizar por ahora
 
-define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . rtrim(dirname($_SERVER['PHP_SELF']), '/') . '/');
+//obtengo el protocolo de la solicitud (HTTPS si estoy en Render)
+$scheme = $_SERVER['HTTP_X_FORWARDED_PROTO'] ?? 'http';
+$host = $_SERVER['HTTP_HOST'];  //incluye dominio y, si existiera, puerto
+//punto de entrada
+$path = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/');
+
+define('BASE_URL', "{$scheme}://{$host}{$path}/");
 
 //Como el servidor no mantiene estado, ésta es una única instancia en una sola ejecución por request
 $instances = new Instances();
