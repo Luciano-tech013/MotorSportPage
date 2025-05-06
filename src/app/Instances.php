@@ -24,29 +24,36 @@ require_once __DIR__ . '/../utils/rules/InvalidRulesUserProvider.php';
 
 
 class Instances {
+    private PDO $connection;
+    private Smarty $smarty;
+    
     private function showError($error): void {
         $this->getSiteView()->showErrorSever($error);
     }
 
     private function getPDO(): PDO {
-        $connection = null;
-
+        if(!empty($this->connection))
+            return $this->connection;
+        
         try {
-            $connection = Connection::connect();
+            $this->connection = Connection::connect();
         } catch (PDOException $e) {
             $this->showError($e->getMessage());
             die();
         }
 
-        return $connection;
+        return $this->connection;
     }
 
     private function getSmarty(): Smarty {
-        $smarty = new Smarty();
-        $smarty->setTemplateDir(__DIR__ . '/views/templates');
-        $smarty->setCompileDir(__DIR__ . '/../templates_c');
+        if(!empty($this->smarty))
+            return $this->smarty;
+
+        $this->smarty = new Smarty();
+        $this->smarty->setTemplateDir(__DIR__ . '/views/templates');
+        $this->smarty->setCompileDir(__DIR__ . '/../templates_c');
         
-        return $smarty;
+        return $this->smarty;
     }
 
     public function getSiteView(): SiteView {

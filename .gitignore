@@ -1,4 +1,4 @@
 templates_c
 app..
-/public/libs
 /vendor
+.env
