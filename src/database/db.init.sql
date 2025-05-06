@@ -35,8 +35,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `description` varchar(5000) NOT NULL,
   `type` varchar(13) NOT NULL,
   `user_id` int DEFAULT NULL,
-  PRIMARY KEY (`category_id`),
-  UNIQUE KEY `name_unique` (`name`)
+  PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -61,8 +60,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(30) NOT NULL DEFAULT 'NOT NULL',
   `password` varchar(255) NOT NULL DEFAULT 'NOT NULL',
   `name_id` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `name_id_unique` (`name_id`)
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -80,7 +78,6 @@ CREATE TABLE IF NOT EXISTS `car` (
   `category_id` int NOT NULL,
   `name_id` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`car_id`),
-  UNIQUE KEY `name_id_unique` (`name_id`),
   KEY `category_id` (`category_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

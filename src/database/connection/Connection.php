@@ -1,10 +1,5 @@
 <?php
 class Connection {
-    private const DEFAULT_DB_HOST = 'db';
-    private const DEFAULT_DB_PORT = '3306';
-    private const DEFAULT_DB_NAME = 'motorsportpage_db';
-    private const DEFAULT_DB_PASSWORD = '45037195';
-    private const DEFAULT_DB_USER = 'root';
     private const DEFAULT_OPTIONS = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
@@ -13,11 +8,11 @@ class Connection {
 
     public static function connect(): PDO {
         //Extrae componentes con valores por defecto seguros
-        $host = $_ENV['MYSQLHOST'] ?? self::DEFAULT_DB_HOST;
-        $port = $_ENV['MYSQLPORT'] ?? self::DEFAULT_DB_PORT;
-        $user = $_ENV['MYSQLUSER'] ?? self::DEFAULT_DB_USER;
-        $pass = $_ENV['MYSQLPASSWORD'] ?? self::DEFAULT_DB_PASSWORD;
-        $name = $_ENV['MYSQLDATABASE'] ?? self::DEFAULT_DB_NAME;
+        $host = getenv('MYSQLHOST');
+        $port = getenv('MYSQLPORT');
+        $user = getenv('MYSQLUSER');
+        $pass = getenv('MYSQLPASSWORD');
+        $name = getenv('MYSQLDATABASE');
         $options = self::DEFAULT_OPTIONS;
 
         error_log(sprintf(
@@ -31,7 +26,6 @@ class Connection {
             $port,
             $name
         );
-        
     
         try {
             return new PDO($dsn, $user, $pass, $options);

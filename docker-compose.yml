@@ -4,10 +4,10 @@ services:
     container_name: motorsportpage_database_server
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQLPASSWORD}
+      MYSQL_DATABASE: ${MYSQLDATABASE}
     ports:
-      - "${MYSQL_PORT}:3306"
+      - "3308:${MYSQLPORT}"
     volumes:
       #Al montar ./src/database en /docker-entrypoint-initdb.d, MySQL ejecuta automáticamente todos los archivos .sql en este directorio solo durante la primera inicialización (cuando la base de datos no existe).
       - ./src/database/db.init.sql:/docker-entrypoint-initdb.d/db.init.sql
@@ -24,6 +24,8 @@ services:
     volumes:
       - ./public/:/var/www/html/public
       - ./src/:/var/www/src
+    env_file:
+      - .env
     networks:
       - motorsportpage-net
 

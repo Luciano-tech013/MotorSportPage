@@ -3,11 +3,11 @@ const signup_expresions = {
   password: /^(?=.*[A-Za-z])[A-Za-z\d\s\-!"#$%&'()*+,./:;<=>?@[\\\]^_{|}~]{4,15}$/
 };
 
-const category_expresions = {
-  name: /^(?=(?:.*[A-Za-z]){4,30})[A-Za-z\d\t ]+$/, 
-  description: /^(?=.*\p{L})[\p{L}\d\p{P}\s]{4,5000}$/u
+const category_expressions = {
+    name: /^(?=.{1,30}$)(?=.*\p{L})[\p{L}\d ]+$/u,
+    description: /^(?=.*\p{L})[\p{L}\d\p{P}\s]{4,5000}$/u
 };
-
+  
 const car_expresions = {
   name: /^(?=(?:.*[A-Za-z]){2,30})[A-Za-z\d\t]+$/,
   description: /^(?=.*\p{L})[\p{L}\d\p{P}\s]{4,5000}$/u,
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Ejecuto el validador
     config.forEach(({ form, expr }) => {
         if(!form) return;
-
+        
         const fields = form.querySelectorAll(".form-control");
         validateForm(form, fields, expr);
     });
@@ -42,7 +42,7 @@ const validateForm = ($form, $fields, $expressions) => {
 
         const element = document.getElementById(e.target.id);
 
-        if(!isValueValid(e.target.name, e.target.value)) {
+        if(!isValueValid(e.target.name, e.target.value.trim())) {
             element.classList.remove("is-valid");
             element.classList.add("is-invalid");
             return;
