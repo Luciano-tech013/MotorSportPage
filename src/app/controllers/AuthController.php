@@ -14,13 +14,13 @@ class AuthController {
     }
 
     public function login(): void {
-        $user = $this->userModel->getByUsername($_POST['username']);
-
-        if(!isset($_POST['password'])) {
+        //Evito llamadas desde otro lugar
+        if(!isset($_POST['password']) || !isset($_POST['username'])) {
             header("Location: " . BASE_URL);
             return;
         }
 
+        $user = $this->userModel->getByUsername($_POST['username']);
         if(empty($user) || !password_verify($_POST['password'], $user->password)) {
             FlashErrorsHelper::addError("INVALID_USER", "El usuario o la contraseña son incorrectos. Por favor, verificalos e intentalo nuevamente.");
             header("Location: " . BASE_URL . "account/validate");

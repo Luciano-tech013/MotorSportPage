@@ -23,7 +23,7 @@ class UserModel {
         return $result == false ? null : $result;
     }
 
-    public function getById(string $id): ?object {
+    public function getById(string|int $id): ?object {
         $query = $this->connection->prepare("SELECT * FROM user WHERE user_id = ?");
         $query->execute([$id]);
 
@@ -31,9 +31,11 @@ class UserModel {
         return $result == false ? null : $result;
     }
 
-    public function add(string $username, string $userpassword, string $nameId): void {
+    public function add(string $username, string $userpassword, string $nameId): string {
         $query = $this->connection->prepare("INSERT INTO user (name, password, name_id) VALUES (?, ?, ?)");
         $query->execute([$username, $userpassword, $nameId]);
+
+        return $this->connection->lastInsertId();
     }
 
     public function delete(string $id) {

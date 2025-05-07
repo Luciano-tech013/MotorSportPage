@@ -56,9 +56,9 @@ class UserController {
         //Hasheo la contraseña
         $userpassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-        $this->userModel->add($username, $userpassword, $nameId);
+        $id = $this->userModel->add($username, $userpassword, $nameId);
 
-        $user = $this->userModel->getByUsername($_POST['username']);
+        $user = $this->userModel->getById($id);
 
         AuthHelper::initSession($user);
 
@@ -76,7 +76,7 @@ class UserController {
            return; 
         }
 
-        //Valido si existe el usuario con ese id
+        //Valido si existe el usuario con ese id para poder acceder a sus propiedades
         $user = $this->userModel->getById($id);
         if(empty($user)) {
             header("Location: " . BASE_URL);

@@ -23,11 +23,6 @@ class CarController {
     }
 
     public function getCarDetail(string $id): void {
-        if(!$this->carModel->getById($id)) {
-            header("Location: " . BASE_URL);
-            return;
-        }
-        
         $detail = AuthHelper::isLogged() ? $this->carModel->getByIdAndUserIdWithDescription($id, AuthHelper::getUserId()) : $this->carModel->getByIdWithDescription($id); 
         if(empty($detail)) {
             header("Location: " . BASE_URL);
@@ -40,6 +35,7 @@ class CarController {
     public function addCar(): void {
         AuthHelper::checkLoggedAndRedict();
 
+        //Me devuelve vacío si no existen los campos
         $fields = $this->getFields();
         if(empty($fields)) {
             header("Location: " . BASE_URL);
@@ -81,11 +77,6 @@ class CarController {
     public function deleteCar(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
-        if(!$this->carModel->getByIdAndUserId($id, AuthHelper::getUserId())) {
-            header("Location: " . BASE_URL);
-            return;
-        }
-
         //Se intento eliminar una categoria con autos asociados y ya se informó
         FlashErrorsHelper::clearErrors();
         
@@ -113,11 +104,7 @@ class CarController {
     public function updateCar(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
-        if(!$this->carModel->getByIdAndUserId($id, AuthHelper::getUserId())) {
-            header("Location: " . BASE_URL);
-            return;
-        }
-        
+        //Me devuelve vacío si no existen los campos
         $fields = $this->getFields();
         if(empty($fields)) {
             header("Location: " . BASE_URL);

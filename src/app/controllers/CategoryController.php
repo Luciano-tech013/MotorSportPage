@@ -26,11 +26,6 @@ class CategoryController {
     }
 
     public function getCategoryDetail(string $id): void {
-        if(!$this->categoryModel->getById($id)) {
-            header("Location: " . BASE_URL);
-            return;
-        }
-
         $detail = AuthHelper::isLogged() ? $this->categoryModel->getByIdAndUserIdWithDescription($id, AuthHelper::getUserId()) : $this->categoryModel->getByIdWithDescription($id);
         if(empty($detail)) {
             header("Location: " . BASE_URL);
@@ -41,11 +36,6 @@ class CategoryController {
     }
 
     public function getFilterListOfCategory(string $id): void {
-        if(!$this->categoryModel->getById($id)) {
-            header("Location: " . BASE_URL);
-            return;
-        }
-
         $categoryName = AuthHelper::isLogged() ? $this->categoryModel->getByIdAndUserIdWithName($id, AuthHelper::getUserId()) : $this->categoryModel->getByIdWithName($id);
         if(!$categoryName){
             header("Location: " . BASE_URL);
@@ -59,7 +49,8 @@ class CategoryController {
 
     public function addCategory(): void {
         AuthHelper::checkLoggedAndRedict();
-
+        
+        //Me devuelve vacío si no existen los campos
         $fields = $this->getFields();
         if (empty($fields)) {
             header("Location: " . BASE_URL);
@@ -86,7 +77,7 @@ class CategoryController {
             return;
         }
 
-        $this->categoryModel->add(
+        $this->categoryModel->addWithUserId(
             $name, 
             $nameId, 
             $fields["categoryDescription"], 
@@ -100,6 +91,7 @@ class CategoryController {
     public function deleteCategory(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
+        //Validar si esa categoria existe para ese usuario
         if(!$this->categoryModel->getByIdAndUserId($id, AuthHelper::getUserId())) {
             header("Location: " . BASE_URL);
             return;
@@ -148,11 +140,7 @@ class CategoryController {
     public function updateCategory(string $id): void {
         AuthHelper::checkLoggedAndRedict();
 
-        if(!$this->categoryModel->getByIdAndUserId($id, AuthHelper::getUserId())) {
-            header("Location: " . BASE_URL);
-            return;
-        }
-        
+        //Me devuelve vacío si no existen los campos
         $fields = $this->getFields();
         if(empty($fields)) {
             header("Location: " . BASE_URL);

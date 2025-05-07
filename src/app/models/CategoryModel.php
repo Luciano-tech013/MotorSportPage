@@ -85,7 +85,7 @@ class CategoryModel {
         return $result == false ? null : $result;
     }
 
-    public function add(string $name, string $nameId, string $description, string $type, int $userId): void {
+    public function addWithUserId(string $name, string $nameId, string $description, string $type, int $userId): void {
         $query = $this->connection->prepare("INSERT INTO category (name, name_id, description, type, user_id) VALUES(?,?,?,?,?)");
 
         $query->execute([$name, $nameId, $description, $type, $userId]);
