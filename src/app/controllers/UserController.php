@@ -57,8 +57,12 @@ class UserController {
         $userpassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
         $this->userModel->add($username, $userpassword, $nameId);
-            
-        header("Location: " . BASE_URL . "account/validate");
+
+        $user = $this->userModel->getByUsername($_POST['username']);
+
+        AuthHelper::initSession($user);
+
+        header("Location: " . BASE_URL);
     }
 
     public function removeUser(string $id): void {

@@ -1,4 +1,4 @@
-const signup_expresions = {
+const signup_expressions = {
   username: /^(?=.*[A-Za-z])[A-Za-z\d\s\-!"#$%&'()*+,./:;<=>?@[\\\]^_{|}~]{4,30}$/,
   password: /^(?=.*[A-Za-z])[A-Za-z\d\s\-!"#$%&'()*+,./:;<=>?@[\\\]^_{|}~]{4,15}$/
 };
@@ -8,7 +8,7 @@ const category_expressions = {
     description: /^(?=.*\p{L})[\p{L}\d\p{P}\s]{4,5000}$/u
 };
   
-const car_expresions = {
+const car_expressions = {
   name: /^(?=(?:.*[A-Za-z]){2,30})[A-Za-z\d\t]+$/,
   description: /^(?=.*\p{L})[\p{L}\d\p{P}\s]{4,5000}$/u,
   brand: /^(?=(?:.*[A-Za-z]){3,30})[A-Za-z\d\t ]+$/,
@@ -16,9 +16,9 @@ const car_expresions = {
 
 document.addEventListener("DOMContentLoaded", () => {
     const config = [
-        { form: document.querySelector("#signup_form"), expr: signup_expresions },
-        { form: document.querySelector("#category_form"), expr: category_expresions },
-        { form: document.querySelector("#car_form"), expr: car_expresions }
+        { form: document.querySelector("#signup_form"), expr: signup_expressions },
+        { form: document.querySelector("#category_form"), expr: category_expressions },
+        { form: document.querySelector("#car_form"), expr: car_expressions }
     ];
 
     //Ejecuto el validador

@@ -1,9 +1,5 @@
 {if isset($smarty.session.ERRORS.CONDITION) || isset($smarty.session.ERRORS.INVALID_PASSWORD)}
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            new bootstrap.Modal(document.getElementById('confirmRemoveModal')).show();
-        });
-    </script>
+    <script src="/public/assets/js/modals.js"></script>
 {/if}
 
 <section class="modal fade" id="confirmRemoveModal" tabindex="-1" aria-labelledby="confirmRemoveLabel" aria-hidden="true">

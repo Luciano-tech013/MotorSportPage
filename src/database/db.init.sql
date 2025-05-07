@@ -104,7 +104,7 @@ INSERT INTO `car` (`car_id`, `name`, `description`, `model`, `brand`, `category_
 -- Filtros para la tabla `car`
 --
 ALTER TABLE `car`
-  ADD CONSTRAINT `car_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `car_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`) ON UPDATE CASCADE ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `category`

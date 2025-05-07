@@ -85,6 +85,9 @@ class CarController {
             header("Location: " . BASE_URL);
             return;
         }
+
+        //Se intento eliminar una categoria con autos asociados y ya se informó
+        FlashErrorsHelper::clearErrors();
         
         $this->carModel->deleteByIdAndUserId($id, AuthHelper::getUserId());
 

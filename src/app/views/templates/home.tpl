@@ -1,9 +1,11 @@
 {include file="layout/header.tpl"}
 
-{include file="init.tpl"}
+{if !isset($smarty.session.AUTH.IS_LOGGED)}
+    {include file="init.tpl"}
+{/if}
 
 <section>
-    <h1 class="text-center shadow-sm p-3 mb-4 bg-body rounded">Lista de Autos</h1>
+    <h1 class="text-center shadow-sm p-3 mb-4 mt-5 bg-body rounded">Lista de Autos</h1>
     {if !isset($smarty.session.AUTH.IS_LOGGED)}
         <p class="p-5 fs-5">Aqui mostraremos informacion sobre algunos ejemplos de autos que pertenecen a algunas de estas
             categorias. En cada auto vamos a mostrar: Su nombre correspondiente (u apodos), breve descripcion del modelo, el
@@ -32,6 +34,13 @@
                     <td>{$car->category_name}</td>
                     <td><a class="btn btn-primary" href="car/detail/{$car->car_id}">Detalle</a></td>
                     {if isset($smarty.session.AUTH.IS_LOGGED)}
+                        {if isset($smarty.session.ERRORS.INVALID_DELETABLE)}
+                            <script>
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    new bootstrap.Modal(document.getElementById('infoCategoryRemoveModal')).show();
+                                });
+                            </script>
+                        {/if}
                         <td><a class="btn btn-badge text-bg-danger" href="remove/car/{$car->car_id}">BORRAR</a></td>
                         <td><a class="btn btn-badge text-bg-warning" href="edit/car/{$car->car_id}">EDITAR</a></td>
                     {/if}
@@ -79,11 +88,7 @@ para mostrar los datos en el formulario. Lo mismo con $optionsCategory-->
                     <td><a class="btn btn-primary" href="category/cars/{$category->category_id}">Filtrar</a></td>
                     <td><a class="btn btn-primary" href="category/detail/{$category->category_id}">Detalle</a></td>
                     {if isset($smarty.session.AUTH.IS_LOGGED)}
-                        {if isset($smarty.session.ERRORS.INVALID_DELETABLE)}
-                            <td><a class="btn btn-badge text-bg-danger" data-bs-toggle="modal" data-bs-target="#infoCategoryRemoveModal" href="#">BORRAR</a></td>
-                        {else}
-                            <td><a class="btn btn-badge text-bg-danger" href="remove/category/{$category->category_id}">BORRAR</a></td>
-                        {/if}
+                        <td><a class="btn btn-badge text-bg-danger" href="remove/category/{$category->category_id}" id="removeCategoryBtn">BORRAR</a></td>
                         <td><a class="btn btn-badge text-bg-warning" href="edit/category/{$category->category_id}">EDITAR</a></td>
                     {/if}
                 </tr>

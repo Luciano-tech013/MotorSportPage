@@ -12,7 +12,7 @@ abstract class BaseView {
         foreach ($data as $key => $value) {
             $this->smarty->assign($key, $value);
         }
-
+   
         $this->smarty->display($template);
     }
 }

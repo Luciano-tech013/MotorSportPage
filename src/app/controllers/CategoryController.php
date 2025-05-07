@@ -79,7 +79,7 @@ class CategoryController {
         $nameId = strtolower($name);
         $userId = AuthHelper::getUserId();
 
-        $isUnique = $this->uniqueNameValidator->isAUniqueName($this->carModel, $nameId, $userId);
+        $isUnique = $this->uniqueNameValidator->isAUniqueName($this->categoryModel, $nameId, $userId);
         if(!$isUnique) {
             FlashErrorsHelper::addError("UNIQUE_NAME_CATEGORY", "El nombre de la categoria ya existe.");
             header("Location: " . $_SERVER['HTTP_REFERER']);
@@ -104,16 +104,27 @@ class CategoryController {
             header("Location: " . BASE_URL);
             return;
         }
-
-        try {
-            $this->categoryDeletionValidator->isDeletable($id);
-        } catch(CategoryDeletionException $e) {
-            FlashErrorsHelper::addError("INVALID_DELETABLE", $e->getMessage());
-            header("Location: " . $_SERVER['HTTP_REFERER']);
-            return;
-        }
         
+        //Si no se envio el formulario, accion restrict
+        if(!isset($_POST['cascade_delete'])) {
+            try {
+                $this->categoryDeletionValidator->isDeletable($id);
+            } catch(CategoryDeletionException $e) {
+                FlashErrorsHelper::addError("INVALID_DELETABLE", $e->getMessage());
+                //Para poder enviarlo en el modal
+                $_SESSION['CATEGORY']['ID_DELETABLE'] = $id;
+                header("Location: " . BASE_URL);
+                return;
+            }
+        }
+
+        //Si se envio el formulario, pero el valor se modificó por un tercero
+        if(!$_POST['cascade_delete'])
+            return;
+
+        //Si se envio el formulario de aceptacion, elimino en cascada
         FlashErrorsHelper::clearErrors();
+        unset($_SESSION['CATEGORY']['ID_DELETABLE']);
     
         $this->categoryModel->deleteByIdAndUserId($id, AuthHelper::getUserId());
         

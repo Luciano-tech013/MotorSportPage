@@ -78,8 +78,8 @@ class CategoryModel {
     }
 
     public function getByUserIdAndName(string $name, int $userId): ?object {
-        $query = $this->connection->prepare("SELECT category_id FROM category WHERE name LIKE ? AND user_id = ?");
-        $query->execute(['%' . $name . '%', $userId]);
+        $query = $this->connection->prepare("SELECT category_id FROM category WHERE name_id = ? AND user_id = ?");
+        $query->execute([$name, $userId]);
 
         $result = $query->fetch();
         return $result == false ? null : $result;

@@ -29,10 +29,7 @@ class AuthController {
 
         FlashErrorsHelper::clearErrors();
 
-        $_SESSION["AUTH"]['USER_ID'] = $user->user_id;
-        $_SESSION["AUTH"]['NAME'] = $user->name;
-        $_SESSION["AUTH"]['PASSWORD'] = $user->password;
-        $_SESSION["AUTH"]['IS_LOGGED'] = true;
+        AuthHelper::initSession($user);
     
         header("Location: " . BASE_URL);
     }

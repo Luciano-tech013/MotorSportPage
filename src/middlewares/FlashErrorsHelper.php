@@ -8,7 +8,12 @@ class FlashErrorsHelper {
     }
 
     public static function clearErrors(): void {
-        unset($_SESSION["ERRORS"]);
+        if(isset($_SESSION['ERRORS']))
+            unset($_SESSION["ERRORS"]);
+    }
+
+    public static function all(): array {
+        return $_SESSION['ERRORS'] ?? [];
     }
 
     public static function mapFieldErrors(array $errors): void {
