@@ -1,8 +1,20 @@
 <section class="modal fade" id="infoCategoryRemoveModal" tabindex="-1" aria-labelledby="infoCategoryRemoveLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <section class="modal-content">
-            <section class="modal-header bg-dark text-white">
-                <h5 class="modal-title text-danger" id="infoCategoryRemoveModal">{if isset($smarty.session.ERRORS.INVALID_DELETABLE)} {$smarty.session.ERRORS.INVALID_DELETABLE} {/if}</h5>
+            <section class="modal-header bg-dark text-white flex-column align-items-start">
+            <h5 class="modal-title text-danger" id="infoCategoryRemoveLabel">
+            {if isset($errors.INVALID_CATEGORY_DELETABLE)} 
+                {$errors.INVALID_CATEGORY_DELETABLE} 
+            {/if}
+            </h5>
+    
+            {if isset($errors.INVALID_CATEGORY_DELETABLE_DATA)}
+                <ul class="mt-2">
+                {foreach from=$errors.INVALID_CATEGORY_DELETABLE_DATA item=$car}
+                    <li>{$car->name} | {$car->brand}</li>
+                {/foreach}
+                </ul>
+            {/if}
             </section>
             <section class="modal-body">
                 <p>Al eliminar esta categoría, también se eliminarán todos los <strong>autos asociados a ella</strong>. Tenga en cuenta que <strong>NO hay vuelta atrás</strong> una vez que la categoría haya sido eliminada, por lo tanto, la <strong>decisión</strong> queda bajo su <strong>responsabilidad</strong>.<br><strong>¿Realmente desea eliminarla?</strong></p>

@@ -12,11 +12,11 @@ se llama para editar--->
             <form class="row g-3 mt-2" method="POST" id="category_form" {if isset($action)} action="{$action}" {/if}>
                 <div class="col-12 col-md-6">
                     <input type="text" {if !empty($category)} class="form-control is-valid" {else} class="form-control" {/if} id="category_name" name="name" {if isset($category) && !empty($category)} value="{$category->name}" {/if} placeholder="Nombre:" required>
-                    {if isset($smarty.session.ERRORS.categoryName)}
-                        <p class="text-danger">{$smarty.session.ERRORS.categoryName}</p>
+                    {if isset($errors.categoryName)}
+                        <p class="text-danger">{$errors.categoryName}</p>
                     {/if}
-                    {if isset($smarty.session.ERRORS.UNIQUE_NAME_CATEGORY)}
-                        <p class="text-danger">{$smarty.session.ERRORS.UNIQUE_NAME_CATEGORY}</p>
+                    {if isset($errors.UNIQUE_NAME_CATEGORY)}
+                        <p class="text-danger">{$errors.UNIQUE_NAME_CATEGORY}</p>
                     {/if}
                 </div>
                 <div class="col-12 col-md-6">
@@ -32,16 +32,16 @@ se llama para editar--->
                         <option value="PROVINCIAL">PROVINCIAL</option>
                         <option value="CONTINENTAL">CONTINENTAL</option>
                     </select>
-                    {if isset($smarty.session.ERRORS.type)}
-                        <p class="text-danger">{$smarty.session.ERRORS.type}</p>
+                    {if isset($errors.type)}
+                        <p class="text-danger">{$errors.type}</p>
                     {/if}
                 </div>
                 <div class="mb-4">
                     <textarea type="text" {if !empty($category)} class="form-control is-valid" {else} class="form-control" {/if} id="category_description" name="description"
                         placeholder="Descripcion:"
                         required>{if isset($category) && !empty($category)}{$category->description}{/if}</textarea>
-                    {if isset($smarty.session.ERRORS.categoryDescription)}
-                        <p class="text-danger">{$smarty.session.ERRORS.categoryDescription}</p>
+                    {if isset($errors.categoryDescription)}
+                        <p class="text-danger">{$errors.categoryDescription}</p>
                     {/if}
                 </div>
                 <div class="col-12">

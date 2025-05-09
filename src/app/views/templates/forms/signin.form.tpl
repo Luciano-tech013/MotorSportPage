@@ -14,8 +14,8 @@
                     <input type="password" class="form-control" name="password" placeholder="Escribe tu contraseña:" required>
                 </div>
                 <button class="btn btn-badge text-bg-success">LOGIN</button>
-                {if isset($smarty.session.ERRORS.INVALID_USER)}
-                    <p class="text-danger">{$smarty.session.ERRORS.INVALID_USER}</p>
+                {if isset($errors.INVALID_USER)}
+                    <p class="text-danger">{$errors.INVALID_USER}</p>
                 {/if}
                 <p class="form-label text-white fs-5 mt-5">
                     ¿No tenes cuenta?. <br> Registrate de forma gratuita en nuestro

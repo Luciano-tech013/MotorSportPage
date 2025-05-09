@@ -8,25 +8,25 @@
                 <div class="mb-4">
                     <label for="nombre" class="form-label text-white fs-4">NOMBRE</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="Tu Nombre:" id="name" required>
-                    {if isset($smarty.session.ERRORS.username)}
-                        <p class="text-danger">{$smarty.session.ERRORS.username}</p>
+                    {if isset($errors.username)}
+                        <p class="text-danger">{$errors.username}</p>
                     {/if}
-                    {if isset($smarty.session.ERRORS.UNIQUE_NAME_USER)}
-                        <p class="text-danger">{$smarty.session.ERRORS.UNIQUE_NAME_USER}</p>
+                    {if isset($errors.UNIQUE_NAME_USER)}
+                        <p class="text-danger">{$errors.UNIQUE_NAME_USER}</p>
                     {/if}
                 </div>
                 <div class="mb-4">
                     <label for="password_signup" class="form-label text-white fs-4">PASSWORD</label>
                     <input type="password" class="form-control" id="password_signup" name="password" placeholder="Escribe tu contraseña:" id="password" required>
-                    {if isset($smarty.session.ERRORS.password)}
-                        <p class="text-danger">{$smarty.session.ERRORS.password}</p>
+                    {if isset($errors.password)}
+                        <p class="text-danger">{$errors.password}</p>
                     {/if}
                 </div>
                 <div class="mb-4">
                     <label for="condiciones" class="form-label text-white fs-4">Aceptar Politica & Privacidad</label>
                     <input type="checkbox" name="politicies" id="politicies" required>
-                    {if isset($smarty.session.ERRORS.politicies)}
-                        <p class="text-danger">{$smarty.session.ERRORS.politicies}</p>
+                    {if isset($errors.politicies)}
+                        <p class="text-danger">{$errors.politicies}</p>
                     {/if}
                 </div>
 

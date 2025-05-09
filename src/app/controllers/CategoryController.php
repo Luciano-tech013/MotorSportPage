@@ -102,7 +102,8 @@ class CategoryController {
             try {
                 $this->categoryDeletionValidator->isDeletable($id);
             } catch(CategoryDeletionException $e) {
-                FlashErrorsHelper::addError("INVALID_DELETABLE", $e->getMessage());
+                FlashErrorsHelper::addError("INVALID_CATEGORY_DELETABLE", $e->getMessage());
+                FlashErrorsHelper::addError("INVALID_CATEGORY_DELETABLE_DATA", $e->getData());
                 //Para poder enviarlo en el modal
                 $_SESSION['CATEGORY']['ID_DELETABLE'] = $id;
                 header("Location: " . BASE_URL);

@@ -1,8 +1,12 @@
-{if isset($smarty.session.ERRORS.CONDITION) || isset($smarty.session.ERRORS.INVALID_PASSWORD)}
-    <script src="/public/assets/js/modals.js"></script>
+{if isset($errors.CONDITION) || isset($errors.INVALID_PASSWORD)}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            new bootstrap.Modal(document.getElementById('infoAccountRemoveModal')).show();
+        });
+    </script>
 {/if}
 
-<section class="modal fade" id="confirmRemoveModal" tabindex="-1" aria-labelledby="confirmRemoveLabel" aria-hidden="true">
+<section class="modal fade" id="infoAccountRemoveModal" tabindex="-1" aria-labelledby="infoAccountRemoveLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <section class="modal-content">
             <section class="modal-header bg-dark text-white">
@@ -16,15 +20,15 @@
                     <div class="form-check mb-3">
                         <label for="condtion" class="form-check-label fs-5 text-dark">Acepto eliminar mi cuenta</label>
                         <input type="checkbox" class="form-check-input" name="condition" id="condition" required>
-                        {if isset($smarty.session.ERRORS.CONDITION)}
-                            <p class="text-danger mt-1">{$smarty.session.ERRORS.CONDITION}</p>
+                        {if isset($errors.CONDITION)}
+                            <p class="text-danger mt-1">{$errors.CONDITION}</p>
                         {/if}
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label fs-5 text-dark">Contraseña</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Escribe tu contraseña:" required>
-                        {if isset($smarty.session.ERRORS.INVALID_PASSWORD) && !empty($smarty.session.ERRORS.INVALID_PASSWORD)}
-                            <p class="text-danger mt-1" id="error_invalid_password_text">{$smarty.session.ERRORS.INVALID_PASSWORD}</p>
+                        {if isset($errors.INVALID_PASSWORD) && !empty($errors.INVALID_PASSWORD)}
+                            <p class="text-danger mt-1" id="error_invalid_password_text">{$errors.INVALID_PASSWORD}</p>
                         {/if}
                     </div>
                     <div class="modal-footer">

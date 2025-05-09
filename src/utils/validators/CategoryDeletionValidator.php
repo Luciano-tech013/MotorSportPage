@@ -12,7 +12,8 @@ class CategoryDeletionValidator {
     }
 
     public function isDeletable(string $id): void {
-        if(!empty($this->carModel->getAllByCategoryIdWithNameAndBrand($id)))
-            throw new CategoryDeletionException("No se puede eliminar la categoria porque tiene autos asociados.");
+        $cars = $this->carModel->getAllByCategoryIdWithNameAndBrand($id);
+        if(!empty($cars))
+            throw new CategoryDeletionException("No se puede eliminar la categoria porque tiene autos asociados.", $cars);
     }
 }

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 class FlashErrorsHelper {
-    public static function addError(string $type, string $msg): void {
+    public static function addError(string $type, string|array $msg): void {
         $_SESSION["ERRORS"][$type] = $msg;
     }
 
@@ -13,7 +13,10 @@ class FlashErrorsHelper {
     }
 
     public static function all(): array {
-        return $_SESSION['ERRORS'] ?? [];
+        $errors = $_SESSION['ERRORS'] ?? [];
+        unset($_SESSION['ERRORS']);
+        
+        return $errors;
     }
 
     public static function mapFieldErrors(array $errors): void {

@@ -10,27 +10,27 @@
             <form class="row g-3 mt-2" method="POST" id="car_form" {if isset($action)} action="{$action}" {/if}>
                 <div class="col-12 col-md-6">
                     <input type="text" {if !empty($car)} class="form-control is-valid" {else} class="form-control" {/if}  id="car_name" name="name" {if !empty($car)} value="{$car->name}" {/if} placeholder="Nombre:" required>
-                    {if isset($smarty.session.ERRORS.carName)}
-                        <p class="text-danger">{$smarty.session.ERRORS.carName}</p>
+                    {if isset($errors.carName)}
+                        <p class="text-danger">{$errors.carName}</p>
                     {/if}
-                    {if isset($smarty.session.ERRORS.UNIQUE_NAME_CAR)}
-                        <p class="text-danger">{$smarty.session.ERRORS.UNIQUE_NAME_CAR}</p>
+                    {if isset($errors.UNIQUE_NAME_CAR)}
+                        <p class="text-danger">{$errors.UNIQUE_NAME_CAR}</p>
                     {/if}
                 </div>
 
                 <div class="col-12 col-md-6">
                     <input type="text" {if !empty($car)} class="form-control is-valid" {else} class="form-control" {/if} id="brand" name="brand" {if !empty($car)}
                         value="{$car->brand}" {/if} placeholder="Marca:" required>
-                    {if isset($smarty.session.ERRORS.brand)}
-                        <p class="text-danger">{$smarty.session.ERRORS.brand}</p>
+                    {if isset($errors.brand)}
+                        <p class="text-danger">{$errors.brand}</p>
                     {/if}
                 </div>
 
                 <div class="col-12 mt-4">
                     <textarea {if !empty($car)} class="form-control is-valid" {else} class="form-control" {/if} id="car_description" name="description" placeholder="Descripción:"
                         required>{if !empty($car)}{$car->description}{/if}</textarea>
-                    {if isset($smarty.session.ERRORS.carDescription)}
-                        <p class="text-danger">{$smarty.session.ERRORS.carDescription}</p>
+                    {if isset($errors.carDescription)}
+                        <p class="text-danger">{$errors.carDescription}</p>
                     {/if}
                 </div>
 
@@ -52,8 +52,8 @@
                             {/section}
                         {/if}
                     </select>
-                    {if isset($smarty.session.ERRORS.model)}
-                        <p class="text-danger">{$smarty.session.ERRORS.model}</p>
+                    {if isset($errors.model)}
+                        <p class="text-danger">{$errors.model}</p>
                     {/if}
                 </div>
 
@@ -73,8 +73,8 @@
                             {/foreach}
                         {/if}
                     </select>
-                    {if isset($smarty.session.ERRORS.category_id)}
-                        <p class="text-danger">{$smarty.session.ERRORS.repeatedCar}</p>
+                    {if isset($errors.category_id)}
+                        <p class="text-danger">{$errors.repeatedCar}</p>
                     {/if}
                 </div>
                 

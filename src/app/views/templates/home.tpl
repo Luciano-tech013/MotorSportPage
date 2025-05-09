@@ -34,10 +34,23 @@
                     <td>{$car->category_name}</td>
                     <td><a class="btn btn-primary" href="car/detail/{$car->car_id}">Detalle</a></td>
                     {if isset($smarty.session.AUTH.IS_LOGGED)}
-                        {if isset($smarty.session.ERRORS.INVALID_DELETABLE)}
+                        {if isset($errors.INVALID_CATEGORY_DELETABLE)}
                             <script>
                                 document.addEventListener('DOMContentLoaded', () => {
-                                    new bootstrap.Modal(document.getElementById('infoCategoryRemoveModal')).show();
+                                    //Limpiar backdrops para que no se acumulen
+                                    document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+
+                                    const modalEl = document.getElementById('infoCategoryRemoveModal');
+                                    const modal = new bootstrap.Modal(modalEl);
+                                    modal.show();
+
+                                    modalEl.addEventListener('hidden.bs.modal', () => {
+                                        //Quitar la clase que bloquea el scroll
+                                        document.body.classList.remove('modal-open');
+
+                                        //Borrar todos los backdrops que queden
+                                        document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+                                    });
                                 });
                             </script>
                         {/if}
@@ -55,7 +68,7 @@ para agregar no para editar. Entonces, en vez de asignarsela desde la vista
 se la asigno desde acá con valor null. Por eso en car.form.tpl se valida que no se null
 para mostrar los datos en el formulario. Lo mismo con $optionsCategory-->
 {if isset($smarty.session.AUTH.IS_LOGGED)}
-    {include file="forms/car.form.tpl" is_embedded=true current_year=$smarty.now|date_format:"%Y" car=null categories=$categories action="save/car"}
+    {include file="forms/car.form.tpl" is_embedded=true current_year=$smarty.now|date_format:"%Y" car=null categories=$categories action="save/car" errors=$errors}
 {/if}
 
 <section>
@@ -100,9 +113,9 @@ para mostrar los datos en el formulario. Lo mismo con $optionsCategory-->
 incluido desde aca utilize la variable $categories, ya que aca se incluye 
 para agregar no para editar-->
 {if isset($smarty.session.AUTH.IS_LOGGED)}
-    {include file="forms/category.form.tpl" is_embedded=true category=null action="save/category"}
+    {include file="forms/category.form.tpl" is_embedded=true category=null action="save/category" errors=$errors}
 {/if}
 
-{include file="modals/category.remove.modal.tpl" }
+{include file="modals/category.remove.modal.tpl" errors=$errors}
 
 {include file="layout/footer.tpl"}

@@ -40,7 +40,7 @@
                     <li><a class="nav-link fs-4" href="politicies">Política & Privacidad</a></li>
                     <li><a class="nav-link fs-4" href="contact">Contacto</a></li>
                     <li><a class="nav-link fs-4" data-bs-toggle="modal" data-bs-target="#confirmLogoutModal" href="#">Cerrar Sesión</a></li>
-                    <li><a class="nav-link fs-4" data-bs-toggle="modal" data-bs-target="#confirmRemoveModal" href="#" id="removeAccountBtn">Eliminar Cuenta</a></li>
+                    <li><a class="nav-link fs-4" data-bs-toggle="modal" data-bs-target="#infoAccountRemoveModal" href="#" id="removeAccountBtn">Eliminar Cuenta</a></li>
                 </ul>
             </div>
                 {else}

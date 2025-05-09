@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . "/../../middlewares/FlashErrorsHelper.php";
+
 abstract class BaseView {
 
     private Smarty $smarty;
@@ -12,7 +14,10 @@ abstract class BaseView {
         foreach ($data as $key => $value) {
             $this->smarty->assign($key, $value);
         }
-   
+
+        
+        
+        $this->smarty->assign('errors', FlashErrorsHelper::all());
         $this->smarty->display($template);
     }
 }
